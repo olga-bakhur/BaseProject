@@ -1,0 +1,34 @@
+ext {
+
+    def keystorePropertiesFile = rootProject.file("keys/keystore.properties")
+    def keystoreProperties = new Properties()
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
+    globalConfig = [
+            compileSdkVersion : 32,
+            minSdkVersion     : 28,
+            targetSdkVersion  : 32,
+            buildToolsVersion : "30.0.3"
+    ]
+
+    appConfig = [
+            applicationId: "com.olgabakhur.baseproject",
+
+            versionCode  : 1,
+            versionName  : "1.0",
+
+            testInstrumentationRunner  : "androidx.test.runner.AndroidJUnitRunner",
+
+            keyAlias     : keystoreProperties["keyAlias"],
+            keyPassword  : keystoreProperties["keyPassword"],
+            storeFile    : file(keystoreProperties["storeFile"]),
+            storePassword: keystoreProperties["storePassword"],
+
+            devUrl         : "https://newsapi.org",
+            prodUrl        : "https://newsapi.org"
+    ]
+
+    /*
+     * Configuration for other modules if any
+     */
+}

@@ -1,48 +1,133 @@
-plugins {
-    id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
-}
+apply plugin: "com.android.application"
+apply plugin: "kotlin-android"
+apply plugin: "androidx.navigation.safeargs"
 
 android {
-    compileSdk 32
+    compileSdkVersion globalConfig.compileSdkVersion
+    buildToolsVersion = globalConfig.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.olgabakhur.baseproject"
-        minSdk 28
-        targetSdk 32
-        versionCode 1
-        versionName "1.0"
+        applicationId appConfig.applicationId
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        minSdk globalConfig.minSdkVersion
+        targetSdk globalConfig.targetSdkVersion
+
+        versionCode appConfig.versionCode
+        versionName appConfig.versionName
+
+        testInstrumentationRunner appConfig.testInstrumentationRunner
+    }
+
+    signingConfigs {
+        release {
+            keyAlias appConfig.keyAlias
+            keyPassword appConfig.keyPassword
+            storeFile appConfig.storeFile
+            storePassword appConfig.storePassword
+        }
     }
 
     buildTypes {
-        release {
+        debug {
+            debuggable true
             minifyEnabled false
+            shrinkResources false
+            buildConfigField("String", "BASE_URL", '"' + appConfig.devUrl + '"')
+        }
+
+        release {
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "BASE_URL", '"' + appConfig.prodUrl + '"')
         }
     }
+
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
+
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = JavaVersion.VERSION_11.toString()
     }
+
     buildFeatures {
         viewBinding true
     }
 }
 
 dependencies {
+    // General
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.4.2'
-    implementation 'com.google.android.material:material:1.6.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.1'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.5.1'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    //    Kotlin
+    implementation globalDependencies.coreKtx
+    implementation globalDependencies.kotlinStdLib
+    implementation globalDependencies.kotlinSerialization
+
+    // Room
+    implementation globalDependencies.room
+    annotationProcessor globalDependencies.roomCompiler
+    implementation globalDependencies.roomCoroutines
+
+    // Coroutines
+    implementation globalDependencies.coroutinesCore
+    implementation globalDependencies.coroutinesAndroid
+
+    // Retrofit
+    implementation globalDependencies.retrofit
+    implementation globalDependencies.retrofitConverterGson
+
+    // GSON
+    implementation globalDependencies.gson
+
+    // OkHttp
+    implementation globalDependencies.okHttp
+    implementation globalDependencies.okHttpLoggingInterceptor
+    implementation globalDependencies.okHttpSse
+
+    // Dagger
+    implementation globalDependencies.dagger
+    implementation globalDependencies.daggerCompiler
+
+    // AppCompat
+    implementation appDependencies.appCompat
+
+    // Material design
+    implementation appDependencies.materialDesign
+
+    // ConstraintLayout
+    implementation appDependencies.constraintLayout
+
+    // Glide
+    implementation appDependencies.glide
+    annotationProcessor appDependencies.glideCompiler
+
+    //    Navigation
+    implementation appDependencies.navigationFragmentKtx
+    implementation appDependencies.navigationUiKtx
+
+    // Lifecycle Coroutines
+    implementation appDependencies.llifecycleCoroutinesKtxViewModel
+    implementation appDependencies.llifecycleCoroutinesKtxRuntime
+
+    // Lifecycle LiveData
+    implementation appDependencies.lifecycleLiveDataKtx
+
+    // Activity
+    implementation appDependencies.activityKtx
+
+    // Fragment
+    implementation appDependencies.fragmentKtx
+
+    // ViewBinding delegate
+    implementation appDependencies.viewBindingPropertyDelegate
+
+    // Tests
+    androidTestImplementation testDependencies.junit
+    androidTestImplementation testDependencies.androidxTestJunit
+    androidTestImplementation testDependencies.espressoCore
 }

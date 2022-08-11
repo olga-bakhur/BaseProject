@@ -1,0 +1,149 @@
+def libraryVersions = [
+        // Global dependencies
+        // Plugins
+        androidGradlePlugin             : "7.1.0",
+        navigation                      : "2.5.1",
+
+        // Kotlin
+        kotlin                          : "1.6.21",
+        ktxSerialization                : "1.3.3",
+
+        // Room
+        room                            : "2.3.0",
+
+        // Coroutines
+        coroutinesCore                  : "1.6.1",
+        coroutinesAndroid               : "1.6.3",
+
+        // Retrofit
+        retrofit                        : "2.9.0",
+        gson                            : "2.9.0",
+
+        // OkHttp
+        okHttp                          : "4.9.3",
+
+        // Dagger
+        dagger                          : "2.42",
+
+        // App module
+        // AppCompat
+        appCompat                       : "1.4.2",
+
+        // Material design
+        materialDesign                  : "1.6.1",
+
+        // ConstraintLayout
+        constraintLayout                : "2.1.4",
+
+        // Glide
+        glide                           : "4.13.2",
+        glideCompiler                   : "4.11.0",
+
+        // Lifecycle Coroutines
+        lifecycleCoroutinesKtx          : "2.5.1",
+
+        // Lifecycle LiveData
+        lifecycleLiveDataKtx            : "2.5.0",
+
+        // Activity
+        ktxActivity                     : "1.5.0",
+
+        // Fragment
+        ktxFragment                     : "1.5.0",
+
+        // ViewBinding delegate
+        viewBindingPropertyDelegate     : "1.5.6",
+
+        // Tests
+        junit                           : "4.13.2",
+        androidxTestJunit               : "1.1.3",
+        espresso                        : "3.4.0"
+]
+
+ext {
+    globalDependencies = [
+            // Plugins
+            androidGradlePlugin        : "com.android.tools.build:gradle:${libraryVersions.androidGradlePlugin}",
+            kotlinGradlePlugin         : "org.jetbrains.kotlin:kotlin-gradle-plugin:${libraryVersions.kotlin}",
+            navigationSafeArgsPlugin   : "androidx.navigation:navigation-safe-args-gradle-plugin:${libraryVersions.navigation}",
+
+            // Kotlin
+            coreKtx                    : "androidx.core:core-ktx:${libraryVersions.kotlin}",
+            kotlinStdLib               : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${libraryVersions.kotlin}",
+            kotlinSerialization        : "org.jetbrains.kotlinx:kotlinx-serialization-json:${libraryVersions.ktxSerialization}",
+
+            // Room
+            room                       : "androidx.room:room-runtime:${libraryVersions.room}",
+            roomCompiler               : "androidx.room:room-compiler:${libraryVersions.room}",
+            roomCoroutines             : "androidx.room:room-ktx:${libraryVersions.room}",
+
+            // Coroutines
+            coroutinesCore             : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${libraryVersions.coroutinesCore}",
+            coroutinesAndroid          : "org.jetbrains.kotlinx:kotlinx-coroutines-android:${libraryVersions.coroutinesAndroid}",
+
+            // Retrofit
+            retrofit                   : "com.squareup.retrofit2:retrofit:${libraryVersions.retrofit}",
+            retrofitConverterGson      : "com.squareup.retrofit2:converter-gson:${libraryVersions.gson}",
+
+            // GSON
+            gson                       : "com.google.code.gson:gson:${libraryVersions.gson}",
+
+            // OkHttp
+            okHttp                     : "com.squareup.okhttp3:okhttp:${libraryVersions.okHttp}",
+            okHttpLoggingInterceptor   : "com.squareup.okhttp3:logging-interceptor:${libraryVersions.okHttp}",
+            okHttpSse                  : "com.squareup.okhttp3:okhttp-sse:${libraryVersions.okHttp}",
+
+            // Dagger
+            dagger                     : "com.google.dagger:dagger:${libraryVersions.dagger}",
+            daggerCompiler             : "com.google.dagger:dagger-compiler:${libraryVersions.dagger}",
+
+            // Google services
+            googleServices             : "com.google.gms:google-services:${libraryVersions.googleServices}",
+            googlePlayServicesAuth     : "com.google.android.gms:play-services-auth:${libraryVersions.googlePlayServicesAuth}"
+    ]
+
+    appDependencies = [
+            // AppCompat
+            appCompat                             : "androidx.appcompat:appcompat:${libraryVersions.appCompat}",
+
+            // Material design
+            materialDesign                        : "com.google.android.material:material:${libraryVersions.materialDesign}",
+
+            // ConstraintLayout
+            constraintLayout                      : "androidx.constraintlayout:constraintlayout:${libraryVersions.constraintLayout}",
+
+            // Glide
+            glide                                 : "com.github.bumptech.glide:glide:${libraryVersions.glide}",
+            glideCompiler                         : "com.github.bumptech.glide:compiler:${libraryVersions.glideCompiler}",
+
+            // Navigation
+            navigationFragmentKtx                 : "androidx.navigation:navigation-fragment-ktx:${libraryVersions.navigation}",
+            navigationUiKtx                       : "androidx.navigation:navigation-ui-ktx:${libraryVersions.navigation}",
+
+            // Lifecycle Coroutines
+            llifecycleCoroutinesKtxViewModel      : "androidx.lifecycle:lifecycle-viewmodel-ktx:${libraryVersions.lifecycleCoroutinesKtx}",
+            llifecycleCoroutinesKtxRuntime        : "androidx.lifecycle:lifecycle-runtime-ktx:${libraryVersions.lifecycleCoroutinesKtx}",
+
+            // Lifecycle LiveData
+            lifecycleLiveDataKtx                  : "androidx.lifecycle:lifecycle-livedata-ktx:${libraryVersions.lifecycleLiveDataKtx}",
+
+            // Activity
+            activityKtx                           : "androidx.activity:activity-ktx:${libraryVersions.ktxActivity}",
+
+            // Fragment
+            fragmentKtx                           : "androidx.fragment:fragment-ktx:${libraryVersions.ktxFragment}",
+
+            // ViewBinding delegate
+            viewBindingPropertyDelegate           : "com.github.kirich1409:viewbindingpropertydelegate-noreflection:${libraryVersions.viewBindingPropertyDelegate}"
+    ]
+
+    /*
+     * Add dependencies for other modules if any
+     */
+
+    testDependencies = [
+            junit                : "junit:junit:${libraryVersions.junit}",
+            androidxTestJunit    : "androidx.test.ext:junit:${libraryVersions.androidxTestJunit},",
+            espressoCore         : "androidx.test.espresso:espresso-core:${libraryVersions.espresso}"
+    ]
+}
