@@ -1,5 +1,4 @@
 def libraryVersions = [
-        // Global dependencies
         // Plugins
         androidGradlePlugin             : "7.1.0",
         navigation                      : "2.5.1",
@@ -25,7 +24,6 @@ def libraryVersions = [
         // Dagger
         dagger                          : "2.42",
 
-        // App module
         // AppCompat
         appCompat                       : "1.4.2",
 
@@ -62,6 +60,11 @@ def libraryVersions = [
 
 ext {
     globalDependencies = [
+            // Modules
+            layerApp                : project(":app"),
+            layerData               : project(":data"),
+            layerDomain             : project(":domain"),
+
             // Plugins
             androidGradlePlugin        : "com.android.tools.build:gradle:${libraryVersions.androidGradlePlugin}",
             kotlinGradlePlugin         : "org.jetbrains.kotlin:kotlin-gradle-plugin:${libraryVersions.kotlin}",
@@ -72,34 +75,21 @@ ext {
             kotlinStdLib               : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${libraryVersions.kotlin}",
             kotlinSerialization        : "org.jetbrains.kotlinx:kotlinx-serialization-json:${libraryVersions.ktxSerialization}",
 
-            // Room
-            room                       : "androidx.room:room-runtime:${libraryVersions.room}",
-            roomCompiler               : "androidx.room:room-compiler:${libraryVersions.room}",
-            roomCoroutines             : "androidx.room:room-ktx:${libraryVersions.room}",
-
             // Coroutines
             coroutinesCore             : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${libraryVersions.coroutinesCore}",
             coroutinesAndroid          : "org.jetbrains.kotlinx:kotlinx-coroutines-android:${libraryVersions.coroutinesAndroid}",
 
-            // Retrofit
-            retrofit                   : "com.squareup.retrofit2:retrofit:${libraryVersions.retrofit}",
-            retrofitConverterGson      : "com.squareup.retrofit2:converter-gson:${libraryVersions.gson}",
-
-            // GSON
-            gson                       : "com.google.code.gson:gson:${libraryVersions.gson}",
-
-            // OkHttp
-            okHttp                     : "com.squareup.okhttp3:okhttp:${libraryVersions.okHttp}",
-            okHttpLoggingInterceptor   : "com.squareup.okhttp3:logging-interceptor:${libraryVersions.okHttp}",
-            okHttpSse                  : "com.squareup.okhttp3:okhttp-sse:${libraryVersions.okHttp}",
+            // Lifecycle LiveData
+            lifecycleLiveDataKtx       : "androidx.lifecycle:lifecycle-livedata-ktx:${libraryVersions.lifecycleLiveDataKtx}",
 
             // Dagger
             dagger                     : "com.google.dagger:dagger:${libraryVersions.dagger}",
             daggerCompiler             : "com.google.dagger:dagger-compiler:${libraryVersions.dagger}",
 
-            // Google services
-            googleServices             : "com.google.gms:google-services:${libraryVersions.googleServices}",
-            googlePlayServicesAuth     : "com.google.android.gms:play-services-auth:${libraryVersions.googlePlayServicesAuth}"
+            // Room
+            room                       : "androidx.room:room-runtime:${libraryVersions.room}",
+            roomCompiler               : "androidx.room:room-compiler:${libraryVersions.room}",
+            roomCoroutines             : "androidx.room:room-ktx:${libraryVersions.room}"
     ]
 
     appDependencies = [
@@ -124,9 +114,6 @@ ext {
             llifecycleCoroutinesKtxViewModel      : "androidx.lifecycle:lifecycle-viewmodel-ktx:${libraryVersions.lifecycleCoroutinesKtx}",
             llifecycleCoroutinesKtxRuntime        : "androidx.lifecycle:lifecycle-runtime-ktx:${libraryVersions.lifecycleCoroutinesKtx}",
 
-            // Lifecycle LiveData
-            lifecycleLiveDataKtx                  : "androidx.lifecycle:lifecycle-livedata-ktx:${libraryVersions.lifecycleLiveDataKtx}",
-
             // Activity
             activityKtx                           : "androidx.activity:activity-ktx:${libraryVersions.ktxActivity}",
 
@@ -137,9 +124,22 @@ ext {
             viewBindingPropertyDelegate           : "com.github.kirich1409:viewbindingpropertydelegate-noreflection:${libraryVersions.viewBindingPropertyDelegate}"
     ]
 
-    /*
-     * Add dependencies for other modules if any
-     */
+    dataDependencies = [
+            // GSON
+            gson                       : "com.google.code.gson:gson:${libraryVersions.gson}",
+
+            // Retrofit
+            retrofit                   : "com.squareup.retrofit2:retrofit:${libraryVersions.retrofit}",
+            retrofitConverterGson      : "com.squareup.retrofit2:converter-gson:${libraryVersions.retrofit}",
+
+            // OkHttp
+            okHttp                     : "com.squareup.okhttp3:okhttp:${libraryVersions.okHttp}",
+            okHttpLoggingInterceptor   : "com.squareup.okhttp3:logging-interceptor:${libraryVersions.okHttp}",
+            okHttpSse                  : "com.squareup.okhttp3:okhttp-sse:${libraryVersions.okHttp}"
+    ]
+
+    domainDependencies = [
+    ]
 
     testDependencies = [
             junit                : "junit:junit:${libraryVersions.junit}",

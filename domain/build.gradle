@@ -1,0 +1,54 @@
+apply plugin: "com.android.library"
+apply plugin: "kotlin-android"
+apply plugin: "kotlin-kapt"
+
+android {
+    compileSdkVersion globalConfig.compileSdkVersion
+    buildToolsVersion = globalConfig.buildToolsVersion
+
+    defaultConfig {
+        minSdk globalConfig.minSdkVersion
+        targetSdk globalConfig.targetSdkVersion
+    }
+
+    buildTypes {
+        debug {
+            debuggable true
+            minifyEnabled false
+        }
+        release {
+            debuggable false
+            minifyEnabled true
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    kotlinOptions {
+        JavaVersion.VERSION_11.toString()
+    }
+}
+
+dependencies {
+    // Domain layer
+    implementation globalDependencies.layerData
+
+    // Kotlin
+    implementation globalDependencies.kotlinStdLib
+    implementation globalDependencies.kotlinSerialization
+    implementation globalDependencies.lifecycleLiveDataKtx
+
+    // Lifecycle LiveData
+    implementation globalDependencies.lifecycleLiveDataKtx
+
+    // Coroutines
+    implementation globalDependencies.coroutinesCore
+    implementation globalDependencies.coroutinesAndroid
+
+    // Dagger
+    api globalDependencies.dagger
+    kapt globalDependencies.daggerCompiler
+}

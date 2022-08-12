@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Базовый проект</string>
+
+    <string name="article_saved_saved_successfully_message">Статья была успешно сохранена</string>
+    <string name="breaking_news_label_toolbar">Последние новости</string>
+    <string name="saved_news_label_toolbar">Сохрананные новости</string>
+    <string name="search_news_label_toolbar">Поиск новостей</string>
+
+    <string name="breaking_news_label_bottom_bar">Последние</string>
+    <string name="saved_news_label_bottom_bar">Сохрананные</string>
+    <string name="search_news_label_bottom_bar">Поиск</string>
+</resources>

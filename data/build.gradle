@@ -1,0 +1,78 @@
+apply plugin: "com.android.library"
+apply plugin: "kotlin-android"
+apply plugin: "kotlin-kapt"
+
+android {
+    compileSdkVersion globalConfig.compileSdkVersion
+    buildToolsVersion = globalConfig.buildToolsVersion
+
+    defaultConfig {
+        minSdk globalConfig.minSdkVersion
+        targetSdk globalConfig.targetSdkVersion
+    }
+
+    buildTypes {
+        debug {
+            debuggable true
+            minifyEnabled false
+
+            buildConfigField("String", "BASE_URL", '"' + dataConfig.devUrl + '"')
+            buildConfigField("String", "API_KEY", '"' + dataConfig.apiKey + '"')
+        }
+
+        release {
+            debuggable false
+            minifyEnabled true
+
+            buildConfigField("String", "BASE_URL", '"' + dataConfig.devUrl + '"')
+            buildConfigField("String", "API_KEY", '"' + dataConfig.apiKey + '"')
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        JavaVersion.VERSION_11.toString()
+    }
+}
+
+dependencies {
+    // Kotlin
+    implementation globalDependencies.kotlinStdLib
+    implementation globalDependencies.kotlinSerialization
+    implementation globalDependencies.lifecycleLiveDataKtx
+
+    // Coroutines
+    implementation globalDependencies.coroutinesCore
+    implementation globalDependencies.coroutinesAndroid
+
+    // Lifecycle Coroutines
+    implementation appDependencies.llifecycleCoroutinesKtxViewModel
+    implementation appDependencies.llifecycleCoroutinesKtxRuntime
+
+    // Lifecycle LiveData
+    implementation globalDependencies.lifecycleLiveDataKtx
+
+    // Room
+    implementation globalDependencies.room
+    kapt globalDependencies.roomCompiler
+    implementation globalDependencies.roomCoroutines
+
+    // Dagger
+    api globalDependencies.dagger
+    kapt globalDependencies.daggerCompiler
+
+    // Gson
+    implementation dataDependencies.gson
+
+    // Retrofit2
+    api dataDependencies.retrofit
+    api dataDependencies.retrofitConverterGson
+
+    // OkHttp3
+    api dataDependencies.okHttp
+    api dataDependencies.okHttpLoggingInterceptor
+    api dataDependencies.okHttpSse
+}

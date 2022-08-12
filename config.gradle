@@ -23,12 +23,16 @@ ext {
             keyPassword  : keystoreProperties["keyPassword"],
             storeFile    : file(keystoreProperties["storeFile"]),
             storePassword: keystoreProperties["storePassword"],
-
-            devUrl         : "https://newsapi.org",
-            prodUrl        : "https://newsapi.org"
     ]
 
-    /*
-     * Configuration for other modules if any
-     */
+    dataConfig = [
+            devUrl         : "https://newsapi.org",
+            prodUrl        : "https://newsapi.org",
+
+            apiKey         : "712b67adda374727bc7020f051fe714a"
+    ]
+
+    domainConfig = [
+
+    ]
 }

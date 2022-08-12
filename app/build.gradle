@@ -1,5 +1,6 @@
 apply plugin: "com.android.application"
 apply plugin: "kotlin-android"
+apply plugin: "kotlin-kapt"
 apply plugin: "androidx.navigation.safeargs"
 
 android {
@@ -32,7 +33,8 @@ android {
             debuggable true
             minifyEnabled false
             shrinkResources false
-            buildConfigField("String", "BASE_URL", '"' + appConfig.devUrl + '"')
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
         }
 
         release {
@@ -41,7 +43,6 @@ android {
             shrinkResources true
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField("String", "BASE_URL", '"' + appConfig.prodUrl + '"')
         }
     }
 
@@ -60,38 +61,35 @@ android {
 }
 
 dependencies {
+    // Domain and Data modules
+    implementation globalDependencies.layerDomain
+    implementation globalDependencies.layerData
+
     // General
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    //    Kotlin
+    // Kotlin
     implementation globalDependencies.coreKtx
     implementation globalDependencies.kotlinStdLib
     implementation globalDependencies.kotlinSerialization
-
-    // Room
-    implementation globalDependencies.room
-    annotationProcessor globalDependencies.roomCompiler
-    implementation globalDependencies.roomCoroutines
+    implementation globalDependencies.lifecycleLiveDataKtx
 
     // Coroutines
     implementation globalDependencies.coroutinesCore
     implementation globalDependencies.coroutinesAndroid
 
-    // Retrofit
-    implementation globalDependencies.retrofit
-    implementation globalDependencies.retrofitConverterGson
-
-    // GSON
-    implementation globalDependencies.gson
-
-    // OkHttp
-    implementation globalDependencies.okHttp
-    implementation globalDependencies.okHttpLoggingInterceptor
-    implementation globalDependencies.okHttpSse
+    // Lifecycle Coroutines
+    implementation appDependencies.llifecycleCoroutinesKtxViewModel
+    implementation appDependencies.llifecycleCoroutinesKtxRuntime
 
     // Dagger
-    implementation globalDependencies.dagger
-    implementation globalDependencies.daggerCompiler
+    api globalDependencies.dagger
+    kapt globalDependencies.daggerCompiler
+
+    // Room
+    implementation globalDependencies.room
+    kapt globalDependencies.roomCompiler
+    implementation globalDependencies.roomCoroutines
 
     // AppCompat
     implementation appDependencies.appCompat
@@ -104,7 +102,7 @@ dependencies {
 
     // Glide
     implementation appDependencies.glide
-    annotationProcessor appDependencies.glideCompiler
+    kapt appDependencies.glideCompiler
 
     //    Navigation
     implementation appDependencies.navigationFragmentKtx
@@ -115,7 +113,7 @@ dependencies {
     implementation appDependencies.llifecycleCoroutinesKtxRuntime
 
     // Lifecycle LiveData
-    implementation appDependencies.lifecycleLiveDataKtx
+    implementation globalDependencies.lifecycleLiveDataKtx
 
     // Activity
     implementation appDependencies.activityKtx
