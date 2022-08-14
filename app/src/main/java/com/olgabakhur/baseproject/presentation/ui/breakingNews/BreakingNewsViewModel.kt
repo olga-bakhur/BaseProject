@@ -5,19 +5,19 @@ import com.olgabakhur.baseproject.presentation.base.BaseViewModel
 import com.olgabakhur.data.model.news.Article
 import com.olgabakhur.data.model.news.NewsItem
 import com.olgabakhur.domain.interactors.NewsInteractor
-import com.olgabakhur.data.util.result.Result
-import com.olgabakhur.data.util.result.onError
-import com.olgabakhur.data.util.result.onSuccess
+import com.olgabakhur.domain.util.result.Result
+import com.olgabakhur.domain.util.result.onError
+import com.olgabakhur.domain.util.result.onSuccess
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import javax.inject.Inject
 
 class BreakingNewsViewModel @Inject constructor(
-    val newsInteractor: NewsInteractor
+    private val newsInteractor: NewsInteractor
 ) : BaseViewModel() {
 
-    private val _breakingNewsShFlow = MutableSharedFlow<com.olgabakhur.data.util.result.Result<NewsItem>>(replay = 1)
+    private val _breakingNewsShFlow = MutableSharedFlow<Result<NewsItem>>(replay = 1)
     val breakingNewsShFlow = _breakingNewsShFlow.asSharedFlow()
 
     var breakingNewsPage = 1
@@ -34,7 +34,7 @@ class BreakingNewsViewModel @Inject constructor(
         }
     }
 
-    private suspend fun handleBreakingNewsResponse(result: com.olgabakhur.data.util.result.Result<NewsItem>) {
+    private suspend fun handleBreakingNewsResponse(result: Result<NewsItem>) {
         result
             .onSuccess { newsItem ->
                 breakingNewsPage++
@@ -58,12 +58,12 @@ class BreakingNewsViewModel @Inject constructor(
                 }
 
                 breakingNewsItem?.let {
-                    _breakingNewsShFlow.emit(com.olgabakhur.data.util.result.Result.Success(it))
+                    _breakingNewsShFlow.emit(Result.Success(it))
                 }
             }
 
             .onError {
-                _breakingNewsShFlow.emit(com.olgabakhur.data.util.result.Result.Error(it))
+                _breakingNewsShFlow.emit(Result.Error(it))
             }
     }
 }

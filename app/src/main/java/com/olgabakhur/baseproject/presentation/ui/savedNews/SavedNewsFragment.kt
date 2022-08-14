@@ -7,15 +7,15 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.baseproject.util.flow.collectLatestLifecycleFlow
 import com.google.android.material.snackbar.Snackbar
+import com.olgabakhur.baseproject.App
 import com.olgabakhur.baseproject.R
-import com.olgabakhur.baseproject.global.di.App
-import com.olgabakhur.data.model.news.Article
 import com.olgabakhur.baseproject.databinding.FragmentSavedNewsBinding
 import com.olgabakhur.baseproject.presentation.adapters.NewsAdapter
 import com.olgabakhur.baseproject.presentation.base.BaseFragment
-import com.olgabakhur.baseproject.presentation.extensions.viewModel
+import com.olgabakhur.baseproject.presentation.extensions.collectLatestLifecycleFlow
+import com.olgabakhur.baseproject.presentation.util.viewModelUtil.viewModel
+import com.olgabakhur.data.model.news.Article
 
 class SavedNewsFragment : BaseFragment(R.layout.fragment_saved_news) {
 

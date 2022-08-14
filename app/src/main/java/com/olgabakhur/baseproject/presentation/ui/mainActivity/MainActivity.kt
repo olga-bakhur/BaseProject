@@ -12,9 +12,9 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.olgabakhur.baseproject.R
-import com.olgabakhur.baseproject.global.di.App
+import com.olgabakhur.baseproject.App
 import com.olgabakhur.baseproject.databinding.ActivityMainBinding
-import com.olgabakhur.baseproject.presentation.extensions.viewModel
+import com.olgabakhur.baseproject.presentation.util.viewModelUtil.viewModel
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 

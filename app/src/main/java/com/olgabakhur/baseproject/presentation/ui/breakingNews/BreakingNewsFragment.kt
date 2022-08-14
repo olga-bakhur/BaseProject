@@ -1,26 +1,23 @@
 package com.olgabakhur.baseproject.presentation.ui.breakingNews
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.AbsListView
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.baseproject.util.flow.collectWhileStarted
+import com.olgabakhur.baseproject.presentation.util.flow.collectWhileStarted
 import com.olgabakhur.baseproject.R
 import com.olgabakhur.baseproject.databinding.FragmentBreakingNewsBinding
-import com.olgabakhur.baseproject.global.di.App
+import com.olgabakhur.baseproject.App
 import com.olgabakhur.baseproject.presentation.adapters.NewsAdapter
 import com.olgabakhur.baseproject.presentation.base.BaseFragment
-import com.olgabakhur.baseproject.presentation.extensions.viewModel
 import com.olgabakhur.baseproject.presentation.util.Constants.QUERY_PAGE_SIZE
-import com.olgabakhur.data.util.result.Result
+import com.olgabakhur.baseproject.presentation.util.viewModelUtil.viewModel
+import com.olgabakhur.domain.util.result.Result
 
 class BreakingNewsFragment : BaseFragment(R.layout.fragment_breaking_news) {
-
-    private val TAG = "BreakingNewsFragment"
 
     private val binding by viewBinding(FragmentBreakingNewsBinding::bind)
     override val viewModel: BreakingNewsViewModel by viewModel { App.appComponent.breakingNewsViewModel }
@@ -35,16 +32,18 @@ class BreakingNewsFragment : BaseFragment(R.layout.fragment_breaking_news) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getBreakingNews(countryCode = "us")
+        setupSwipeToRefresh()
         initRecyclerViewScrollListener()
         setupRecyclerView()
         setupRecyclerViewItemClickListener()
+
     }
 
     //TODO: loading dialog
     override fun observeViewModel() {
         viewModel.breakingNewsShFlow.collectWhileStarted(viewLifecycleOwner) { result ->
             when (result) {
-                is com.olgabakhur.data.util.result.Result.Success -> {
+                is Result.Success -> {
                     val newsItem = result.value
                     val newArticlesList = newsItem.articles.toList()
                     val totalPagesCount = newsItem.totalResults
@@ -59,14 +58,25 @@ class BreakingNewsFragment : BaseFragment(R.layout.fragment_breaking_news) {
                     }
                 }
 
-                is com.olgabakhur.data.util.result.Result.Error -> {
-                    // TODO: add message
-                    Log.e(TAG, "An error occurred: ${result.error}")
+                is Result.Error -> {
+                    binding.laySwipeToRefresh.isRefreshing = false
+//                    snackbar(binding.root, {result.error)
                 }
             }
         }
     }
 
+    private fun setupSwipeToRefresh() {
+        binding.laySwipeToRefresh.apply {
+            setColorSchemeResources(R.color.colorAccent, R.color.colorPrimary)
+            setOnRefreshListener {
+                viewModel.getBreakingNews(countryCode = "us")
+            }
+        }
+    }
+
+
+    // TODO: Add Google paging
     private fun initRecyclerViewScrollListener() {
         scrollListener = object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {

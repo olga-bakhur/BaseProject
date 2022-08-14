@@ -57,7 +57,7 @@ dependencies {
 
     // Room
     implementation globalDependencies.room
-    kapt globalDependencies.roomCompiler
+    annotationProcessor globalDependencies.roomCompiler
     implementation globalDependencies.roomCoroutines
 
     // Dagger

@@ -1,11 +1,3 @@
-/*
- * ┌────────────────────────────┐
- * │                            │
- * │   (C) 2014-2021 iHaus AG   │
- * │                            │
- * └────────────────────────────┘
- */
-
 package com.olgabakhur.baseproject.presentation.util
 
 import android.view.View

@@ -33,6 +33,9 @@ def libraryVersions = [
         // ConstraintLayout
         constraintLayout                : "2.1.4",
 
+        // SwipeRefresh layout
+        swipeRefreshLayout              : "1.1.0",
+
         // Glide
         glide                           : "4.13.2",
         glideCompiler                   : "4.11.0",
@@ -101,6 +104,9 @@ ext {
 
             // ConstraintLayout
             constraintLayout                      : "androidx.constraintlayout:constraintlayout:${libraryVersions.constraintLayout}",
+
+            // SwipeRefresh layout
+            swipeRefreshLayout                    : "androidx.swiperefreshlayout:swiperefreshlayout:${libraryVersions.swipeRefreshLayout}",
 
             // Glide
             glide                                 : "com.github.bumptech.glide:glide:${libraryVersions.glide}",

@@ -5,9 +5,9 @@ import androidx.lifecycle.viewModelScope
 import com.olgabakhur.data.model.news.Article
 import com.olgabakhur.data.model.news.NewsItem
 import com.olgabakhur.domain.interactors.NewsInteractor
-import com.olgabakhur.data.util.result.Result
-import com.olgabakhur.data.util.result.onError
-import com.olgabakhur.data.util.result.onSuccess
+import com.olgabakhur.domain.util.result.Result
+import com.olgabakhur.domain.util.result.onError
+import com.olgabakhur.domain.util.result.onSuccess
 import com.olgabakhur.baseproject.presentation.base.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -15,10 +15,10 @@ import kotlinx.coroutines.flow.asSharedFlow
 import javax.inject.Inject
 
 class SearchNewsViewModel @Inject constructor(
-    val newsInteractor: NewsInteractor
+    private val newsInteractor: NewsInteractor
 ) : BaseViewModel() {
 
-    private val _searchNewsShFlow = MutableSharedFlow<com.olgabakhur.data.util.result.Result<NewsItem>>(replay = 1)
+    private val _searchNewsShFlow = MutableSharedFlow<Result<NewsItem>>(replay = 1)
     val searchNewsShFlow = _searchNewsShFlow.asSharedFlow()
 
     var searchNewsPage = 1
@@ -37,7 +37,7 @@ class SearchNewsViewModel @Inject constructor(
         }
     }
 
-    private suspend fun handleSearchNewsResponse(result: com.olgabakhur.data.util.result.Result<NewsItem>) {
+    private suspend fun handleSearchNewsResponse(result: Result<NewsItem>) {
         result
             .onSuccess { newsItem ->
                 searchNewsPage++
@@ -62,12 +62,12 @@ class SearchNewsViewModel @Inject constructor(
 
                 Log.d("TAGGG", searchNewsItem?.articles?.size.toString())
                 searchNewsItem?.let {
-                    _searchNewsShFlow.emit(com.olgabakhur.data.util.result.Result.Success(it))
+                    _searchNewsShFlow.emit(Result.Success(it))
                 }
             }
 
             .onError {
-                _searchNewsShFlow.emit(com.olgabakhur.data.util.result.Result.Error(it))
+                _searchNewsShFlow.emit(Result.Error(it))
             }
     }
 }

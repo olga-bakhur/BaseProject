@@ -44,6 +44,11 @@ dependencies {
     // Lifecycle LiveData
     implementation globalDependencies.lifecycleLiveDataKtx
 
+    // Room
+    implementation globalDependencies.room
+    annotationProcessor globalDependencies.roomCompiler
+    implementation globalDependencies.roomCoroutines
+
     // Coroutines
     implementation globalDependencies.coroutinesCore
     implementation globalDependencies.coroutinesAndroid

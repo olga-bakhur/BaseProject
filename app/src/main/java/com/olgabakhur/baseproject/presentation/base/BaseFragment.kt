@@ -2,9 +2,7 @@ package com.olgabakhur.baseproject.presentation.base
 
 import android.app.Activity
 import android.app.Dialog
-import android.content.res.Configuration
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
@@ -16,11 +14,11 @@ import com.olgabakhur.baseproject.presentation.util.EventObserver
 
 abstract class BaseFragment(@LayoutRes layoutId: Int) : Fragment(layoutId) {
 
-    protected abstract val viewModel: BaseViewModel
+    abstract val viewModel: BaseViewModel
 
     private var loadingDialog: Dialog? = null
 
-    private var activeToast: Toast? = null
+//    private var activeToast: Toast? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -31,7 +29,7 @@ abstract class BaseFragment(@LayoutRes layoutId: Int) : Fragment(layoutId) {
         viewModel.loading.observe(
             viewLifecycleOwner,
             EventObserver {
-//                showLoading(it)
+                showLoading(it)
             })
     }
 
@@ -46,34 +44,28 @@ abstract class BaseFragment(@LayoutRes layoutId: Int) : Fragment(layoutId) {
     }
 
     /* Messages */
+
+
+
     //        binding.fab.setOnClickListener { view ->
 //            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                .setAction("Action", null).show()
 //        }
 
-    fun toast(message: String) {
-        activeToast?.cancel()
-        activeToast = Toast.makeText(requireContext(), message, Toast.LENGTH_LONG)
-        activeToast!!.show()
-    }
+//    fun toast(message: String) {
+//        activeToast?.cancel()
+//        activeToast = Toast.makeText(requireContext(), message, Toast.LENGTH_LONG)
+//        activeToast!!.show()
+//    }
+
 
     /* Loadings */
-//    protected fun showLoading(isLoading: Boolean) {
+    protected fun showLoading(isLoading: Boolean) {
 //        loadingDialog = if (isLoading) {
 //            LoadingDialog.buildLoadingDialog(this.view).apply { show() }
 //        } else {
 //            loadingDialog?.dismiss().let { null }
 //        }
-//    }
-
-    protected fun getDeviceColumnCount(): Int {
-        val cfg = resources.configuration
-        val count = (cfg.screenWidthDp / cfg.fontScale / 175).toInt()
-        if (count < 2) {
-            return 2
-        }
-        Log.d("base", "column count: $count")
-        return count
     }
 
 //    protected fun getRecyclerHorizontalMargin(): Int {

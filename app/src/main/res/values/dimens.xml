@@ -2,4 +2,5 @@
     <dimen name="fab_margin">16dp</dimen>
 
     <dimen name="zero">0dp</dimen>
+    <dimen name="loader_progressBar_diameter">42dp</dimen>
 </resources>

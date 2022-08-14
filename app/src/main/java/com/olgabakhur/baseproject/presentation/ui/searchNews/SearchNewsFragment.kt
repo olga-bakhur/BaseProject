@@ -9,16 +9,16 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.baseproject.util.flow.collectWhileStarted
+import com.olgabakhur.baseproject.presentation.util.flow.collectWhileStarted
 import com.olgabakhur.baseproject.R
 import com.olgabakhur.baseproject.databinding.FragmentSearchNewsBinding
-import com.olgabakhur.baseproject.global.di.App
+import com.olgabakhur.baseproject.App
 import com.olgabakhur.baseproject.presentation.adapters.NewsAdapter
 import com.olgabakhur.baseproject.presentation.base.BaseFragment
-import com.olgabakhur.baseproject.presentation.extensions.viewModel
 import com.olgabakhur.baseproject.presentation.util.Constants
 import com.olgabakhur.baseproject.presentation.util.Constants.SEARCH_NEWS_TIME_DELAY
-import com.olgabakhur.data.util.result.Result
+import com.olgabakhur.baseproject.presentation.util.viewModelUtil.viewModel
+import com.olgabakhur.domain.util.result.Result
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
@@ -50,7 +50,7 @@ class SearchNewsFragment : BaseFragment(R.layout.fragment_search_news) {
     override fun observeViewModel() {
         viewModel.searchNewsShFlow.collectWhileStarted(viewLifecycleOwner) { result ->
             when (result) {
-                is com.olgabakhur.data.util.result.Result.Success -> {
+                is Result.Success -> {
                     val newsItem = result.value
                     val newArticlesList = newsItem.articles.toList()
                     val totalPagesCount = newsItem.totalResults
@@ -65,7 +65,7 @@ class SearchNewsFragment : BaseFragment(R.layout.fragment_search_news) {
                     }
                 }
 
-                is com.olgabakhur.data.util.result.Result.Error -> {
+                is Result.Error -> {
                     // TODO: add message
                     Log.e(TAG, "An error occurred: ${result.error}")
                 }

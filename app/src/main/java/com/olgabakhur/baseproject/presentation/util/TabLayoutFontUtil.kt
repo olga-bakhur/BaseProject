@@ -8,7 +8,7 @@ import androidx.annotation.ColorRes
 import androidx.annotation.FontRes
 import androidx.core.content.res.ResourcesCompat
 import com.google.android.material.tabs.TabLayout
-import com.olgabakhur.baseproject.presentation.extensions.disable
+import com.olgabakhur.baseproject.presentation.util.view.disable
 
 fun changeSelectedTabFont(
     tabLayout: TabLayout,

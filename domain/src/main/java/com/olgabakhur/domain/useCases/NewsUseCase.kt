@@ -1,6 +1,6 @@
 package com.olgabakhur.domain.useCases
 
-import com.olgabakhur.data.repository.NewsRepository
+import com.olgabakhur.domain.repository.NewsRepository
 import javax.inject.Inject
 
 class NewsUseCase @Inject constructor(

@@ -7,11 +7,11 @@ import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.snackbar.Snackbar
 import com.olgabakhur.baseproject.R
-import com.olgabakhur.baseproject.global.di.App
+import com.olgabakhur.baseproject.App
 import com.olgabakhur.data.model.news.Article
 import com.olgabakhur.baseproject.databinding.FragmentArticleBinding
 import com.olgabakhur.baseproject.presentation.base.BaseFragment
-import com.olgabakhur.baseproject.presentation.extensions.viewModel
+import com.olgabakhur.baseproject.presentation.util.viewModelUtil.viewModel
 
 class ArticleFragment : BaseFragment(R.layout.fragment_article) {
 

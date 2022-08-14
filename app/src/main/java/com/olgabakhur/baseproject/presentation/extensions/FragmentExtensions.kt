@@ -1,31 +1,17 @@
-@file:Suppress("UNCHECKED_CAST")
-
 package com.olgabakhur.baseproject.presentation.extensions
 
-import androidx.activity.viewModels
-import androidx.fragment.app.*
-import androidx.lifecycle.*
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
-inline fun <reified T : ViewModel> Fragment.viewModel(
-    crossinline provider: () -> T
-) = viewModels<T> {
-    object : ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T = provider() as T
-    }
-}
-
-inline fun <reified T : ViewModel> Fragment.activityViewModel(
-    crossinline provider: () -> T
-) = activityViewModels<T> {
-    object : ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T = provider() as T
-    }
-}
-
-inline fun <reified T : ViewModel> FragmentActivity.viewModel(
-    crossinline provider: () -> T
-) = viewModels<T> {
-    object : ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T = provider() as T
+fun <T> Fragment.collectLatestLifecycleFlow(flow: Flow<T>, collect: suspend (T) -> Unit) {
+    lifecycleScope.launch {
+        repeatOnLifecycle(Lifecycle.State.STARTED) {
+            flow.collectLatest(collect)
+        }
     }
 }
