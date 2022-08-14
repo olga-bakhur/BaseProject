@@ -9,12 +9,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.olgabakhur.baseproject.presentation.util.flow.collectWhileStarted
 import com.olgabakhur.baseproject.R
 import com.olgabakhur.baseproject.databinding.FragmentSearchNewsBinding
 import com.olgabakhur.baseproject.App
 import com.olgabakhur.baseproject.presentation.adapters.NewsAdapter
 import com.olgabakhur.baseproject.presentation.base.BaseFragment
+import com.olgabakhur.baseproject.presentation.extensions.collectWhenStarted
 import com.olgabakhur.baseproject.presentation.util.Constants
 import com.olgabakhur.baseproject.presentation.util.Constants.SEARCH_NEWS_TIME_DELAY
 import com.olgabakhur.baseproject.presentation.util.viewModelUtil.viewModel
@@ -48,7 +48,7 @@ class SearchNewsFragment : BaseFragment(R.layout.fragment_search_news) {
 
     //TODO: loading dialog
     override fun observeViewModel() {
-        viewModel.searchNewsShFlow.collectWhileStarted(viewLifecycleOwner) { result ->
+        collectWhenStarted(viewModel.searchNewsShFlow)  { result ->
             when (result) {
                 is Result.Success -> {
                     val newsItem = result.value

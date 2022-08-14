@@ -7,12 +7,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.olgabakhur.baseproject.presentation.util.flow.collectWhileStarted
+import com.olgabakhur.baseproject.App
 import com.olgabakhur.baseproject.R
 import com.olgabakhur.baseproject.databinding.FragmentBreakingNewsBinding
-import com.olgabakhur.baseproject.App
 import com.olgabakhur.baseproject.presentation.adapters.NewsAdapter
 import com.olgabakhur.baseproject.presentation.base.BaseFragment
+import com.olgabakhur.baseproject.presentation.extensions.collectLatestWhenStarted
 import com.olgabakhur.baseproject.presentation.util.Constants.QUERY_PAGE_SIZE
 import com.olgabakhur.baseproject.presentation.util.viewModelUtil.viewModel
 import com.olgabakhur.domain.util.result.Result
@@ -41,7 +41,7 @@ class BreakingNewsFragment : BaseFragment(R.layout.fragment_breaking_news) {
 
     //TODO: loading dialog
     override fun observeViewModel() {
-        viewModel.breakingNewsShFlow.collectWhileStarted(viewLifecycleOwner) { result ->
+        collectLatestWhenStarted(viewModel.breakingNewsShFlow) { result ->
             when (result) {
                 is Result.Success -> {
                     val newsItem = result.value

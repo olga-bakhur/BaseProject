@@ -15,7 +15,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.olgabakhur.baseproject.App
 import com.olgabakhur.baseproject.R
 import com.olgabakhur.baseproject.databinding.ActivityMainBinding
-import com.olgabakhur.baseproject.presentation.extensions.collectWhenStarted
+import com.olgabakhur.baseproject.presentation.extensions.collectWhenCreated
 import com.olgabakhur.baseproject.presentation.extensions.message
 import com.olgabakhur.baseproject.presentation.util.viewModelUtil.viewModel
 
@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     }
 
     private fun observeViewModel() {
-        collectWhenStarted(viewModel.getApplicationErrors()) {
+        collectWhenCreated(viewModel.getApplicationErrors()) {
             // TODO: show in a dialog
             Log.d("TAGGG", it.message(this@MainActivity))
         }

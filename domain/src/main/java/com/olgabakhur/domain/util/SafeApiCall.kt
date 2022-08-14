@@ -12,7 +12,7 @@ import java.net.UnknownHostException
 
 object SafeApiCall {
 
-    private val _networkErrorsFlow = MutableSharedFlow<ApplicationError>(replay = 1)
+    private val _networkErrorsFlow = MutableSharedFlow<ApplicationError>(replay = 0)
     val networkErrorsFlow = _networkErrorsFlow.asSharedFlow()
 
     suspend fun <T> doSafeApiCall(apiCall: suspend () -> T): Result<T> {
