@@ -13,7 +13,7 @@ import com.olgabakhur.baseproject.R
 import com.olgabakhur.baseproject.databinding.FragmentSavedNewsBinding
 import com.olgabakhur.baseproject.presentation.adapters.NewsAdapter
 import com.olgabakhur.baseproject.presentation.base.BaseFragment
-import com.olgabakhur.baseproject.presentation.extensions.collectLatestLifecycleFlow
+import com.olgabakhur.baseproject.presentation.extensions.collectLatestWhenStarted
 import com.olgabakhur.baseproject.presentation.util.viewModelUtil.viewModel
 import com.olgabakhur.data.model.news.Article
 
@@ -36,7 +36,7 @@ class SavedNewsFragment : BaseFragment(R.layout.fragment_saved_news) {
     override fun observeViewModel() {
         super.observeViewModel()
 
-        collectLatestLifecycleFlow(viewModel.getSavedNews()) { articlesList: List<Article> ->
+        collectLatestWhenStarted(viewModel.getSavedNews()) { articlesList: List<Article> ->
             newsAdapter.differList.submitList(articlesList)
         }
     }

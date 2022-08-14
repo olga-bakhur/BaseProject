@@ -1,19 +1,22 @@
 package com.olgabakhur.baseproject.presentation.ui.mainActivity
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.olgabakhur.baseproject.R
 import com.olgabakhur.baseproject.App
+import com.olgabakhur.baseproject.R
 import com.olgabakhur.baseproject.databinding.ActivityMainBinding
+import com.olgabakhur.baseproject.presentation.extensions.collectWhenStarted
+import com.olgabakhur.baseproject.presentation.extensions.message
 import com.olgabakhur.baseproject.presentation.util.viewModelUtil.viewModel
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
@@ -26,7 +29,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        observeViewModel()
         initNavController()
         setupToolbar()
         setupBottomNavigation()
@@ -53,6 +56,13 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                 || super.onSupportNavigateUp()
     }
 
+    private fun observeViewModel() {
+        collectWhenStarted(viewModel.getApplicationErrors()) {
+            // TODO: show in a dialog
+            Log.d("TAGGG", it.message(this@MainActivity))
+        }
+    }
+
     private fun initNavController() {
         val navHostFragment = supportFragmentManager
             .findFragmentById(binding.navHostFragment.id) as NavHostFragment
@@ -61,11 +71,13 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private fun setupToolbar() {
         setSupportActionBar(binding.toolbar)
-        appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.breakingNewsFragment,
-            R.id.savedNewsFragment,
-            R.id.searchNewsFragment
-        ))
+        appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.breakingNewsFragment,
+                R.id.savedNewsFragment,
+                R.id.searchNewsFragment
+            )
+        )
         setupActionBarWithNavController(navController, appBarConfiguration)
     }
 

@@ -1,6 +1,5 @@
 package com.olgabakhur.baseproject.presentation.util.validation
 
-import com.olgabakhur.domain.util.error.ApplicationError
 import com.olgabakhur.domain.util.result.Result
 
 

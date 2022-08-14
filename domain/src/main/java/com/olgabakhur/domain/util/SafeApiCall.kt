@@ -1,35 +1,53 @@
 package com.olgabakhur.domain.util
 
+import com.olgabakhur.domain.util.error.ApplicationError
+import com.olgabakhur.domain.util.result.Result
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import retrofit2.HttpException
 import java.net.ConnectException
 import java.net.HttpURLConnection.*
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
-suspend fun <T> safeApiCall(apiCall: suspend () -> T): com.olgabakhur.domain.util.result.Result<T> {
-    return try {
-        com.olgabakhur.domain.util.result.Result.Success(apiCall.invoke())
-    } catch (throwable: Throwable) {
-        when (throwable) {
-            is SocketTimeoutException -> com.olgabakhur.domain.util.result.Result.Error(com.olgabakhur.domain.util.error.ApplicationError.TimeOut)
-            is ConnectException -> com.olgabakhur.domain.util.result.Result.Error(com.olgabakhur.domain.util.error.ApplicationError.NoInternetConnection)
-            is UnknownHostException -> com.olgabakhur.domain.util.result.Result.Error(com.olgabakhur.domain.util.error.ApplicationError.NoInternetConnection)
-            is HttpException -> {
+object SafeApiCall {
 
-                val error = throwable.getCustomHttpError().getApplicationErrorOrNull()
-                if (error != null) return com.olgabakhur.domain.util.result.Result.Error(error)
+    private val _networkErrorsFlow = MutableSharedFlow<ApplicationError>(replay = 1)
+    val networkErrorsFlow = _networkErrorsFlow.asSharedFlow()
 
-                when (throwable.code()) {
-                    HTTP_BAD_REQUEST -> com.olgabakhur.domain.util.result.Result.Error(com.olgabakhur.domain.util.error.ApplicationError.BadRequest)
-                    HTTP_UNAUTHORIZED -> com.olgabakhur.domain.util.result.Result.Error(com.olgabakhur.domain.util.error.ApplicationError.Unauthorized)
-                    HTTP_NOT_FOUND -> com.olgabakhur.domain.util.result.Result.Error(com.olgabakhur.domain.util.error.ApplicationError.NotFound)
-                    HTTP_INTERNAL_ERROR -> com.olgabakhur.domain.util.result.Result.Error(com.olgabakhur.domain.util.error.ApplicationError.Server)
-                    else -> com.olgabakhur.domain.util.result.Result.Error(com.olgabakhur.domain.util.error.ApplicationError.Generic)
+    suspend fun <T> doSafeApiCall(apiCall: suspend () -> T): Result<T> {
+        return try {
+            Result.Success(apiCall.invoke())
+        } catch (throwable: Throwable) {
+
+            val appError = when (throwable) {
+                is SocketTimeoutException -> ApplicationError.TimeOut
+                is ConnectException -> ApplicationError.NoInternetConnection
+                is UnknownHostException -> ApplicationError.NoInternetConnection
+                is HttpException -> {
+
+                    when (throwable.code()) {
+                        HTTP_BAD_REQUEST -> ApplicationError.BadRequest                       // 400
+                        HTTP_UNAUTHORIZED -> ApplicationError.Unauthorized                    // 401
+                        HTTP_FORBIDDEN -> ApplicationError.Forbidden                          // 403
+                        HTTP_NOT_FOUND -> ApplicationError.NotFound                           // 404
+                        HTTP_GATEWAY_TIMEOUT,                                                 // 504
+                        HTTP_CLIENT_TIMEOUT -> ApplicationError.TimeOut                       // 408
+                        HTTP_CONFLICT -> ApplicationError.Conflict                            // 409
+                        HTTP_UNSUPPORTED_TYPE -> ApplicationError.UnsupportedType             // 415
+                        ApplicationError.TOO_MANY_REQUESTS -> ApplicationError.TooManyRequests// 429
+                        HTTP_BAD_GATEWAY,                                                     // 502
+                        HTTP_INTERNAL_ERROR -> ApplicationError.Server                        // 500
+
+                        else -> ApplicationError.Generic                                       // -1
+                    }
+                }
+                else -> {
+                    ApplicationError.Generic                                                   // -1
                 }
             }
-            else -> {
-                com.olgabakhur.domain.util.result.Result.Error(com.olgabakhur.domain.util.error.ApplicationError.Generic)
-            }
+            _networkErrorsFlow.emit(appError)
+            return Result.Error(appError)
         }
     }
 }
