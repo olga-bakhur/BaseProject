@@ -1,6 +1,6 @@
 package com.olgabakhur.domain.useCases
 
-import com.olgabakhur.domain.util.error.ApplicationError
+import com.olgabakhur.data.util.error.ApplicationError
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.merge
 import javax.inject.Inject

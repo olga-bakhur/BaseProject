@@ -17,7 +17,7 @@ import com.olgabakhur.baseproject.presentation.extensions.message
 import com.olgabakhur.baseproject.presentation.util.Constants.QUERY_PAGE_SIZE
 import com.olgabakhur.baseproject.presentation.util.view.Dialog
 import com.olgabakhur.baseproject.presentation.util.viewModelUtil.viewModel
-import com.olgabakhur.domain.util.result.Result
+import com.olgabakhur.data.util.result.Result
 
 class BreakingNewsFragment : BaseFragment(R.layout.fragment_breaking_news) {
 

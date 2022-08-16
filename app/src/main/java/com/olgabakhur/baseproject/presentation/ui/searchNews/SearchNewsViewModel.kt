@@ -5,9 +5,9 @@ import com.olgabakhur.baseproject.presentation.base.BaseViewModel
 import com.olgabakhur.data.model.news.Article
 import com.olgabakhur.data.model.news.NewsItem
 import com.olgabakhur.domain.interactors.NewsInteractor
-import com.olgabakhur.domain.util.result.Result
-import com.olgabakhur.domain.util.result.onError
-import com.olgabakhur.domain.util.result.onSuccess
+import com.olgabakhur.data.util.result.Result
+import com.olgabakhur.data.util.result.onError
+import com.olgabakhur.data.util.result.onSuccess
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow

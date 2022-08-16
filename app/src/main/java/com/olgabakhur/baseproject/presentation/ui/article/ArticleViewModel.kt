@@ -4,7 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.olgabakhur.baseproject.presentation.base.BaseViewModel
 import com.olgabakhur.data.model.news.Article
 import com.olgabakhur.domain.interactors.NewsInteractor
-import com.olgabakhur.domain.util.result.Result
+import com.olgabakhur.data.util.result.Result
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow

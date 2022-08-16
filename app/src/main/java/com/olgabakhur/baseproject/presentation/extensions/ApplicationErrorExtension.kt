@@ -2,7 +2,7 @@ package com.olgabakhur.baseproject.presentation.extensions
 
 import android.content.Context
 import com.olgabakhur.baseproject.R
-import com.olgabakhur.domain.util.error.ApplicationError
+import com.olgabakhur.data.util.error.ApplicationError
 
 fun ApplicationError.message(context: Context): String =
     context.resources.getString(

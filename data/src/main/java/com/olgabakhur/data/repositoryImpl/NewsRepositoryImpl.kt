@@ -1,14 +1,14 @@
-package com.olgabakhur.domain.repositoryImpl
+package com.olgabakhur.data.repositoryImpl
 
 import com.olgabakhur.data.model.news.Article
 import com.olgabakhur.data.model.news.NewsItem
 import com.olgabakhur.data.source.local.newsDatabase.ArticleDao
 import com.olgabakhur.data.source.local.newsDatabase.ArticleDatabase
 import com.olgabakhur.data.source.remote.NewsApi
-import com.olgabakhur.domain.repository.NewsRepository
-import com.olgabakhur.domain.util.SafeApiCall
-import com.olgabakhur.domain.util.SafeDatabaseCall
-import com.olgabakhur.domain.util.result.Result
+import com.olgabakhur.data.repository.NewsRepository
+import com.olgabakhur.data.util.safeCall.SafeApiCall
+import com.olgabakhur.data.util.safeCall.SafeDatabaseCall
+import com.olgabakhur.data.util.result.Result
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

@@ -1,4 +1,4 @@
-package com.olgabakhur.domain.util.error
+package com.olgabakhur.data.util.error
 
 sealed class ApplicationError {
 

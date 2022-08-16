@@ -1,8 +1,8 @@
-package com.olgabakhur.domain.repository
+package com.olgabakhur.data.repository
 
 import com.olgabakhur.data.model.news.Article
 import com.olgabakhur.data.model.news.NewsItem
-import com.olgabakhur.domain.util.result.Result
+import com.olgabakhur.data.util.result.Result
 import kotlinx.coroutines.flow.Flow
 
 interface NewsRepository {

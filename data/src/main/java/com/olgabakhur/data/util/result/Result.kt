@@ -1,6 +1,6 @@
-package com.olgabakhur.domain.util.result
+package com.olgabakhur.data.util.result
 
-import com.olgabakhur.domain.util.error.ApplicationError
+import com.olgabakhur.data.util.error.ApplicationError
 
 
 /**

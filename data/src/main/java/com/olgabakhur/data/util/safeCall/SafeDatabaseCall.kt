@@ -1,8 +1,8 @@
-package com.olgabakhur.domain.util
+package com.olgabakhur.data.util.safeCall
 
 import android.database.sqlite.SQLiteException
-import com.olgabakhur.domain.util.error.ApplicationError
-import com.olgabakhur.domain.util.result.Result
+import com.olgabakhur.data.util.error.ApplicationError
+import com.olgabakhur.data.util.result.Result
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 

@@ -1,9 +1,9 @@
 package com.olgabakhur.baseproject.di.module
 
-import com.olgabakhur.domain.repositoryImpl.NewsRepositoryImpl
+import com.olgabakhur.data.repositoryImpl.NewsRepositoryImpl
 import com.olgabakhur.data.source.local.newsDatabase.ArticleDatabase
 import com.olgabakhur.data.source.remote.NewsApi
-import com.olgabakhur.domain.repository.NewsRepository
+import com.olgabakhur.data.repository.NewsRepository
 import dagger.Module
 import dagger.Provides
 

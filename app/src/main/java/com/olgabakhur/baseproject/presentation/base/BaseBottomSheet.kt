@@ -8,13 +8,14 @@ import androidx.annotation.*
 import androidx.core.view.isVisible
 
 import com.google.android.material.bottomsheet.*
+import com.olgabakhur.baseproject.R
 
 abstract class BaseBottomSheet(
     @LayoutRes val layoutId: Int,
     @StyleRes val themeBottomSheet: Int? = null
 ) : BottomSheetDialogFragment() {
 
-    protected abstract val viewModel: BaseViewModel
+    abstract val viewModel: BaseViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,7 +26,7 @@ abstract class BaseBottomSheet(
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = BottomSheetDialog(
             requireContext(),
-//            themeBottomSheet ?: R.style.BottomSheet_SystemBarsStyle
+            themeBottomSheet ?: R.style.BottomSheet_SystemBarsStyle
         )
 
         dialog.setOnShowListener { dialogInterface ->

@@ -20,7 +20,7 @@ import com.olgabakhur.baseproject.presentation.util.view.SnackbarAction
 import com.olgabakhur.baseproject.presentation.util.view.showSnackbar
 import com.olgabakhur.baseproject.presentation.util.view.showSnackbarWithAction
 import com.olgabakhur.baseproject.presentation.util.viewModelUtil.viewModel
-import com.olgabakhur.domain.util.result.Result
+import com.olgabakhur.data.util.result.Result
 import kotlinx.coroutines.flow.collectLatest
 
 class SavedNewsFragment : BaseFragment(R.layout.fragment_saved_news) {
@@ -67,7 +67,7 @@ class SavedNewsFragment : BaseFragment(R.layout.fragment_saved_news) {
             // TODO: enable ui or adjust loading dialog
             when (result) {
                 is Result.Success -> {
-                    // TODO: resores at the end of the list, not previous position
+                    // TODO: restores at the end of the list, not previous position
                     showSnackbarWithAction(
                         mContext,
                         binding.root,

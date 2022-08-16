@@ -16,7 +16,7 @@ import com.olgabakhur.baseproject.presentation.util.view.Dialog
 import com.olgabakhur.baseproject.presentation.util.view.showSnackbar
 import com.olgabakhur.baseproject.presentation.util.viewModelUtil.viewModel
 import com.olgabakhur.data.model.news.Article
-import com.olgabakhur.domain.util.result.Result
+import com.olgabakhur.data.util.result.Result
 
 class ArticleFragment : BaseFragment(R.layout.fragment_article) {
 
@@ -67,7 +67,7 @@ class ArticleFragment : BaseFragment(R.layout.fragment_article) {
     private fun setupWebView() {
         binding.webView.apply {
             webViewClient = WebViewClient()
-            article.url?.let { loadUrl(it) }
+            loadUrl(article.url)
         }
     }
 
