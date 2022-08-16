@@ -1,4 +1,4 @@
-package com.olgabakhur.baseproject.presentation.util
+package com.olgabakhur.baseproject.presentation.util.onClickListener
 
 import android.view.View
 
@@ -18,6 +18,7 @@ class DebouncingOnClickListener(
     companion object {
         @JvmStatic
         var isTesting = false
+
         @JvmStatic
         var enabled = true
         private val ENABLE_AGAIN =
@@ -27,4 +28,9 @@ class DebouncingOnClickListener(
 
 
 fun View.setOnCLick(intervalMillis: Long = 0, doClick: (View) -> Unit) =
-    setOnClickListener(DebouncingOnClickListener(intervalMillis = intervalMillis, doClick = doClick))
+    setOnClickListener(
+        DebouncingOnClickListener(
+            intervalMillis = intervalMillis,
+            doClick = doClick
+        )
+    )

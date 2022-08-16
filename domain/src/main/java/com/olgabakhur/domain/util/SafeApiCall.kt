@@ -39,11 +39,11 @@ object SafeApiCall {
                         HTTP_BAD_GATEWAY,                                                     // 502
                         HTTP_INTERNAL_ERROR -> ApplicationError.Server                        // 500
 
-                        else -> ApplicationError.Generic                                       // -1
+                        else -> ApplicationError.Unknown                                       // -1
                     }
                 }
                 else -> {
-                    ApplicationError.Generic                                                   // -1
+                    ApplicationError.Unknown                                                   // -1
                 }
             }
             _networkErrorsFlow.emit(appError)

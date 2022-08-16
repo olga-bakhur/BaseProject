@@ -11,7 +11,7 @@ interface NewsRepository {
     suspend fun searchNews(searchQuery: String, pageNumber: Int): Result<NewsItem>
 
     // News database
-    suspend fun upsert(article: Article): Long
-    fun getSavedArticles(): Flow<List<Article>>
-    suspend fun deleteArticle(article: Article)
+    suspend fun insertArticle(article: Article): Result<Long>
+    suspend fun getSavedArticles(): Result<Flow<List<Article>>>
+    suspend fun deleteArticle(article: Article): Result<Int>
 }

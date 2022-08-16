@@ -8,8 +8,8 @@
 
     <ProgressBar
         style="@style/Widget.AppCompat.ProgressBar"
-        android:layout_width="@dimen/loader_progressBar_diameter"
-        android:layout_height="@dimen/loader_progressBar_diameter"
+        android:layout_width="@dimen/progress_bar_diameter"
+        android:layout_height="@dimen/progress_bar_diameter"
         android:indeterminate="true"
         android:theme="@style/Widget.AppCompat.ProgressBar" />
 

@@ -1,9 +1,9 @@
 package com.olgabakhur.baseproject.presentation.ui.breakingNews
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.AbsListView
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -13,7 +13,9 @@ import com.olgabakhur.baseproject.databinding.FragmentBreakingNewsBinding
 import com.olgabakhur.baseproject.presentation.adapters.NewsAdapter
 import com.olgabakhur.baseproject.presentation.base.BaseFragment
 import com.olgabakhur.baseproject.presentation.extensions.collectLatestWhenStarted
+import com.olgabakhur.baseproject.presentation.extensions.message
 import com.olgabakhur.baseproject.presentation.util.Constants.QUERY_PAGE_SIZE
+import com.olgabakhur.baseproject.presentation.util.view.Dialog
 import com.olgabakhur.baseproject.presentation.util.viewModelUtil.viewModel
 import com.olgabakhur.domain.util.result.Result
 
@@ -24,6 +26,7 @@ class BreakingNewsFragment : BaseFragment(R.layout.fragment_breaking_news) {
 
     private lateinit var newsAdapter: NewsAdapter
     private lateinit var scrollListener: RecyclerView.OnScrollListener
+    private lateinit var mContext: Context
 
     private var isLoading = false
     private var isLastPage = false
@@ -31,17 +34,17 @@ class BreakingNewsFragment : BaseFragment(R.layout.fragment_breaking_news) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mContext = requireContext()
         viewModel.getBreakingNews(countryCode = "us")
         setupSwipeToRefresh()
         initRecyclerViewScrollListener()
         setupRecyclerView()
         setupRecyclerViewItemClickListener()
-
     }
 
-    //TODO: loading dialog
     override fun observeViewModel() {
-        collectLatestWhenStarted(viewModel.breakingNewsShFlow) { result ->
+        collectLatestWhenStarted(viewModel.breakingNewsResultFlow) { result ->
+            // TODO: enable ui or adjust loading dialog
             when (result) {
                 is Result.Success -> {
                     val newsItem = result.value
@@ -59,8 +62,12 @@ class BreakingNewsFragment : BaseFragment(R.layout.fragment_breaking_news) {
                 }
 
                 is Result.Error -> {
-                    binding.laySwipeToRefresh.isRefreshing = false
-//                    snackbar(binding.root, {result.error)
+                    //  TODO: binding.laySwipeToRefresh.isRefreshing = false
+                    Dialog.showOkDialogWithTitle(
+                        mContext,
+                        R.string.general_error,
+                        result.error.message(mContext)
+                    )
                 }
             }
         }
@@ -68,13 +75,12 @@ class BreakingNewsFragment : BaseFragment(R.layout.fragment_breaking_news) {
 
     private fun setupSwipeToRefresh() {
         binding.laySwipeToRefresh.apply {
-            setColorSchemeResources(R.color.colorAccent, R.color.colorPrimary)
+            setColorSchemeResources(R.color.colorPrimary, R.color.colorSecondary)
             setOnRefreshListener {
                 viewModel.getBreakingNews(countryCode = "us")
             }
         }
     }
-
 
     // TODO: Add Google paging
     private fun initRecyclerViewScrollListener() {
@@ -120,9 +126,7 @@ class BreakingNewsFragment : BaseFragment(R.layout.fragment_breaking_news) {
 
     private fun setupRecyclerViewItemClickListener() {
         newsAdapter.setOnItemClickListener {
-            findNavController().navigate(
-                BreakingNewsFragmentDirections.actionBreakingNewsFragmentToArticleFragment(it)
-            )
+            navigate(BreakingNewsFragmentDirections.actionBreakingNewsFragmentToArticleFragment(it))
         }
     }
 }

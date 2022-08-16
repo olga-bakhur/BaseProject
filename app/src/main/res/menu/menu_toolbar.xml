@@ -1,11 +1,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.olgabakhur.baseproject.presentation.ui.mainActivity.MainActivity">
+    tools:context="com.olgabakhur.baseproject.presentation.ui.MainActivity">
 
     <item
-        android:id="@+id/settings"
-        android:title="Settings"
+        android:id="@+id/actionA"
+        android:title="Action A"
         android:icon="@drawable/ic_favorite"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/actionB"
+        android:title="Action B"
+        android:icon="@drawable/ic_favorite"
+        app:showAsAction="always"/>
 </menu>

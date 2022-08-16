@@ -7,7 +7,9 @@ import com.olgabakhur.data.source.local.newsDatabase.ArticleDatabase
 import com.olgabakhur.data.source.remote.NewsApi
 import com.olgabakhur.domain.repository.NewsRepository
 import com.olgabakhur.domain.util.SafeApiCall
+import com.olgabakhur.domain.util.SafeDatabaseCall
 import com.olgabakhur.domain.util.result.Result
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class NewsRepositoryImpl @Inject constructor(
@@ -25,9 +27,12 @@ class NewsRepositoryImpl @Inject constructor(
         SafeApiCall.doSafeApiCall { newsApi.searchForNews(searchQuery, pageNumber) }
 
     // News database
-    override suspend fun upsert(article: Article) = newsDao.upsert(article)
+    override suspend fun insertArticle(article: Article): Result<Long> =
+        SafeDatabaseCall.doSafeDatabaseCall { newsDao.insertArticle(article) }
 
-    override fun getSavedArticles() = newsDao.getAllArticles()
+    override suspend fun getSavedArticles(): Result<Flow<List<Article>>> =
+        SafeDatabaseCall.doSafeDatabaseCall { newsDao.getAllArticles() }
 
-    override suspend fun deleteArticle(article: Article) = newsDao.deleteArticle(article)
+    override suspend fun deleteArticle(article: Article): Result<Int> =
+        SafeDatabaseCall.doSafeDatabaseCall { newsDao.deleteArticle(article) }
 }

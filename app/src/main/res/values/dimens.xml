@@ -1,6 +1,7 @@
 <resources>
-    <dimen name="fab_margin">16dp</dimen>
-
     <dimen name="zero">0dp</dimen>
-    <dimen name="loader_progressBar_diameter">42dp</dimen>
+
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="progress_bar_diameter">42dp</dimen>
+    <dimen name="dialog_corner_radius">10dp</dimen>
 </resources>

@@ -5,14 +5,11 @@ import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 
-private const val keyboardDelay: Long = 300
-
 fun Context.showKeyboard(view: View) {
-    if (view.requestFocus()) getInputMethodManager().showSoftInput(view, InputMethodManager.SHOW_FORCED)
-}
-
-fun Context.showKeyboardWithDelay(view: View) {
-    view.postDelayed({ showKeyboard(view) }, keyboardDelay)
+    if (view.requestFocus()) getInputMethodManager().showSoftInput(
+        view,
+        InputMethodManager.SHOW_FORCED
+    )
 }
 
 fun Context.hideKeyboard(view: View) {

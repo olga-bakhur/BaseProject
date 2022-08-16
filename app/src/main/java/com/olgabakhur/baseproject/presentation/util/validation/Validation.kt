@@ -1,15 +1,16 @@
 package com.olgabakhur.baseproject.presentation.util.validation
 
-import com.olgabakhur.domain.util.result.Result
+// Email
+private fun isEmailValid(email: String): Boolean {
+    val pattern = Regex(EMAIL)
+    return pattern.matches(email)
+}
 
+// Password
+fun isPasswordValid(password: String): Boolean {
+    val pattern = Regex(PASSWORD)
+    return pattern.matches(password)
+}
 
-//fun Result<String>.checkEmpty(): Result<String> {
-//    return if (this is Result.Success) {
-//        if (value.isNotEmpty()) Result.Success(value)
-//        else Result.Error(ApplicationError.EmptyFiled)
-//    } else this
-//}
-
-private fun String.matchTo(regExp: String) = matches(regExp.toRegex())
-
-private fun String.isEmailValid() = this.matchTo(EMAIL)
+fun isPasswordMatches(password: String, repeat: String): Boolean =
+    password.contentEquals(repeat, false)

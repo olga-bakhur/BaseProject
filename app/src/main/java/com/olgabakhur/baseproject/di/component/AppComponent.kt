@@ -3,9 +3,9 @@ package com.olgabakhur.baseproject.di.component
 import android.app.Application
 import com.olgabakhur.baseproject.di.module.ApiModule
 import com.olgabakhur.baseproject.di.module.RepositoriesModule
+import com.olgabakhur.baseproject.presentation.ui.MainViewModel
 import com.olgabakhur.baseproject.presentation.ui.article.ArticleViewModel
 import com.olgabakhur.baseproject.presentation.ui.breakingNews.BreakingNewsViewModel
-import com.olgabakhur.baseproject.presentation.ui.mainActivity.MainViewModel
 import com.olgabakhur.baseproject.presentation.ui.savedNews.SavedNewsViewModel
 import com.olgabakhur.baseproject.presentation.ui.searchNews.SearchNewsViewModel
 import dagger.BindsInstance

@@ -1,8 +1,8 @@
 package com.olgabakhur.baseproject.presentation.ui.savedNews
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,8 +14,14 @@ import com.olgabakhur.baseproject.databinding.FragmentSavedNewsBinding
 import com.olgabakhur.baseproject.presentation.adapters.NewsAdapter
 import com.olgabakhur.baseproject.presentation.base.BaseFragment
 import com.olgabakhur.baseproject.presentation.extensions.collectLatestWhenStarted
+import com.olgabakhur.baseproject.presentation.extensions.message
+import com.olgabakhur.baseproject.presentation.util.view.Dialog
+import com.olgabakhur.baseproject.presentation.util.view.SnackbarAction
+import com.olgabakhur.baseproject.presentation.util.view.showSnackbar
+import com.olgabakhur.baseproject.presentation.util.view.showSnackbarWithAction
 import com.olgabakhur.baseproject.presentation.util.viewModelUtil.viewModel
-import com.olgabakhur.data.model.news.Article
+import com.olgabakhur.domain.util.result.Result
+import kotlinx.coroutines.flow.collectLatest
 
 class SavedNewsFragment : BaseFragment(R.layout.fragment_saved_news) {
 
@@ -24,9 +30,12 @@ class SavedNewsFragment : BaseFragment(R.layout.fragment_saved_news) {
 
     private lateinit var newsAdapter: NewsAdapter
     private lateinit var itemTouchHelperCallback: ItemTouchHelper.SimpleCallback
+    private lateinit var mContext: Context
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mContext = requireContext()
+        viewModel.getSavedNews()
         setupRecyclerView()
         setupRecyclerViewItemClickListener()
         initNewsItemTouchHelperCallback()
@@ -35,9 +44,72 @@ class SavedNewsFragment : BaseFragment(R.layout.fragment_saved_news) {
 
     override fun observeViewModel() {
         super.observeViewModel()
+        collectLatestWhenStarted(viewModel.savedNewsResultFlow) { result ->
+            // TODO: enable ui or adjust loading dialog
+            when (result) {
+                is Result.Success -> {
+                    result.value.collectLatest { articlesList ->
+                        newsAdapter.differList.submitList(articlesList)
+                    }
+                }
 
-        collectLatestWhenStarted(viewModel.getSavedNews()) { articlesList: List<Article> ->
-            newsAdapter.differList.submitList(articlesList)
+                is Result.Error -> {
+                    Dialog.showOkDialogWithTitle(
+                        mContext,
+                        R.string.general_error,
+                        result.error.message(mContext)
+                    )
+                }
+            }
+        }
+
+        collectLatestWhenStarted(viewModel.deleteArticleResultFlow) { result ->
+            // TODO: enable ui or adjust loading dialog
+            when (result) {
+                is Result.Success -> {
+                    // TODO: resores at the end of the list, not previous position
+                    showSnackbarWithAction(
+                        mContext,
+                        binding.root,
+                        R.string.article_was_deleted_successfully_message,
+                        Snackbar.LENGTH_LONG,
+                        SnackbarAction(
+                            viewModel::restoreArticle,
+                            R.string.general_cancel
+                        )
+                    )
+                }
+
+                is Result.Error -> {
+                    Dialog.showOkDialogWithTitle(
+                        mContext,
+                        R.string.general_error,
+                        R.string.article_deletion_failed_message
+                    )
+                }
+            }
+        }
+
+        collectLatestWhenStarted(viewModel.restoreArticleResultFlow) { result ->
+            // TODO: enable ui or adjust loading dialog
+            when (result) {
+                is Result.Success -> {
+                    showSnackbar(
+                        mContext,
+                        binding.root,
+                        R.string.article_was_restored_successfully_message,
+                        Snackbar.LENGTH_SHORT
+                    )
+                }
+
+                is Result.Error -> {
+                    Dialog.showOkDialogWithTitle(
+                        mContext,
+                        R.string.general_error,
+                        R.string.article_restoration_failed_message
+                    )
+                }
+            }
         }
     }
 
@@ -51,11 +123,7 @@ class SavedNewsFragment : BaseFragment(R.layout.fragment_saved_news) {
 
     private fun setupRecyclerViewItemClickListener() {
         newsAdapter.setOnItemClickListener {
-            findNavController().navigate(
-                SavedNewsFragmentDirections.actionSavedNewsFragmentToArticleFragment(
-                    it
-                )
-            )
+            navigate(SavedNewsFragmentDirections.actionSavedNewsFragmentToArticleFragment(it))
         }
     }
 
@@ -76,14 +144,6 @@ class SavedNewsFragment : BaseFragment(R.layout.fragment_saved_news) {
                 val position = viewHolder.bindingAdapterPosition
                 val article = newsAdapter.differList.currentList[position]
                 viewModel.deleteArticle(article)
-
-                Snackbar.make(binding.root, "Successfully deleted article", Snackbar.LENGTH_LONG)
-                    .apply {
-                        setAction("Undo") {
-                            viewModel.saveArticle(article)
-                        }
-                        show()
-                    }
             }
         }
     }

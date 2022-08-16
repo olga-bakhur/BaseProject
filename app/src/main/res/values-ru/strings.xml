@@ -1,18 +1,47 @@
 <resources>
     <string name="app_name">Базовый проект</string>
 
-    <string name="article_saved_saved_successfully_message">Статья была успешно сохранена</string>
+    <!-- Error handling -->
+
+    <string name="error_generic">Произошла ошибка. Попробуйте снова позже.</string>
+    <string name="error_no_internet_connection">Нет сети. Проверьте интернет соединение.</string>
+    <string name="error_bad_request">Некорректный запрос. Попробуйте снова позже.</string>
+    <string name="error_forbidden">Отказано в доступе.</string>
+    <string name="error_not_found">Ресурс не был найден.</string>
+    <string name="error_timeout">Время ожидания истекло. Посторите попытку, когда сеть стабилизируется.</string>
+    <string name="error_conflict">Конфликт и текущит статусом запрашиваемого ресурса.</string>
+    <string name="error_unsupported_type">Предоставлен неподдерживаемый тип данных.</string>
+    <string name="error_too_many_requests">Лимит запросов истек.</string>
+    <string name="error_unauthorized">Нет разрешения на доступ к ресурсу. Попробуйте снова позже.</string>
+    <string name="error_server">Ошибка сервера. Попробуйте снова позже.</string>
+    <string name="error_database_operation">Произошла ошибва при обращении к базе данных.</string>
+
+    <!--    General-->
+    <string name="general_ok">Принять</string>
+    <string name="general_cancel">Отмена</string>
+    <string name="general_error">Ошибка</string>
+
+    <!--    Toolbar title-->
     <string name="breaking_news_label_toolbar">Последние новости</string>
     <string name="saved_news_label_toolbar">Сохрананные новости</string>
     <string name="search_news_label_toolbar">Поиск новостей</string>
+    <string name="article_details_label_toolbar">Подродно</string>
 
+    <!--    Bottom navigation bar-->
     <string name="breaking_news_label_bottom_bar">Последние</string>
     <string name="saved_news_label_bottom_bar">Сохрананные</string>
     <string name="search_news_label_bottom_bar">Поиск</string>
 
-    <!-- Errors -->
+    <!--    MainActivity-->
+    <string name="tap_to_exit">Нажмите еще раз кнопку \"Назад\" для выхода из приложения.</string>
 
+    <!--    ArticlesFragment-->
+    <string name="article_was_saved_successfully_message">Статья была успешно сохранена.</string>
+    <string name="article_was_deleted_successfully_message">Статья была успешно удалена.</string>
+    <string name="article_was_restored_successfully_message">Статья была успешно восстановлена.</string>
 
+    <string name="article_saving_failed_message">При сохранении статьи произошла ошибка.</string>
+    <string name="article_deletion_failed_message">При удалении статьи произошла ошибка</string>
+    <string name="article_restoration_failed_message">При восстановлении статьи произошла ошибка</string>
 
-    <string name="tap_to_exit">Press Back again to exit.</string>
 </resources>

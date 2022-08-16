@@ -1,22 +1,23 @@
 package com.olgabakhur.baseproject.presentation.ui.searchNews
 
+import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.AbsListView
 import androidx.core.widget.addTextChangedListener
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.olgabakhur.baseproject.App
 import com.olgabakhur.baseproject.R
 import com.olgabakhur.baseproject.databinding.FragmentSearchNewsBinding
-import com.olgabakhur.baseproject.App
 import com.olgabakhur.baseproject.presentation.adapters.NewsAdapter
 import com.olgabakhur.baseproject.presentation.base.BaseFragment
 import com.olgabakhur.baseproject.presentation.extensions.collectWhenStarted
+import com.olgabakhur.baseproject.presentation.extensions.message
 import com.olgabakhur.baseproject.presentation.util.Constants
 import com.olgabakhur.baseproject.presentation.util.Constants.SEARCH_NEWS_TIME_DELAY
+import com.olgabakhur.baseproject.presentation.util.view.Dialog
 import com.olgabakhur.baseproject.presentation.util.viewModelUtil.viewModel
 import com.olgabakhur.domain.util.result.Result
 import kotlinx.coroutines.Job
@@ -26,20 +27,20 @@ import kotlinx.coroutines.launch
 
 class SearchNewsFragment : BaseFragment(R.layout.fragment_search_news) {
 
-    private val TAG = "SearchNewsFragment"
-
     private val binding by viewBinding(FragmentSearchNewsBinding::bind)
     override val viewModel: SearchNewsViewModel by viewModel { App.appComponent.searchNewsViewModel }
 
     private lateinit var newsAdapter: NewsAdapter
+    private lateinit var scrollListener: RecyclerView.OnScrollListener
+    private lateinit var mContext: Context
 
     private var isLoading = false
     private var isLastPage = false
     private var isScrolling = false
-    private lateinit var scrollListener: RecyclerView.OnScrollListener
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mContext = requireContext()
         initRecyclerViewScrollListener()
         setupRecyclerView()
         setupRecyclerViewItemClickListener()
@@ -48,7 +49,8 @@ class SearchNewsFragment : BaseFragment(R.layout.fragment_search_news) {
 
     //TODO: loading dialog
     override fun observeViewModel() {
-        collectWhenStarted(viewModel.searchNewsShFlow)  { result ->
+        collectWhenStarted(viewModel.searchNewsResultFlow) { result ->
+            // TODO: enable ui or adjust loading dialog
             when (result) {
                 is Result.Success -> {
                     val newsItem = result.value
@@ -66,13 +68,18 @@ class SearchNewsFragment : BaseFragment(R.layout.fragment_search_news) {
                 }
 
                 is Result.Error -> {
-                    // TODO: add message
-                    Log.e(TAG, "An error occurred: ${result.error}")
+                    //  TODO: binding.laySwipeToRefresh.isRefreshing = false
+                    Dialog.showOkDialogWithTitle(
+                        mContext,
+                        R.string.general_error,
+                        result.error.message(mContext)
+                    )
                 }
             }
         }
     }
 
+    // TODO: Add Google paging
     private fun initRecyclerViewScrollListener() {
         scrollListener = object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -116,11 +123,7 @@ class SearchNewsFragment : BaseFragment(R.layout.fragment_search_news) {
 
     private fun setupRecyclerViewItemClickListener() {
         newsAdapter.setOnItemClickListener {
-            findNavController().navigate(
-                SearchNewsFragmentDirections.actionSearchNewsFragmentToArticleFragment(
-                    it
-                )
-            )
+            navigate(SearchNewsFragmentDirections.actionSearchNewsFragmentToArticleFragment(it))
         }
     }
 

@@ -1,7 +1,7 @@
-package com.olgabakhur.baseproject.presentation.ui.mainActivity
+package com.olgabakhur.baseproject.presentation.ui
 
+import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +17,7 @@ import com.olgabakhur.baseproject.R
 import com.olgabakhur.baseproject.databinding.ActivityMainBinding
 import com.olgabakhur.baseproject.presentation.extensions.collectWhenCreated
 import com.olgabakhur.baseproject.presentation.extensions.message
+import com.olgabakhur.baseproject.presentation.util.view.Dialog.showOkDialogWithTitle
 import com.olgabakhur.baseproject.presentation.util.viewModelUtil.viewModel
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
@@ -26,12 +27,13 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var mContext: Context
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        mContext = this
         observeViewModel()
         initNavController()
-        setupToolbar()
         setupBottomNavigation()
     }
 
@@ -57,9 +59,13 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     }
 
     private fun observeViewModel() {
-        collectWhenCreated(viewModel.getApplicationErrors()) {
-            // TODO: show in a dialog
-            Log.d("TAGGG", it.message(this@MainActivity))
+        // TODO: only for general errors
+        collectWhenCreated(viewModel.getApplicationErrors()) { error ->
+            showOkDialogWithTitle(
+                mContext,
+                R.string.general_error,
+                error.message(mContext)
+            )
         }
     }
 
@@ -69,19 +75,19 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         navController = navHostFragment.navController
     }
 
-    private fun setupToolbar() {
+    private fun setupBottomNavigation() {
         setSupportActionBar(binding.toolbar)
+
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.breakingNewsFragment,
                 R.id.savedNewsFragment,
                 R.id.searchNewsFragment
-            )
+            ),
+            fallbackOnNavigateUpListener = ::onSupportNavigateUp
         )
-        setupActionBarWithNavController(navController, appBarConfiguration)
-    }
 
-    private fun setupBottomNavigation() {
         binding.bottomNavigationView.setupWithNavController(navController)
+        setupActionBarWithNavController(navController, appBarConfiguration)
     }
 }

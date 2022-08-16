@@ -11,20 +11,21 @@ import com.olgabakhur.domain.util.result.onSuccess
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class BreakingNewsViewModel @Inject constructor(
     private val newsInteractor: NewsInteractor
 ) : BaseViewModel() {
 
-    private val _breakingNewsShFlow = MutableSharedFlow<Result<NewsItem>>(replay = 1)
-    val breakingNewsShFlow = _breakingNewsShFlow.asSharedFlow()
+    private val _breakingNewsResultFlow = MutableSharedFlow<Result<NewsItem>>(replay = 1)
+    val breakingNewsResultFlow = _breakingNewsResultFlow.asSharedFlow()
 
     var breakingNewsPage = 1
     var breakingNewsItem: NewsItem? = null
 
     fun getBreakingNews(countryCode: String) {
-        viewModelScope.launchWithLoading(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.IO) {
             val result = newsInteractor.getBreakingNews(
                 countryCode = countryCode,
                 pageNumber = breakingNewsPage
@@ -58,12 +59,12 @@ class BreakingNewsViewModel @Inject constructor(
                 }
 
                 breakingNewsItem?.let {
-                    _breakingNewsShFlow.emit(Result.Success(it))
+                    _breakingNewsResultFlow.emit(Result.Success(it))
                 }
             }
 
             .onError {
-                _breakingNewsShFlow.emit(Result.Error(it))
+                _breakingNewsResultFlow.emit(result)
             }
     }
 }

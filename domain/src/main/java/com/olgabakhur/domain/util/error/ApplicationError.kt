@@ -7,7 +7,7 @@ sealed class ApplicationError {
     }
 
     // Common errors
-    object Generic : ApplicationError()
+    object Unknown : ApplicationError()
     object NoInternetConnection : ApplicationError()
 
     // Http errors
@@ -20,4 +20,7 @@ sealed class ApplicationError {
     object UnsupportedType : ApplicationError()
     object TooManyRequests : ApplicationError()
     object Server : ApplicationError()
+
+    // Database operation error
+    object DatabaseOperation : ApplicationError()
 }

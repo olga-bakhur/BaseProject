@@ -1,4 +1,4 @@
-package com.olgabakhur.baseproject.presentation.util
+package com.olgabakhur.baseproject.presentation.util.liveData
 
 import androidx.lifecycle.Observer
 

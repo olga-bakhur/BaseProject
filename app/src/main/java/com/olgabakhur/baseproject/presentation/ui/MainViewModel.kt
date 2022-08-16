@@ -1,4 +1,4 @@
-package com.olgabakhur.baseproject.presentation.ui.mainActivity
+package com.olgabakhur.baseproject.presentation.ui
 
 import com.olgabakhur.baseproject.presentation.base.BaseViewModel
 import com.olgabakhur.domain.interactors.MainInteractor

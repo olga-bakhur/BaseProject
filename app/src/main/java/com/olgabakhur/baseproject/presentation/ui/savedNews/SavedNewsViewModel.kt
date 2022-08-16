@@ -4,7 +4,12 @@ import androidx.lifecycle.viewModelScope
 import com.olgabakhur.baseproject.presentation.base.BaseViewModel
 import com.olgabakhur.data.model.news.Article
 import com.olgabakhur.domain.interactors.NewsInteractor
+import com.olgabakhur.domain.util.result.Result
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -12,17 +17,43 @@ class SavedNewsViewModel @Inject constructor(
     val newsInteractor: NewsInteractor
 ) : BaseViewModel() {
 
-    fun getSavedNews() = newsInteractor.getSavedArticles()
+    private val _savedNewsResultFlow: MutableSharedFlow<Result<Flow<List<Article>>>> =
+        MutableSharedFlow(replay = 1)
+    val savedNewsResultFlow: SharedFlow<Result<Flow<List<Article>>>> =
+        _savedNewsResultFlow.asSharedFlow()
 
-    fun saveArticle(article: Article) {
-        viewModelScope.launch {
-            newsInteractor.upsert(article)
+    private val _deleteArticleResultFlow: MutableSharedFlow<Result<Int>> =
+        MutableSharedFlow(replay = 0)
+    val deleteArticleResultFlow: SharedFlow<Result<Int>> = _deleteArticleResultFlow.asSharedFlow()
+
+    private var articleToDelete: Article? = null
+
+    private val _restoreArticleResultFlow: MutableSharedFlow<Result<Long>> =
+        MutableSharedFlow(replay = 0)
+    val restoreArticleResultFlow: SharedFlow<Result<Long>> =
+        _restoreArticleResultFlow.asSharedFlow()
+
+    fun getSavedNews() =
+        viewModelScope.launch(Dispatchers.IO) {
+            val result = newsInteractor.getSavedArticles()
+            _savedNewsResultFlow.emit(result)
+        }
+
+    fun deleteArticle(article: Article) {
+        articleToDelete = article
+
+        viewModelScope.launch(Dispatchers.IO) {
+            val result = newsInteractor.deleteArticle(article)
+            _deleteArticleResultFlow.emit(result)
         }
     }
 
-    fun deleteArticle(article: Article) {
+    fun restoreArticle() {
         viewModelScope.launch(Dispatchers.IO) {
-            newsInteractor.deleteArticle(article)
+            articleToDelete?.let { article ->
+                val result = newsInteractor.insertArticle(article)
+                _restoreArticleResultFlow.emit(result)
+            }
         }
     }
 }

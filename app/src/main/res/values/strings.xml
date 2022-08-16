@@ -1,17 +1,7 @@
 <resources>
     <string name="app_name">BaseProject</string>
 
-    <string name="article_saved_saved_successfully_message">Article was saved successfully</string>
-    <string name="breaking_news_label_toolbar">Breaking news</string>
-    <string name="saved_news_label_toolbar">Saved news</string>
-    <string name="search_news_label_toolbar">Search news</string>
-
-    <string name="breaking_news_label_bottom_bar">Breaking news</string>
-    <string name="saved_news_label_bottom_bar">Saved news</string>
-    <string name="search_news_label_bottom_bar">Search news</string>
-
-    <!-- Errors -->
-
+    <!-- Error handling -->
     <string name="error_generic">Something went wrong. Please try again later.</string>
     <string name="error_no_internet_connection">No Internet connection. Please check the Internet.</string>
     <string name="error_bad_request">Bad request. Please try again later.</string>
@@ -23,8 +13,33 @@
     <string name="error_too_many_requests">Too many requests.</string>
     <string name="error_unauthorized">Unauthorized. Please Sign-In and try again.</string>
     <string name="error_server">Server error. Please try again later.</string>
+    <string name="error_database_operation">Database operation failed.</string>
 
+    <!--    General-->
+    <string name="general_ok">Ok</string>
+    <string name="general_cancel">Cancel</string>
+    <string name="general_error">Error</string>
 
+    <!--    Toolbar title-->
+    <string name="breaking_news_label_toolbar">Breaking news</string>
+    <string name="saved_news_label_toolbar">Saved news</string>
+    <string name="search_news_label_toolbar">Search news</string>
+    <string name="article_details_label_toolbar">Details</string>
 
+    <!--    Bottom navigation bar-->
+    <string name="breaking_news_label_bottom_bar">Breaking news</string>
+    <string name="saved_news_label_bottom_bar">Saved news</string>
+    <string name="search_news_label_bottom_bar">Search news</string>
+
+    <!--    MainActivity-->
     <string name="tap_to_exit">Press Back again to exit.</string>
+
+    <!--    ArticlesFragment-->
+    <string name="article_was_saved_successfully_message">Article was saved successfully.</string>
+    <string name="article_was_deleted_successfully_message">Article was deleted successfully.</string>
+    <string name="article_was_restored_successfully_message">Article was restored successfully.</string>
+
+    <string name="article_saving_failed_message">Article saving failed.</string>
+    <string name="article_deletion_failed_message">Article deletion failed.</string>
+    <string name="article_restoration_failed_message">Article restoration failed.</string>
 </resources>
