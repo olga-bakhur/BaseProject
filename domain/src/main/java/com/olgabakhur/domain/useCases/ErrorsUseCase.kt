@@ -22,7 +22,6 @@ class ErrorsUseCase @Inject constructor() {
             getNetworkErrors()
         )
 
-    // TODO: Test collector
     private fun getNetworkErrors() =
         SafeApiCall.networkErrorsFlow
             .filter { it.isGenericError() }

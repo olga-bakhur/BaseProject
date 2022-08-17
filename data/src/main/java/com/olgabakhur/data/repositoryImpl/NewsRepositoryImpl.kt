@@ -16,10 +16,8 @@ import javax.inject.Inject
 
 class NewsRepositoryImpl @Inject constructor(
     private val newsApi: NewsApi,
-    articleDatabase: ArticleDatabase
+    private val articleDao: ArticleDao
 ) : NewsRepository {
-
-    private var newsDao: ArticleDao = articleDatabase.getArticleDao()
 
     // News Api
     override suspend fun signIn(authRequest: AuthRequest): Result<AuthResponse> =
@@ -33,11 +31,11 @@ class NewsRepositoryImpl @Inject constructor(
 
     // News database
     override suspend fun insertArticle(article: Article): Result<Long> =
-        SafeDatabaseCall.doSafeDatabaseCall { newsDao.insertArticle(article) }
+        SafeDatabaseCall.doSafeDatabaseCall { articleDao.insertArticle(article) }
 
     override suspend fun getSavedArticles(): Result<Flow<List<Article>>> =
-        SafeDatabaseCall.doSafeDatabaseCall { newsDao.getAllArticles() }
+        SafeDatabaseCall.doSafeDatabaseCall { articleDao.getAllArticles() }
 
     override suspend fun deleteArticle(article: Article): Result<Int> =
-        SafeDatabaseCall.doSafeDatabaseCall { newsDao.deleteArticle(article) }
+        SafeDatabaseCall.doSafeDatabaseCall { articleDao.deleteArticle(article) }
 }

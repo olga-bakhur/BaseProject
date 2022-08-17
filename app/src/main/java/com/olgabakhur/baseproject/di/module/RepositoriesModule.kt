@@ -1,9 +1,9 @@
 package com.olgabakhur.baseproject.di.module
 
-import com.olgabakhur.data.repositoryImpl.NewsRepositoryImpl
-import com.olgabakhur.data.source.local.newsDatabase.ArticleDatabase
-import com.olgabakhur.data.source.remote.NewsApi
 import com.olgabakhur.data.repository.NewsRepository
+import com.olgabakhur.data.repositoryImpl.NewsRepositoryImpl
+import com.olgabakhur.data.source.local.newsDatabase.ArticleDao
+import com.olgabakhur.data.source.remote.NewsApi
 import dagger.Module
 import dagger.Provides
 
@@ -13,7 +13,7 @@ object RepositoriesModule {
     @Provides
     fun provideNewsRepository(
         newsApi: NewsApi,
-        articleDatabase: ArticleDatabase
+        articleDao: ArticleDao
     ): NewsRepository =
-        NewsRepositoryImpl(newsApi, articleDatabase)
+        NewsRepositoryImpl(newsApi, articleDao)
 }
