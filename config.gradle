@@ -27,9 +27,7 @@ ext {
 
     dataConfig = [
             devUrl         : "https://newsapi.org",
-            prodUrl        : "https://newsapi.org",
-
-            apiKey         : "712b67adda374727bc7020f051fe714a"
+            prodUrl        : "https://newsapi.org"
     ]
 
     domainConfig = [

@@ -1,6 +1,6 @@
 package com.olgabakhur.data.source.remote
 
-import com.olgabakhur.data.BuildConfig.API_KEY
+import com.olgabakhur.data.BuildConfig
 import com.olgabakhur.data.model.news.auth.AuthRequest
 import com.olgabakhur.data.model.news.auth.AuthResponse
 import com.olgabakhur.data.model.news.pojo.NewsItem
@@ -20,13 +20,13 @@ interface NewsApi {
     suspend fun getBreakingNews(
         @Query("country") countryCode: String = "us",
         @Query("page") pageNumber: Int = 1,
-        @Query("apiKey") apiKey: String = API_KEY
+        @Query("apiKey") apiKey: String = BuildConfig.API_KEY
     ): NewsItem
 
     @GET("v2/everything")
     suspend fun searchForNews(
         @Query("q") searchQuery: String,
         @Query("page") pageNumber: Int = 1,
-        @Query("apiKey") apiKey: String = API_KEY
+        @Query("apiKey") apiKey: String = BuildConfig.API_KEY
     ): NewsItem
 }

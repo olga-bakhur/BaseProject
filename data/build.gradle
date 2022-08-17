@@ -9,6 +9,10 @@ android {
     defaultConfig {
         minSdk globalConfig.minSdkVersion
         targetSdk globalConfig.targetSdkVersion
+
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file("local.properties").newDataInputStream())
+        buildConfigField "String", "API_KEY", "\"${properties.getProperty("API_KEY")}\""
     }
 
     buildTypes {
@@ -17,7 +21,6 @@ android {
             minifyEnabled false
 
             buildConfigField("String", "BASE_URL", '"' + dataConfig.devUrl + '"')
-            buildConfigField("String", "API_KEY", '"' + dataConfig.apiKey + '"')
         }
 
         release {
@@ -25,7 +28,6 @@ android {
             minifyEnabled true
 
             buildConfigField("String", "BASE_URL", '"' + dataConfig.devUrl + '"')
-            buildConfigField("String", "API_KEY", '"' + dataConfig.apiKey + '"')
         }
     }
 
