@@ -2,8 +2,8 @@ package com.olgabakhur.baseproject.presentation.ui.breakingNews
 
 import androidx.lifecycle.viewModelScope
 import com.olgabakhur.baseproject.presentation.base.BaseViewModel
-import com.olgabakhur.data.model.news.Article
-import com.olgabakhur.data.model.news.NewsItem
+import com.olgabakhur.data.model.news.pojo.Article
+import com.olgabakhur.data.model.news.pojo.NewsItem
 import com.olgabakhur.domain.interactors.NewsInteractor
 import com.olgabakhur.data.util.result.Result
 import com.olgabakhur.data.util.result.onError

@@ -1,6 +1,7 @@
 package com.olgabakhur.data.util.safeCall
 
 import com.olgabakhur.data.util.error.ApplicationError
+import com.olgabakhur.data.util.result.Result
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import retrofit2.HttpException
@@ -8,7 +9,6 @@ import java.net.ConnectException
 import java.net.HttpURLConnection.*
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
-import com.olgabakhur.data.util.result.Result
 
 object SafeApiCall {
 

@@ -1,7 +1,9 @@
 package com.olgabakhur.domain.useCases
 
 import com.olgabakhur.data.util.error.ApplicationError
+import com.olgabakhur.data.util.safeCall.SafeApiCall
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.merge
 import javax.inject.Inject
 
@@ -17,5 +19,11 @@ class ErrorsUseCase @Inject constructor() {
     fun getApplicationErrors(): Flow<ApplicationError> =
         merge(
             /* errors from multiple sources */
+            getNetworkErrors()
         )
+
+    // TODO: Test collector
+    private fun getNetworkErrors() =
+        SafeApiCall.networkErrorsFlow
+            .filter { it.isGenericError() }
 }

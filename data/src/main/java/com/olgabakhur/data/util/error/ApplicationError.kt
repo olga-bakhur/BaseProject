@@ -23,4 +23,16 @@ sealed class ApplicationError {
 
     // Database operation error
     object DatabaseOperation : ApplicationError()
+
+    // Login errors
+    object InvalidEmail : ApplicationError()
+    object InvalidPassword : ApplicationError()
+    object UserIsNotRegistered : ApplicationError()
+
+    fun isGenericError(): Boolean =
+        when (this) {
+            is Unknown,
+            is NoInternetConnection -> true
+            else -> false
+        }
 }

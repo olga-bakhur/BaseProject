@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.olgabakhur.baseproject.databinding.ItemArticlePreviewBinding
-import com.olgabakhur.data.model.news.Article
+import com.olgabakhur.data.model.news.pojo.Article
 
 class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
 

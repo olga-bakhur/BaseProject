@@ -1,7 +1,7 @@
 package com.olgabakhur.domain.interactors
 
-import com.olgabakhur.data.model.news.Article
-import com.olgabakhur.data.model.news.NewsItem
+import com.olgabakhur.data.model.news.pojo.Article
+import com.olgabakhur.data.model.news.pojo.NewsItem
 import com.olgabakhur.data.util.result.Result
 import com.olgabakhur.domain.useCases.NewsUseCase
 import kotlinx.coroutines.flow.Flow

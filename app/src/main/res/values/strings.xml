@@ -14,6 +14,9 @@
     <string name="error_unauthorized">Unauthorized. Please Sign-In and try again.</string>
     <string name="error_server">Server error. Please try again later.</string>
     <string name="error_database_operation">Database operation failed.</string>
+    <string name="error_invalid_email">Invalid email.</string>
+    <string name="error_invalid_password">Invalid password.</string>
+    <string name="error_user_is_not_registered">User is not registered.</string>
 
     <!--    General-->
     <string name="general_ok">Ok</string>
@@ -21,6 +24,7 @@
     <string name="general_error">Error</string>
 
     <!--    Toolbar title-->
+    <string name="sign_in_label_toolbar">Sign in</string>
     <string name="breaking_news_label_toolbar">Breaking news</string>
     <string name="saved_news_label_toolbar">Saved news</string>
     <string name="search_news_label_toolbar">Search news</string>

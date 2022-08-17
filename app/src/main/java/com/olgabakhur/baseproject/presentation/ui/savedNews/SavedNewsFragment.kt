@@ -13,7 +13,7 @@ import com.olgabakhur.baseproject.R
 import com.olgabakhur.baseproject.databinding.FragmentSavedNewsBinding
 import com.olgabakhur.baseproject.presentation.adapters.NewsAdapter
 import com.olgabakhur.baseproject.presentation.base.BaseFragment
-import com.olgabakhur.baseproject.presentation.extensions.collectLatestWhenStarted
+import com.olgabakhur.baseproject.presentation.extensions.collectWhenStarted
 import com.olgabakhur.baseproject.presentation.extensions.message
 import com.olgabakhur.baseproject.presentation.util.view.Dialog
 import com.olgabakhur.baseproject.presentation.util.view.SnackbarAction
@@ -44,7 +44,7 @@ class SavedNewsFragment : BaseFragment(R.layout.fragment_saved_news) {
 
     override fun observeViewModel() {
         super.observeViewModel()
-        collectLatestWhenStarted(viewModel.savedNewsResultFlow) { result ->
+        collectWhenStarted(viewModel.savedNewsResultFlow) { result ->
             // TODO: enable ui or adjust loading dialog
             when (result) {
                 is Result.Success -> {
@@ -63,7 +63,7 @@ class SavedNewsFragment : BaseFragment(R.layout.fragment_saved_news) {
             }
         }
 
-        collectLatestWhenStarted(viewModel.deleteArticleResultFlow) { result ->
+        collectWhenStarted(viewModel.deleteArticleResultFlow) { result ->
             // TODO: enable ui or adjust loading dialog
             when (result) {
                 is Result.Success -> {
@@ -90,7 +90,7 @@ class SavedNewsFragment : BaseFragment(R.layout.fragment_saved_news) {
             }
         }
 
-        collectLatestWhenStarted(viewModel.restoreArticleResultFlow) { result ->
+        collectWhenStarted(viewModel.restoreArticleResultFlow) { result ->
             // TODO: enable ui or adjust loading dialog
             when (result) {
                 is Result.Success -> {

@@ -1,7 +1,7 @@
 package com.olgabakhur.data.source.local.newsDatabase
 
 import androidx.room.*
-import com.olgabakhur.data.model.news.Article
+import com.olgabakhur.data.model.news.pojo.Article
 import kotlinx.coroutines.flow.Flow
 
 @Dao

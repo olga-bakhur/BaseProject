@@ -1,7 +1,7 @@
 package com.olgabakhur.data.source.local.newsDatabase
 
 import androidx.room.TypeConverter
-import com.olgabakhur.data.model.news.Source
+import com.olgabakhur.data.model.news.pojo.Source
 import com.olgabakhur.data.util.Constants.EMPTY
 
 class Converters {

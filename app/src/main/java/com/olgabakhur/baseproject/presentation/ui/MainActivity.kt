@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     }
 
     private fun observeViewModel() {
-        // TODO: only for general errors
+        /* Only for generic errors */
         collectWhenCreated(viewModel.getApplicationErrors()) { error ->
             showOkDialogWithTitle(
                 mContext,

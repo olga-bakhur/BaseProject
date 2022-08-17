@@ -15,13 +15,16 @@
     <string name="error_unauthorized">Нет разрешения на доступ к ресурсу. Попробуйте снова позже.</string>
     <string name="error_server">Ошибка сервера. Попробуйте снова позже.</string>
     <string name="error_database_operation">Произошла ошибва при обращении к базе данных.</string>
-
+    <string name="error_invalid_email">Некорректный имэйл.</string>
+    <string name="error_invalid_password">Некорректный пароль.</string>
+    <string name="error_user_is_not_registered">Пользователь не зарегистрирован.</string>
     <!--    General-->
     <string name="general_ok">Принять</string>
     <string name="general_cancel">Отмена</string>
     <string name="general_error">Ошибка</string>
 
     <!--    Toolbar title-->
+    <string name="sign_in_label_toolbar">Вход</string>
     <string name="breaking_news_label_toolbar">Последние новости</string>
     <string name="saved_news_label_toolbar">Сохрананные новости</string>
     <string name="search_news_label_toolbar">Поиск новостей</string>

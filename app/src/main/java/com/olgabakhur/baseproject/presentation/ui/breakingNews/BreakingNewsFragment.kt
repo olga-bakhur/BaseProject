@@ -36,7 +36,6 @@ class BreakingNewsFragment : BaseFragment(R.layout.fragment_breaking_news) {
         super.onViewCreated(view, savedInstanceState)
         mContext = requireContext()
         viewModel.getBreakingNews(countryCode = "us")
-        setupSwipeToRefresh()
         initRecyclerViewScrollListener()
         setupRecyclerView()
         setupRecyclerViewItemClickListener()
@@ -62,22 +61,18 @@ class BreakingNewsFragment : BaseFragment(R.layout.fragment_breaking_news) {
                 }
 
                 is Result.Error -> {
-                    //  TODO: binding.laySwipeToRefresh.isRefreshing = false
+                    val error = result.error
+
+                    if (error.isGenericError()) {
+                        return@collectLatestWhenStarted
+                    }
+
                     Dialog.showOkDialogWithTitle(
                         mContext,
                         R.string.general_error,
-                        result.error.message(mContext)
+                        error.message(mContext)
                     )
                 }
-            }
-        }
-    }
-
-    private fun setupSwipeToRefresh() {
-        binding.laySwipeToRefresh.apply {
-            setColorSchemeResources(R.color.colorPrimary, R.color.colorSecondary)
-            setOnRefreshListener {
-                viewModel.getBreakingNews(countryCode = "us")
             }
         }
     }

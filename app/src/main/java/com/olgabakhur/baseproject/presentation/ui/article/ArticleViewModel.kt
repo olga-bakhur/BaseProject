@@ -2,7 +2,7 @@ package com.olgabakhur.baseproject.presentation.ui.article
 
 import androidx.lifecycle.viewModelScope
 import com.olgabakhur.baseproject.presentation.base.BaseViewModel
-import com.olgabakhur.data.model.news.Article
+import com.olgabakhur.data.model.news.pojo.Article
 import com.olgabakhur.domain.interactors.NewsInteractor
 import com.olgabakhur.data.util.result.Result
 import kotlinx.coroutines.flow.MutableSharedFlow

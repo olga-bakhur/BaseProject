@@ -1,11 +1,20 @@
 package com.olgabakhur.data.source.remote
 
 import com.olgabakhur.data.BuildConfig.API_KEY
-import com.olgabakhur.data.model.news.NewsItem
+import com.olgabakhur.data.model.news.auth.AuthRequest
+import com.olgabakhur.data.model.news.auth.AuthResponse
+import com.olgabakhur.data.model.news.pojo.NewsItem
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface NewsApi {
+
+    @POST("session/password")
+    suspend fun signIn(
+        @Body authRequest: AuthRequest
+    ): AuthResponse
 
     @GET("v2/top-headlines")
     suspend fun getBreakingNews(

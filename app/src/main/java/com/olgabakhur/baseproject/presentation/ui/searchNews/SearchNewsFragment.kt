@@ -13,7 +13,7 @@ import com.olgabakhur.baseproject.R
 import com.olgabakhur.baseproject.databinding.FragmentSearchNewsBinding
 import com.olgabakhur.baseproject.presentation.adapters.NewsAdapter
 import com.olgabakhur.baseproject.presentation.base.BaseFragment
-import com.olgabakhur.baseproject.presentation.extensions.collectWhenStarted
+import com.olgabakhur.baseproject.presentation.extensions.collectLatestWhenStarted
 import com.olgabakhur.baseproject.presentation.extensions.message
 import com.olgabakhur.baseproject.presentation.util.Constants
 import com.olgabakhur.baseproject.presentation.util.Constants.SEARCH_NEWS_TIME_DELAY
@@ -49,7 +49,7 @@ class SearchNewsFragment : BaseFragment(R.layout.fragment_search_news) {
 
     //TODO: loading dialog
     override fun observeViewModel() {
-        collectWhenStarted(viewModel.searchNewsResultFlow) { result ->
+        collectLatestWhenStarted(viewModel.searchNewsResultFlow) { result ->
             // TODO: enable ui or adjust loading dialog
             when (result) {
                 is Result.Success -> {
@@ -68,11 +68,16 @@ class SearchNewsFragment : BaseFragment(R.layout.fragment_search_news) {
                 }
 
                 is Result.Error -> {
-                    //  TODO: binding.laySwipeToRefresh.isRefreshing = false
+                    val error = result.error
+
+                    if (error.isGenericError()) {
+                        return@collectLatestWhenStarted
+                    }
+
                     Dialog.showOkDialogWithTitle(
                         mContext,
                         R.string.general_error,
-                        result.error.message(mContext)
+                        error.message(mContext)
                     )
                 }
             }
