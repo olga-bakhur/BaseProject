@@ -19,7 +19,7 @@ import com.olgabakhur.baseproject.presentation.util.view.Dialog
 import com.olgabakhur.baseproject.presentation.util.view.SnackbarAction
 import com.olgabakhur.baseproject.presentation.util.view.showSnackbar
 import com.olgabakhur.baseproject.presentation.util.view.showSnackbarWithAction
-import com.olgabakhur.baseproject.presentation.util.viewModelUtil.viewModel
+import com.olgabakhur.baseproject.presentation.util.viewModel.viewModel
 import com.olgabakhur.data.util.result.Result
 import kotlinx.coroutines.flow.collectLatest
 

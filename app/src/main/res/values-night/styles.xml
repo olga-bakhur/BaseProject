@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<!--    Create styles for your views here-->
+    <!--    TODO: check colors-->
+    <!--    BottomSheet. System bars color-->
+    <style name="BottomSheet_SystemBarsStyle" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:statusBarColor">@color/colorPrimaryVariant</item>
+        <item name="android:navigationBarColor">@color/colorSurface</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
 </resources>

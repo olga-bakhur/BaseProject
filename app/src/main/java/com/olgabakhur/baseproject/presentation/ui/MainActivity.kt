@@ -18,7 +18,7 @@ import com.olgabakhur.baseproject.databinding.ActivityMainBinding
 import com.olgabakhur.baseproject.presentation.extensions.collectWhenCreated
 import com.olgabakhur.baseproject.presentation.extensions.message
 import com.olgabakhur.baseproject.presentation.util.view.Dialog.showOkDialogWithTitle
-import com.olgabakhur.baseproject.presentation.util.viewModelUtil.viewModel
+import com.olgabakhur.baseproject.presentation.util.viewModel.viewModel
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 

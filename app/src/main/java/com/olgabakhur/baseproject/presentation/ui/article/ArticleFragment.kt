@@ -14,7 +14,7 @@ import com.olgabakhur.baseproject.presentation.base.BaseFragment
 import com.olgabakhur.baseproject.presentation.extensions.collectLatestWhenStarted
 import com.olgabakhur.baseproject.presentation.util.view.Dialog
 import com.olgabakhur.baseproject.presentation.util.view.showSnackbar
-import com.olgabakhur.baseproject.presentation.util.viewModelUtil.viewModel
+import com.olgabakhur.baseproject.presentation.util.viewModel.viewModel
 import com.olgabakhur.data.model.news.Article
 import com.olgabakhur.data.util.result.Result
 
