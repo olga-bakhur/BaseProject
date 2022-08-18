@@ -11,6 +11,7 @@ import retrofit2.http.Query
 
 interface NewsApi {
 
+    /* Fake request */
     @POST("session/password")
     suspend fun signIn(
         @Body authRequest: AuthRequest
@@ -19,13 +20,6 @@ interface NewsApi {
     @GET("v2/top-headlines")
     suspend fun getBreakingNews(
         @Query("country") countryCode: String = "us",
-        @Query("page") pageNumber: Int = 1,
-        @Query("apiKey") apiKey: String = BuildConfig.API_KEY
-    ): NewsItem
-
-    @GET("v2/everything")
-    suspend fun searchForNews(
-        @Query("q") searchQuery: String,
         @Query("page") pageNumber: Int = 1,
         @Query("apiKey") apiKey: String = BuildConfig.API_KEY
     ): NewsItem

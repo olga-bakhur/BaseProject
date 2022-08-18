@@ -1,6 +1,7 @@
 apply plugin: "com.android.application"
 apply plugin: "kotlin-android"
 apply plugin: "kotlin-kapt"
+apply plugin: "kotlinx-serialization"
 apply plugin: "androidx.navigation.safeargs"
 
 android {
@@ -125,6 +126,9 @@ dependencies {
 
     // ViewBinding delegate
     implementation appDependencies.viewBindingPropertyDelegate
+
+    // Preferences DataStore
+    implementation globalDependencies.preferencesDataStore
 
     // Tests
     androidTestImplementation testDependencies.junit

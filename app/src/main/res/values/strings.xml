@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BaseProject</string>
+    <string name="app_name">Base Project</string>
 
     <!-- Error handling -->
     <string name="error_generic">Something went wrong. Please try again later.</string>
@@ -22,21 +22,20 @@
     <string name="general_ok">Ok</string>
     <string name="general_cancel">Cancel</string>
     <string name="general_error">Error</string>
+    <string name="general_continue">Continue</string>
+
+    <!--    Authorization-->
+    <string name="general_sign_in">Sign in</string>
+    <string name="general_sign_out">Sign out</string>
 
     <!--    Toolbar title-->
-    <string name="sign_in_label_toolbar">Sign in</string>
     <string name="breaking_news_label_toolbar">Breaking news</string>
     <string name="saved_news_label_toolbar">Saved news</string>
-    <string name="search_news_label_toolbar">Search news</string>
     <string name="article_details_label_toolbar">Details</string>
 
-    <!--    Bottom navigation bar-->
-    <string name="breaking_news_label_bottom_bar">Breaking news</string>
-    <string name="saved_news_label_bottom_bar">Saved news</string>
-    <string name="search_news_label_bottom_bar">Search news</string>
-
-    <!--    MainActivity-->
-    <string name="tap_to_exit">Press Back again to exit.</string>
+    <!--    SignIn-->
+    <string name="sign_in_status_completed_message">You are already Signed in.\nPress button to continue.</string>
+    <string name="sign_in_status_uncompleted_message">You are not Signed in.\nPress button to Sign in.</string>
 
     <!--    ArticlesFragment-->
     <string name="article_was_saved_successfully_message">Article was saved successfully.</string>

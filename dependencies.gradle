@@ -55,6 +55,9 @@ def libraryVersions = [
         // ViewBinding delegate
         viewBindingPropertyDelegate     : "1.5.6",
 
+        // Preferences DataStore
+        preferencesDataStore            : "1.0.0",
+
         // Tests
         junit                           : "4.13.2",
         androidxTestJunit               : "1.1.3",
@@ -72,6 +75,7 @@ ext {
             androidGradlePlugin        : "com.android.tools.build:gradle:${libraryVersions.androidGradlePlugin}",
             kotlinGradlePlugin         : "org.jetbrains.kotlin:kotlin-gradle-plugin:${libraryVersions.kotlin}",
             navigationSafeArgsPlugin   : "androidx.navigation:navigation-safe-args-gradle-plugin:${libraryVersions.navigation}",
+            kotlinSerializationPlugin  : "org.jetbrains.kotlin:kotlin-serialization:${libraryVersions.kotlin}",
 
             // Kotlin
             coreKtx                    : "androidx.core:core-ktx:${libraryVersions.kotlin}",
@@ -92,7 +96,10 @@ ext {
             // Room
             room                       : "androidx.room:room-runtime:${libraryVersions.room}",
             roomCompiler               : "androidx.room:room-compiler:${libraryVersions.room}",
-            roomCoroutines             : "androidx.room:room-ktx:${libraryVersions.room}"
+            roomCoroutines             : "androidx.room:room-ktx:${libraryVersions.room}",
+
+            // Preferences DataStore
+            preferencesDataStore       : "androidx.datastore:datastore-preferences:${libraryVersions.preferencesDataStore}"
     ]
 
     appDependencies = [

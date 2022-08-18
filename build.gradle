@@ -12,6 +12,7 @@ buildscript {
         classpath globalDependencies.androidGradlePlugin
         classpath globalDependencies.kotlinGradlePlugin
         classpath globalDependencies.navigationSafeArgsPlugin
+        classpath globalDependencies.kotlinSerializationPlugin
     }
 }
 

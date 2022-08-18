@@ -1,21 +1,23 @@
 package com.olgabakhur.baseproject.presentation.ui
 
-import android.content.Context
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuInflater
 import android.view.MenuItem
+import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.MenuProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.olgabakhur.baseproject.App
 import com.olgabakhur.baseproject.R
 import com.olgabakhur.baseproject.databinding.ActivityMainBinding
 import com.olgabakhur.baseproject.presentation.extensions.collectWhenCreated
+import com.olgabakhur.baseproject.presentation.extensions.getCurrentDestinationId
 import com.olgabakhur.baseproject.presentation.extensions.message
 import com.olgabakhur.baseproject.presentation.util.view.Dialog.showOkDialogWithTitle
 import com.olgabakhur.baseproject.presentation.util.viewModel.viewModel
@@ -27,30 +29,45 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var mContext: Context
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mContext = this
         observeViewModel()
         initNavController()
-        setupBottomNavigation()
+        setupToolbarNavigation()
+        setupToolbarMenu()
+        setupSystemBackButton()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_toolbar, menu)
-        return true
-    }
+    private fun setupToolbarMenu() {
+        addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                navController.getCurrentDestinationId()?.let { destinationId ->
+                    when (destinationId) {
+                        R.id.signInFragment -> menu.clear()
+                        else -> menuInflater.inflate(R.menu.menu_toolbar, menu)
+                        /* Inflate other menus here if necessary */
+                    }
+                }
+            }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val destination = navController.findDestination(item.itemId)
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean =
+                when (menuItem.itemId) {
+                    R.id.actionSignOut -> {
+                        viewModel.signOutFake {
+                            navController.popBackStack(R.id.signInFragment, false)
+                        }
+                        true
+                    }
 
-        return if (destination != null) {
-            navController.navigate(item.itemId)
-            true
-        } else {
-            false
-        }
+                    R.id.savedNewsFragment -> {
+                        navController.navigate(R.id.savedNewsFragment)
+                        true
+                    }
+                    else -> false
+                }
+
+        }, this)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -62,9 +79,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         /* Only for generic errors */
         collectWhenCreated(viewModel.getApplicationErrors()) { error ->
             showOkDialogWithTitle(
-                mContext,
+                this,
                 R.string.general_error,
-                error.message(mContext)
+                error.message(this)
             )
         }
     }
@@ -75,19 +92,26 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         navController = navHostFragment.navController
     }
 
-    private fun setupBottomNavigation() {
+    private fun setupToolbarNavigation() {
         setSupportActionBar(binding.toolbar)
 
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.breakingNewsFragment,
-                R.id.savedNewsFragment,
-                R.id.searchNewsFragment
+                R.id.signInFragment,
+                R.id.breakingNewsFragment
             ),
             fallbackOnNavigateUpListener = ::onSupportNavigateUp
         )
-
-        binding.bottomNavigationView.setupWithNavController(navController)
         setupActionBarWithNavController(navController, appBarConfiguration)
+    }
+
+    private fun setupSystemBackButton() {
+        onBackPressedDispatcher.addCallback(this) {
+            when (navController.getCurrentDestinationId()) {
+                R.id.signInFragment,
+                R.id.breakingNewsFragment -> finish()
+                else -> navController.navigateUp()
+            }
+        }
     }
 }

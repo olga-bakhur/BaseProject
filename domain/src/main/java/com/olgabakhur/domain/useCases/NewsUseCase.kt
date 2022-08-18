@@ -14,9 +14,6 @@ class NewsUseCase @Inject constructor(
     suspend fun getBreakingNews(countryCode: String, pageNumber: Int): Result<NewsItem> =
         newsRepository.getBreakingNews(countryCode, pageNumber)
 
-    suspend fun searchNews(searchQuery: String, pageNumber: Int): Result<NewsItem> =
-        newsRepository.searchNews(searchQuery, pageNumber)
-
     // News database
     suspend fun insertArticle(article: Article): Result<Long> =
         newsRepository.insertArticle(article)

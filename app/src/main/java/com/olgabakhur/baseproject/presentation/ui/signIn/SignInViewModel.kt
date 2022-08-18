@@ -18,6 +18,17 @@ class SignInViewModel @Inject constructor(
     private val _signInFlow: MutableSharedFlow<Result<AuthResponse>> = MutableSharedFlow(1)
     val signInFlow: SharedFlow<Result<AuthResponse>> = _signInFlow.asSharedFlow()
 
+    fun isUserLoggedIn() = authInteractor.getIsUserLoggedIn()
+
+    /* Fake implementation */
+    fun signInFake(navigateNext: () -> Unit) {
+        viewModelScope.launchWithLoading {
+            navigateNext()
+            authInteractor.setIsUserLoggedIn(true)
+        }
+    }
+
+    /* Real implementation */
     fun signIn(email: String, password: String) =
         viewModelScope.launchWithLoading(Dispatchers.IO) {
             val result = authInteractor.signIn(email, password)

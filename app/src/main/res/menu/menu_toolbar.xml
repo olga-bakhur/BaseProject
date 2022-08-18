@@ -4,14 +4,15 @@
     tools:context="com.olgabakhur.baseproject.presentation.ui.MainActivity">
 
     <item
-        android:id="@+id/actionA"
-        android:title="Action A"
-        android:icon="@drawable/ic_favorite"
-        app:showAsAction="never" />
+        android:id="@+id/savedNewsFragment"
+        android:title="@string/saved_news_label_toolbar"
+        android:visible="true"
+        app:showAsAction="never"/>
 
     <item
-        android:id="@+id/actionB"
-        android:title="Action B"
-        android:icon="@drawable/ic_favorite"
+        android:id="@+id/actionSignOut"
+        android:title="@string/general_sign_out"
+        android:visible="true"
+        android:icon="@drawable/ic_sign_out"
         app:showAsAction="always"/>
 </menu>

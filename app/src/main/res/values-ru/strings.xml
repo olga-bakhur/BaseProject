@@ -18,25 +18,26 @@
     <string name="error_invalid_email">Некорректный имэйл.</string>
     <string name="error_invalid_password">Некорректный пароль.</string>
     <string name="error_user_is_not_registered">Пользователь не зарегистрирован.</string>
+
     <!--    General-->
     <string name="general_ok">Принять</string>
     <string name="general_cancel">Отмена</string>
     <string name="general_error">Ошибка</string>
+    <string name="general_continue">Продолжить</string>
+
+    <!--    Authorization-->
+    <string name="general_sign_in">Войти</string>
+    <string name="general_sign_out">Выйти</string>
 
     <!--    Toolbar title-->
-    <string name="sign_in_label_toolbar">Вход</string>
     <string name="breaking_news_label_toolbar">Последние новости</string>
     <string name="saved_news_label_toolbar">Сохрананные новости</string>
-    <string name="search_news_label_toolbar">Поиск новостей</string>
     <string name="article_details_label_toolbar">Подродно</string>
 
-    <!--    Bottom navigation bar-->
-    <string name="breaking_news_label_bottom_bar">Последние</string>
-    <string name="saved_news_label_bottom_bar">Сохрананные</string>
-    <string name="search_news_label_bottom_bar">Поиск</string>
 
-    <!--    MainActivity-->
-    <string name="tap_to_exit">Нажмите еще раз кнопку \"Назад\" для выхода из приложения.</string>
+    <!--    SignIn-->
+    <string name="sign_in_status_completed_message">Вы уже вошли в приложение.\nНажмите кнопку, чтобы продолжить.</string>
+    <string name="sign_in_status_uncompleted_message">Вы еще не вошли в приложение.\nНажмите кнопку, чтобы войти.</string>
 
     <!--    ArticlesFragment-->
     <string name="article_was_saved_successfully_message">Статья была успешно сохранена.</string>
@@ -46,5 +47,4 @@
     <string name="article_saving_failed_message">При сохранении статьи произошла ошибка.</string>
     <string name="article_deletion_failed_message">При удалении статьи произошла ошибка</string>
     <string name="article_restoration_failed_message">При восстановлении статьи произошла ошибка</string>
-
 </resources>

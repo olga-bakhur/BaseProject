@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.olgabakhur.baseproject.databinding.ItemArticlePreviewBinding
+import com.olgabakhur.baseproject.databinding.ViewHolderArticleBinding
 import com.olgabakhur.data.model.news.pojo.Article
 
 class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
@@ -29,7 +29,7 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = ItemArticlePreviewBinding.inflate(layoutInflater, parent, false)
+        val binding = ViewHolderArticleBinding.inflate(layoutInflater, parent, false)
         return ArticleViewHolder(
             binding = binding
         )
@@ -42,7 +42,7 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
 
 
     inner class ArticleViewHolder(
-        private val binding: ItemArticlePreviewBinding
+        private val binding: ViewHolderArticleBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(article: Article) {
             with(itemView) {

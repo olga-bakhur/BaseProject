@@ -4,13 +4,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph_main"
-    app:startDestination="@id/breakingNewsFragment">
+    app:startDestination="@id/signInFragment">
 
     <fragment
         android:id="@+id/signInFragment"
         android:name="com.olgabakhur.baseproject.presentation.ui.signIn.SignInFragment"
-        android:label="@string/sign_in_label_toolbar"
-        tools:layout="@layout/fragment_sign_in"/>
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_sign_in">
+        <action
+            android:id="@+id/action_signInFragment_to_breakingNewsFragment"
+            app:destination="@id/breakingNewsFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/breakingNewsFragment"
@@ -20,8 +24,6 @@
         <action
             android:id="@+id/action_breakingNewsFragment_to_articleFragment"
             app:destination="@id/articleFragment"
-            app:enterAnim="@anim/enter_from_right"
-            app:exitAnim="@anim/exit_to_left"
             app:popEnterAnim="@anim/enter_from_left"
             app:popExitAnim="@anim/exit_to_right" />
     </fragment>
@@ -33,20 +35,6 @@
         tools:layout="@layout/fragment_saved_news">
         <action
             android:id="@+id/action_savedNewsFragment_to_articleFragment"
-            app:destination="@id/articleFragment"
-            app:enterAnim="@anim/enter_from_right"
-            app:exitAnim="@anim/exit_to_left"
-            app:popEnterAnim="@anim/enter_from_left"
-            app:popExitAnim="@anim/exit_to_right" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/searchNewsFragment"
-        android:name="com.olgabakhur.baseproject.presentation.ui.searchNews.SearchNewsFragment"
-        android:label="@string/search_news_label_toolbar"
-        tools:layout="@layout/fragment_search_news">
-        <action
-            android:id="@+id/action_searchNewsFragment_to_articleFragment"
             app:destination="@id/articleFragment"
             app:enterAnim="@anim/enter_from_right"
             app:exitAnim="@anim/exit_to_left"

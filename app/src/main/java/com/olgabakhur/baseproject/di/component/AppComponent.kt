@@ -7,7 +7,6 @@ import com.olgabakhur.baseproject.presentation.ui.MainViewModel
 import com.olgabakhur.baseproject.presentation.ui.article.ArticleViewModel
 import com.olgabakhur.baseproject.presentation.ui.breakingNews.BreakingNewsViewModel
 import com.olgabakhur.baseproject.presentation.ui.savedNews.SavedNewsViewModel
-import com.olgabakhur.baseproject.presentation.ui.searchNews.SearchNewsViewModel
 import com.olgabakhur.baseproject.presentation.ui.signIn.SignInViewModel
 import dagger.BindsInstance
 import dagger.Component
@@ -26,6 +25,5 @@ interface AppComponent {
     val signInViewModel: SignInViewModel
     val breakingNewsViewModel: BreakingNewsViewModel
     val savedNewsViewModel: SavedNewsViewModel
-    val searchNewsViewModel: SearchNewsViewModel
     val articleNewsViewModel: ArticleViewModel
 }

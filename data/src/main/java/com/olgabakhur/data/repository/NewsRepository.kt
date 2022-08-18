@@ -11,7 +11,6 @@ interface NewsRepository {
     // News Api
     suspend fun signIn(authRequest: AuthRequest): Result<AuthResponse>
     suspend fun getBreakingNews(countryCode: String, pageNumber: Int): Result<NewsItem>
-    suspend fun searchNews(searchQuery: String, pageNumber: Int): Result<NewsItem>
 
     // News database
     suspend fun insertArticle(article: Article): Result<Long>

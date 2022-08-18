@@ -1,13 +1,13 @@
 package com.olgabakhur.data.util.error
 
-sealed class ApplicationError {
+sealed class ApplicationError() {
 
     companion object {
         const val TOO_MANY_REQUESTS = 429
     }
 
     // Common errors
-    object Unknown : ApplicationError()
+    class Generic(val throwableMessage: String? = null) : ApplicationError()
     object NoInternetConnection : ApplicationError()
 
     // Http errors
@@ -31,7 +31,7 @@ sealed class ApplicationError {
 
     fun isGenericError(): Boolean =
         when (this) {
-            is Unknown,
+            is Generic,
             is NoInternetConnection -> true
             else -> false
         }

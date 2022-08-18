@@ -15,7 +15,7 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_favorite"
+        android:src="@drawable/ic_save_article"
         app:fabSize="normal"
         app:backgroundTint="@color/button_background_state_is_enabled_selector"
         android:foregroundTint="@color/button_text_state_is_enabled_selector"

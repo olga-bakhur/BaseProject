@@ -18,7 +18,7 @@ object SafeDatabaseCall {
 
             val appError = when (throwable) {
                 is SQLiteException -> ApplicationError.DatabaseOperation
-                else -> ApplicationError.Unknown
+                else -> ApplicationError.Generic(throwable.message)
             }
 
             _databaseErrorsFlow.emit(appError)

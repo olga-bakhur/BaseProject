@@ -15,9 +15,6 @@ class NewsInteractor @Inject constructor(
     suspend fun getBreakingNews(countryCode: String, pageNumber: Int): Result<NewsItem> =
         newsUseCase.getBreakingNews(countryCode, pageNumber)
 
-    suspend fun searchNews(searchQuery: String, pageNumber: Int): Result<NewsItem> =
-        newsUseCase.searchNews(searchQuery, pageNumber)
-
     // News database
     suspend fun insertArticle(article: Article): Result<Long> =
         newsUseCase.insertArticle(article)

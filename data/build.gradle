@@ -1,6 +1,7 @@
 apply plugin: "com.android.library"
 apply plugin: "kotlin-android"
 apply plugin: "kotlin-kapt"
+apply plugin: "kotlinx-serialization"
 
 android {
     compileSdkVersion globalConfig.compileSdkVersion
@@ -77,4 +78,7 @@ dependencies {
     api dataDependencies.okHttp
     api dataDependencies.okHttpLoggingInterceptor
     api dataDependencies.okHttpSse
+
+    // Preferences DataStore
+    implementation globalDependencies.preferencesDataStore
 }
