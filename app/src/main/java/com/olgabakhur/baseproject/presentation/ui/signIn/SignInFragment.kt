@@ -1,7 +1,13 @@
 package com.olgabakhur.baseproject.presentation.ui.signIn
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
+import androidx.lifecycle.Lifecycle
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.olgabakhur.baseproject.App
 import com.olgabakhur.baseproject.R
@@ -14,7 +20,7 @@ import com.olgabakhur.data.util.result.Result
 
 class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
 
-    private val binding by viewBinding(FragmentSignInBinding::bind)
+    override val binding by viewBinding(FragmentSignInBinding::bind)
     override val viewModel: SignInViewModel by viewModel { App.appComponent.signInViewModel }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -22,16 +28,29 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
         setupSignInButtonClickListener()
     }
 
+    override fun setupToolbarMenu() {
+        super.setupToolbarMenu()
+
+        val menuHost: MenuHost = requireActivity()
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menu.clear()
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean = false
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+    }
+
     override fun observeViewModel() {
         super.observeViewModel()
 
         /* Read from the DataStore */
-        collectLatestWhenStarted(viewModel.isUserLoggedIn()) { isLoggedIn ->
+        collectWhenStarted(viewModel.isUserLoggedIn()) { isLoggedIn ->
             updateUiOnLoginStatus(isLoggedIn)
         }
 
         /* Api call result*/
-        collectWhenStarted(viewModel.signInFlow) { result ->
+        collectLatestWhenStarted(viewModel.signInFlow) { result ->
             when (result) {
                 is Result.Success -> { /* do "onSuccess" actions */
                 }
@@ -61,7 +80,6 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
 
     private fun setupSignInButtonClickListener() {
         binding.btnSignIn.setOnClickListener {
-
             /* Fake implementation */
             viewModel.signInFake {
                 navigate(

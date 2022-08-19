@@ -22,6 +22,7 @@
     <!--    General-->
     <string name="general_ok">Принять</string>
     <string name="general_cancel">Отмена</string>
+    <string name="general_undo">Вернуть</string>
     <string name="general_error">Ошибка</string>
     <string name="general_continue">Продолжить</string>
 

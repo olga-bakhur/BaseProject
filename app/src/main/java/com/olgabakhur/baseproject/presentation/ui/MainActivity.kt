@@ -42,13 +42,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private fun setupToolbarMenu() {
         addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                navController.getCurrentDestinationId()?.let { destinationId ->
-                    when (destinationId) {
-                        R.id.signInFragment -> menu.clear()
-                        else -> menuInflater.inflate(R.menu.menu_toolbar, menu)
-                        /* Inflate other menus here if necessary */
-                    }
-                }
+                /* Menu items which are visible around the whole App. */
+                menuInflater.inflate(R.menu.menu_toolbar, menu)
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean =

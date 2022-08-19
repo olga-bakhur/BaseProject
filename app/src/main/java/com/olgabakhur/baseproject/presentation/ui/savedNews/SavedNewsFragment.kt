@@ -13,6 +13,7 @@ import com.olgabakhur.baseproject.R
 import com.olgabakhur.baseproject.databinding.FragmentSavedNewsBinding
 import com.olgabakhur.baseproject.presentation.adapters.NewsAdapter
 import com.olgabakhur.baseproject.presentation.base.BaseFragment
+import com.olgabakhur.baseproject.presentation.extensions.collectLatestWhenStarted
 import com.olgabakhur.baseproject.presentation.extensions.collectWhenStarted
 import com.olgabakhur.baseproject.presentation.extensions.message
 import com.olgabakhur.baseproject.presentation.util.view.Dialog
@@ -25,11 +26,10 @@ import kotlinx.coroutines.flow.collectLatest
 
 class SavedNewsFragment : BaseFragment(R.layout.fragment_saved_news) {
 
-    private val binding by viewBinding(FragmentSavedNewsBinding::bind)
+    override val binding by viewBinding(FragmentSavedNewsBinding::bind)
     override val viewModel: SavedNewsViewModel by viewModel { App.appComponent.savedNewsViewModel }
 
-    private lateinit var newsAdapter: NewsAdapter
-    private lateinit var itemTouchHelperCallback: ItemTouchHelper.SimpleCallback
+    private val newsAdapter by lazy { NewsAdapter() }
     private lateinit var mContext: Context
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -38,14 +38,12 @@ class SavedNewsFragment : BaseFragment(R.layout.fragment_saved_news) {
         viewModel.getSavedNews()
         setupRecyclerView()
         setupRecyclerViewItemClickListener()
-        initNewsItemTouchHelperCallback()
-        setupNewsItemTouchListener()
+        setupSwipeToDelete()
     }
 
     override fun observeViewModel() {
         super.observeViewModel()
-        collectWhenStarted(viewModel.savedNewsResultFlow) { result ->
-            // TODO: enable ui or adjust loading dialog
+        collectLatestWhenStarted(viewModel.savedNewsFlow) { result ->
             when (result) {
                 is Result.Success -> {
                     result.value.collectLatest { articlesList ->
@@ -63,11 +61,9 @@ class SavedNewsFragment : BaseFragment(R.layout.fragment_saved_news) {
             }
         }
 
-        collectWhenStarted(viewModel.deleteArticleResultFlow) { result ->
-            // TODO: enable ui or adjust loading dialog
+        collectWhenStarted(viewModel.deleteArticleFlow) { result ->
             when (result) {
                 is Result.Success -> {
-                    // TODO: restores at the end of the list, not previous position
                     showSnackbarWithAction(
                         mContext,
                         binding.root,
@@ -75,7 +71,7 @@ class SavedNewsFragment : BaseFragment(R.layout.fragment_saved_news) {
                         Snackbar.LENGTH_LONG,
                         SnackbarAction(
                             viewModel::restoreArticle,
-                            R.string.general_cancel
+                            R.string.general_undo
                         )
                     )
                 }
@@ -90,8 +86,7 @@ class SavedNewsFragment : BaseFragment(R.layout.fragment_saved_news) {
             }
         }
 
-        collectWhenStarted(viewModel.restoreArticleResultFlow) { result ->
-            // TODO: enable ui or adjust loading dialog
+        collectWhenStarted(viewModel.restoreArticleFlow) { result ->
             when (result) {
                 is Result.Success -> {
                     showSnackbar(
@@ -114,21 +109,22 @@ class SavedNewsFragment : BaseFragment(R.layout.fragment_saved_news) {
     }
 
     private fun setupRecyclerView() {
-        newsAdapter = NewsAdapter()
         binding.rvSavedNews.apply {
             adapter = newsAdapter
-            layoutManager = LinearLayoutManager(activity)
+            layoutManager = LinearLayoutManager(mContext)
         }
     }
 
     private fun setupRecyclerViewItemClickListener() {
         newsAdapter.setOnItemClickListener {
-            navigate(SavedNewsFragmentDirections.actionSavedNewsFragmentToArticleFragment(it))
+            navigate(
+                SavedNewsFragmentDirections.actionSavedNewsFragmentToArticleFragment(it)
+            )
         }
     }
 
-    private fun initNewsItemTouchHelperCallback() {
-        itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(
+    private fun setupSwipeToDelete() {
+        val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(
             ItemTouchHelper.UP or ItemTouchHelper.DOWN,
             ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
         ) {
@@ -136,9 +132,7 @@ class SavedNewsFragment : BaseFragment(R.layout.fragment_saved_news) {
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder,
                 target: RecyclerView.ViewHolder
-            ): Boolean {
-                return true
-            }
+            ): Boolean = true
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.bindingAdapterPosition
@@ -146,11 +140,8 @@ class SavedNewsFragment : BaseFragment(R.layout.fragment_saved_news) {
                 viewModel.deleteArticle(article)
             }
         }
-    }
 
-    private fun setupNewsItemTouchListener() {
-        ItemTouchHelper(itemTouchHelperCallback).apply {
-            attachToRecyclerView(binding.rvSavedNews)
-        }
+        val touchHelper = ItemTouchHelper(itemTouchHelperCallback)
+        touchHelper.attachToRecyclerView(binding.rvSavedNews)
     }
 }

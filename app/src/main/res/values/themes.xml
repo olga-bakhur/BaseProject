@@ -28,6 +28,7 @@
 
         <!--    Customize the App theme-->
         <item name="materialAlertDialogTheme">@style/DialogStyle_RoundedCorners</item>
+        <item name="circularProgressIndicatorStyle">@style/CircularProgressIndicator_Style</item>
     </style>
 
     <style name="Theme.BaseProject.NoActionBar">

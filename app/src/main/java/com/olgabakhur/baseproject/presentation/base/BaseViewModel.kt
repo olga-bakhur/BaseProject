@@ -26,6 +26,9 @@ open class BaseViewModel : ViewModel() {
         block: suspend CoroutineScope.() -> Unit
     ): Job {
         _loading.start()
-        return launch(context, start, block).also { _loading.stop() }
+        return launch(context, start) {
+            block()
+            _loading.stop()
+        }
     }
 }

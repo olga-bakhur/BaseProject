@@ -9,6 +9,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class SignInViewModel @Inject constructor(
@@ -22,9 +24,14 @@ class SignInViewModel @Inject constructor(
 
     /* Fake implementation */
     fun signInFake(navigateNext: () -> Unit) {
-        viewModelScope.launchWithLoading {
-            navigateNext()
-            authInteractor.setIsUserLoggedIn(true)
+        viewModelScope.launch {
+            launch(Dispatchers.IO) {
+                authInteractor.setIsUserLoggedIn(true)
+            }.join()
+
+            withContext(Dispatchers.Main) {
+                navigateNext()
+            }
         }
     }
 

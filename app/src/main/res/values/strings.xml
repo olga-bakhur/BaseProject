@@ -21,6 +21,7 @@
     <!--    General-->
     <string name="general_ok">Ok</string>
     <string name="general_cancel">Cancel</string>
+    <string name="general_undo">Undo</string>
     <string name="general_error">Error</string>
     <string name="general_continue">Continue</string>
 

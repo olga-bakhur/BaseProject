@@ -13,6 +13,15 @@
         <item name="cornerSize">@dimen/dialog_corner_radius</item>
     </style>
 
+    <!--    Progress bar-->
+    <style name="CircularProgressIndicator_Style" parent="Widget.MaterialComponents.CircularProgressIndicator">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.CircularProgressIndicator</item>
+    </style>
+
+    <style name="ThemeOverlay.App.CircularProgressIndicator" parent="">
+        <item name="colorPrimary">@color/colorSecondary</item>
+    </style>
+
 <!--    TODO: check colors-->
     <!--    BottomSheet. System bars color-->
     <style name="BottomSheet_SystemBarsStyle" parent="Theme.MaterialComponents.Light.BottomSheetDialog">

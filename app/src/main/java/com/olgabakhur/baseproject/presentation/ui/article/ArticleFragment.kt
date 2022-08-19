@@ -1,8 +1,13 @@
 package com.olgabakhur.baseproject.presentation.ui.article
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.View
+import android.webkit.WebResourceError
+import android.webkit.WebResourceRequest
+import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -11,34 +16,33 @@ import com.olgabakhur.baseproject.App
 import com.olgabakhur.baseproject.R
 import com.olgabakhur.baseproject.databinding.FragmentArticleBinding
 import com.olgabakhur.baseproject.presentation.base.BaseFragment
-import com.olgabakhur.baseproject.presentation.extensions.collectLatestWhenStarted
+import com.olgabakhur.baseproject.presentation.extensions.collectWhenStarted
 import com.olgabakhur.baseproject.presentation.util.view.Dialog
 import com.olgabakhur.baseproject.presentation.util.view.showSnackbar
 import com.olgabakhur.baseproject.presentation.util.viewModel.viewModel
-import com.olgabakhur.data.model.news.pojo.Article
 import com.olgabakhur.data.util.result.Result
 
 class ArticleFragment : BaseFragment(R.layout.fragment_article) {
 
-    private val binding by viewBinding(FragmentArticleBinding::bind)
+    override val binding by viewBinding(FragmentArticleBinding::bind)
     override val viewModel: ArticleViewModel by viewModel { App.appComponent.articleNewsViewModel }
 
     private val args: ArticleFragmentArgs by navArgs()
     private lateinit var mContext: Context
-    private lateinit var article: Article
+    private lateinit var webClient: WebViewClient
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mContext = requireContext()
         setupArgs()
-        setupWebView()
         setupFabClickListener()
+        initWebViewClient()
+        setupWebView()
     }
 
     override fun observeViewModel() {
         super.observeViewModel()
-        collectLatestWhenStarted(viewModel.saveArticleResultFlow) { result ->
-            // TODO: enable ui or adjust loading dialog
+        collectWhenStarted(viewModel.saveArticleFlow) { result ->
             when (result) {
                 is Result.Success -> {
                     showSnackbar(
@@ -61,19 +65,51 @@ class ArticleFragment : BaseFragment(R.layout.fragment_article) {
     }
 
     private fun setupArgs() {
-        article = args.article // TODO: getById()
-    }
-
-    private fun setupWebView() {
-        binding.webView.apply {
-            webViewClient = WebViewClient()
-            loadUrl(article.url)
-        }
+        viewModel.setArticle(args.article)
     }
 
     private fun setupFabClickListener() {
-        binding.fab.setOnClickListener {
-            viewModel.saveArticle(article)
+        binding.fab.setOnClickListener { viewModel.saveArticle() }
+    }
+
+    private fun initWebViewClient() {
+        webClient = object : WebViewClient() {
+            override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
+                super.onPageStarted(view, url, favicon)
+                showLoading(true)
+            }
+
+            override fun onPageFinished(view: WebView?, url: String?) {
+                super.onPageFinished(view, url)
+                showLoading(false)
+            }
+
+            override fun onReceivedError(
+                view: WebView?,
+                request: WebResourceRequest?,
+                error: WebResourceError?
+            ) {
+                super.onReceivedError(view, request, error)
+                showLoading(false)
+
+                Dialog.showOkDialogWithTitle(
+                    requireContext(),
+                    R.string.general_error,
+                    error?.description?.toString() ?: getString(R.string.error_generic)
+                )
+            }
+        }
+    }
+
+    @SuppressLint("SetJavaScriptEnabled")
+    private fun setupWebView() {
+        binding.webView.apply {
+            webViewClient = webClient
+            settings.javaScriptEnabled = true
+            viewModel.article?.url?.let { url ->
+                loadUrl(url)
+            }
+            settings.setSupportMultipleWindows(true)
         }
     }
 }

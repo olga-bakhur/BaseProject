@@ -1,6 +1,5 @@
 package com.olgabakhur.baseproject.presentation.base
 
-import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.view.Menu
@@ -16,16 +15,19 @@ import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavDirections
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
+import androidx.viewbinding.ViewBinding
+import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.olgabakhur.baseproject.presentation.util.liveData.EventObserver
-import com.olgabakhur.baseproject.presentation.util.view.buildLoadingDialog
+import com.olgabakhur.baseproject.presentation.util.view.createProgressBar
 import com.olgabakhur.baseproject.presentation.util.view.hideKeyboard
 
 abstract class BaseFragment(@LayoutRes layoutId: Int) : Fragment(layoutId) {
 
     abstract val viewModel: BaseViewModel
+    abstract val binding: ViewBinding
 
-    private var loadingDialog: Dialog? = null
     private lateinit var mContext: Context
+    private var progressBar: CircularProgressIndicator? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -39,12 +41,11 @@ abstract class BaseFragment(@LayoutRes layoutId: Int) : Fragment(layoutId) {
         view?.let { mContext.hideKeyboard(it) }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        viewModel.loading.removeObservers(viewLifecycleOwner)
-    }
-
-    private fun setupToolbarMenu() {
+    /*
+    Override this function in a particular subFragment to add more MenuItems or clear items
+    which are common for the whole App.
+    */
+    open fun setupToolbarMenu() {
         val menuHost: MenuHost = requireActivity()
         menuHost.addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {}
@@ -57,31 +58,36 @@ abstract class BaseFragment(@LayoutRes layoutId: Int) : Fragment(layoutId) {
             viewLifecycleOwner,
             EventObserver {
                 showLoading(it)
-            })
+            }
+        )
     }
 
+    /* Loading */
     fun showLoading(isLoading: Boolean) {
-        loadingDialog = if (isLoading) {
-            buildLoadingDialog().apply { show() }
+        progressBar = if (isLoading) {
+            createProgressBar(mContext, binding.root).apply { show() }
         } else {
-            loadingDialog?.dismiss().let { null }
+            progressBar?.hide().let { null }
         }
     }
 
+    private fun blockUi(isLoading: Boolean) {
+        if (isLoading) disableUi() else enableUi()
+    }
+
+    /* Override those functions in a particular subFragment to enable / disable all the clickable views. */
+    open fun disableUi() {}
+    open fun enableUi() {}
+
     /* Navigation */
-    fun navigate(@IdRes resId: Int) {
-        findNavController().navigate(resId)
-    }
+    fun navigate(@IdRes resId: Int) = findNavController().navigate(resId)
 
-    fun navigate(direction: NavDirections) {
-        findNavController().navigate(direction)
-    }
+    fun navigate(direction: NavDirections) = findNavController().navigate(direction)
 
-    fun navigate(direction: NavDirections, navOptions: NavOptions) {
+    fun navigate(direction: NavDirections, navOptions: NavOptions) =
         findNavController().navigate(direction, navOptions)
-    }
 
-    fun navigateBack() {
-        findNavController().popBackStack()
-    }
+    fun navigateBack() = findNavController().popBackStack()
+
+    fun navigateUp() = findNavController().navigateUp()
 }
