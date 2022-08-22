@@ -1,8 +1,8 @@
-package com.olgabakhur.data.model.news.auth
+package com.olgabakhur.data.model.pojo
 
 import com.google.gson.annotations.SerializedName
 
-data class AuthRequest(
+data class SignInRequest(
     @SerializedName("email") val email: String,
     @SerializedName("password") val password: String
 )

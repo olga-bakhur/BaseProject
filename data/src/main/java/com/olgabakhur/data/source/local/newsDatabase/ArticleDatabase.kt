@@ -4,14 +4,13 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.room.TypeConverters
-import com.olgabakhur.data.model.news.pojo.Article
+import com.olgabakhur.data.model.entity.ArticleEntity
 
 @Database(
-    entities = [Article::class],
+    entities = [ArticleEntity::class],
     version = 1
 )
-@TypeConverters(Converters::class)
+/* @TypeConverters(Converters::class) */
 abstract class ArticleDatabase : RoomDatabase() {
 
     abstract fun getArticleDao(): ArticleDao

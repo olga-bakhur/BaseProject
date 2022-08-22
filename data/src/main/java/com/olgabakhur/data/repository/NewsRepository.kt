@@ -1,16 +1,14 @@
 package com.olgabakhur.data.repository
 
-import com.olgabakhur.data.model.news.auth.AuthRequest
-import com.olgabakhur.data.model.news.auth.AuthResponse
-import com.olgabakhur.data.model.news.pojo.Article
-import com.olgabakhur.data.model.news.pojo.NewsItem
+import com.olgabakhur.data.model.dto.Article
+import com.olgabakhur.data.model.dto.UserCredentials
 import com.olgabakhur.data.util.result.Result
 import kotlinx.coroutines.flow.Flow
 
 interface NewsRepository {
     // News Api
-    suspend fun signIn(authRequest: AuthRequest): Result<AuthResponse>
-    suspend fun getBreakingNews(countryCode: String, pageNumber: Int): Result<NewsItem>
+    suspend fun signIn(email: String, password: String): Result<UserCredentials>
+    suspend fun getBreakingNews(countryCode: String, pageNumber: Int): Result<List<Article>>
 
     // News database
     suspend fun insertArticle(article: Article): Result<Long>

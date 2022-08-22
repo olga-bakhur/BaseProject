@@ -1,28 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    tools:context="com.olgabakhur.baseproject.presentation.ui.signIn.SignInFragment">
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tvSitgnInStatus"
-        android:layout_width="wrap_content"
+        android:id="@+id/tvSignInStatus"
+        style="@style/BodyText_Style"
+        android:layout_width="@dimen/dimen_0"
         android:layout_height="wrap_content"
-        app:layout_constraintVertical_chainStyle="packed"
+        android:layout_marginHorizontal="@dimen/dimen_16"
+        android:gravity="center"
         android:text="@string/sign_in_status_uncompleted_message"
+        app:layout_constraintBottom_toTopOf="@id/btnSignIn"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/btnSignIn"/>
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:textColor="@color/colorError" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnSignIn"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/dimen_0"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dimen_16"
+        android:layout_marginTop="@dimen/dimen_6"
         android:text="@string/general_sign_in"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvSitgnInStatus"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvSignInStatus" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,7 +1,6 @@
 package com.olgabakhur.domain.useCases
 
-import com.olgabakhur.data.model.news.auth.AuthRequest
-import com.olgabakhur.data.model.news.auth.AuthResponse
+import com.olgabakhur.data.model.dto.UserCredentials
 import com.olgabakhur.data.repository.NewsRepository
 import com.olgabakhur.data.repository.UserPreferencesRepository
 import com.olgabakhur.data.util.error.ApplicationError
@@ -24,7 +23,7 @@ class AuthUseCase @Inject constructor(
         userPreferencesRepository.setIsUserLoggedIn(isLoggedIn)
 
     /* Assume fields are not empty*/
-    suspend fun signIn(email: String, password: String): Result<AuthResponse> {
+    suspend fun signIn(email: String, password: String): Result<UserCredentials> {
         if (!isEmailValid(email)) {
             return Result.Error(ApplicationError.InvalidEmail)
         }
@@ -33,12 +32,7 @@ class AuthUseCase @Inject constructor(
             return Result.Error(ApplicationError.InvalidPassword)
         }
 
-        val result = newsRepository.signIn(
-            AuthRequest(
-                email = email,
-                password = password
-            )
-        )
+        val result = newsRepository.signIn(email, password)
 
         return result
             .onSuccess {

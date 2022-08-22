@@ -1,13 +1,22 @@
 package com.olgabakhur.baseproject.presentation.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.olgabakhur.baseproject.R
 import com.olgabakhur.baseproject.databinding.ViewHolderArticleBinding
-import com.olgabakhur.data.model.news.pojo.Article
+import com.olgabakhur.baseproject.presentation.extensions.setTextOrNoInfoLabel
+import com.olgabakhur.baseproject.presentation.util.onClickListener.setOnCLick
+import com.olgabakhur.baseproject.presentation.util.view.gone
+import com.olgabakhur.baseproject.presentation.util.view.visible
+import com.olgabakhur.data.model.dto.Article
 
 class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
 
@@ -21,10 +30,10 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
 
     val differList = AsyncListDiffer(this, differCallback)
 
-    private var onItemClickListener: ((Article) -> Unit)? = null
+    private var saveOrDeleteArticle: ((Article) -> Unit)? = null
 
-    fun setOnItemClickListener(listener: (Article) -> Unit) {
-        onItemClickListener = listener
+    fun setOnSaveOrDeleteArticleClickListener(listener: (Article) -> Unit) {
+        saveOrDeleteArticle = listener
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
@@ -46,20 +55,101 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(article: Article) {
             with(itemView) {
-                Glide.with(context)
-                    .load(article.urlToImage)
-                    .into(binding.ivArticleImage)
+                setupTitle(article)
+                setupSource(article)
+                setupArticleImage(article, context)
+                setupDescription(article)
+                setupContent(article)
+                setupPublishedAt(article)
+                setupButtonSave(article, context)
+                setupOnItemClickListener(itemView)
+            }
+        }
 
-                binding.tvSource.text = article.source?.name
-                binding.tvTitle.text = article.title
-                binding.tvDescription.text = article.description
-                binding.tvPublishedAt.text = article.publishedAt
+        private fun setupTitle(article: Article) {
+            binding.tvTitle.apply {
+                text = context.setTextOrNoInfoLabel(article.title)
+                isSelected = true
+            }
+        }
 
-                setOnClickListener {
-                    onItemClickListener?.let {
-                        it(article)
-                    }
+        private fun setupSource(article: Article) {
+            binding.tvSource.apply {
+                text = context.setTextOrNoInfoLabel(article.sourceName)
+                isSelected = true
+            }
+        }
+
+        private fun setupArticleImage(article: Article, context: Context) {
+            Glide.with(context)
+                .load(article.urlToImage)
+                .centerCrop() // TODO: ??
+                .apply(
+                    RequestOptions()
+                        .placeholder(R.drawable.ic_news_image_preloader)
+                        .error(R.drawable.ic_news_image_error)
+                        .fitCenter()
+                )
+                .into(binding.ivArticleImage)
+        }
+
+        private fun setupDescription(article: Article) {
+            binding.tvDescription.apply {
+                text = context.setTextOrNoInfoLabel(article.description)
+            }
+        }
+
+        private fun setupContent(article: Article) { // TODO: transition
+            binding.tvContent.apply {
+                text = context.setTextOrNoInfoLabel(article.content)
+            }
+        }
+
+        private fun setupPublishedAt(article: Article) {
+            binding.tvPublishedAt.apply {
+                text = article.publishedAt
+                isSelected = true
+            }
+        }
+
+        private fun setupButtonSave(article: Article, context: Context) {
+            // TODO: add selector??
+            if (article.isSaved) {
+                binding.ivSave.setColorFilter(
+                    context.resources.getColor(
+                        R.color.colorSecondary,
+                        null
+                    )
+                )
+            } else {
+                binding.ivSave.clearColorFilter()
+            }
+
+            binding.ivSave.setOnCLick {
+                saveOrDeleteArticle?.let {
+                    it(article)
                 }
+
+                updateItem()
+            }
+        }
+
+        private fun setupOnItemClickListener(itemView: View) {
+            itemView.setOnClickListener {
+                setupTransition()
+            }
+        }
+
+        private fun updateItem() { // TODO: update doesn't work
+            bindingAdapter?.notifyItemChanged(bindingAdapterPosition)
+        }
+
+        private fun setupTransition() { // TODO: create transition
+            val isContentVisible = binding.tvContent.isVisible
+            if (isContentVisible) {
+                binding.tvContent.gone()
+            } else {
+                binding.tvContent.visible()
             }
         }
     }

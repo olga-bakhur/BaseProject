@@ -1,18 +1,18 @@
 package com.olgabakhur.data.source.local.newsDatabase
 
-import androidx.room.TypeConverter
-import com.olgabakhur.data.model.news.pojo.Source
-import com.olgabakhur.data.util.Constants.EMPTY
-
 class Converters {
 
+    /* Example:
+
     @TypeConverter
-    fun fromSource(source: Source): String {
-        return source.name ?: EMPTY
+    fun fromSource(sourceResponse: SourceResponse): String {
+        return sourceResponse.name ?: EMPTY
     }
 
     @TypeConverter
-    fun toSource(name: String): Source {
-        return Source(id = name, name = name)
+    fun toSource(name: String): SourceResponse {
+        return SourceResponse(id = name, name = name)
     }
+
+    */
 }

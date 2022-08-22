@@ -37,7 +37,6 @@ class SavedNewsFragment : BaseFragment(R.layout.fragment_saved_news) {
         mContext = requireContext()
         viewModel.getSavedNews()
         setupRecyclerView()
-        setupRecyclerViewItemClickListener()
         setupSwipeToDelete()
     }
 
@@ -71,7 +70,7 @@ class SavedNewsFragment : BaseFragment(R.layout.fragment_saved_news) {
                         Snackbar.LENGTH_LONG,
                         SnackbarAction(
                             viewModel::restoreArticle,
-                            R.string.general_undo
+                            R.string.general_cancel
                         )
                     )
                 }
@@ -85,41 +84,12 @@ class SavedNewsFragment : BaseFragment(R.layout.fragment_saved_news) {
                 }
             }
         }
-
-        collectWhenStarted(viewModel.restoreArticleFlow) { result ->
-            when (result) {
-                is Result.Success -> {
-                    showSnackbar(
-                        mContext,
-                        binding.root,
-                        R.string.article_was_restored_successfully_message,
-                        Snackbar.LENGTH_SHORT
-                    )
-                }
-
-                is Result.Error -> {
-                    Dialog.showOkDialogWithTitle(
-                        mContext,
-                        R.string.general_error,
-                        R.string.article_restoration_failed_message
-                    )
-                }
-            }
-        }
     }
 
     private fun setupRecyclerView() {
         binding.rvSavedNews.apply {
             adapter = newsAdapter
             layoutManager = LinearLayoutManager(mContext)
-        }
-    }
-
-    private fun setupRecyclerViewItemClickListener() {
-        newsAdapter.setOnItemClickListener {
-            navigate(
-                SavedNewsFragmentDirections.actionSavedNewsFragmentToArticleFragment(it)
-            )
         }
     }
 

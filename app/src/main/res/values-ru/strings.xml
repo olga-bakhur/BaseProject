@@ -22,30 +22,23 @@
     <!--    General-->
     <string name="general_ok">Принять</string>
     <string name="general_cancel">Отмена</string>
-    <string name="general_undo">Вернуть</string>
     <string name="general_error">Ошибка</string>
     <string name="general_continue">Продолжить</string>
+    <string name="general_no_info">Нет информации</string>
 
-    <!--    Authorization-->
+    <!--    Toolbar title-->
+    <string name="toolbar_title_breaking_news">Последние новости</string>
+    <string name="toolbar_title_saved_news">Сохрананные новости</string>
+
+    <!--    SignInFragment-->
+    <string name="sign_in_status_completed_message">Вы уже вошли в приложение.</string>
+    <string name="sign_in_status_uncompleted_message">Вы еще не вошли в приложение.</string>
     <string name="general_sign_in">Войти</string>
     <string name="general_sign_out">Выйти</string>
 
-    <!--    Toolbar title-->
-    <string name="breaking_news_label_toolbar">Последние новости</string>
-    <string name="saved_news_label_toolbar">Сохрананные новости</string>
-    <string name="article_details_label_toolbar">Подродно</string>
-
-
-    <!--    SignIn-->
-    <string name="sign_in_status_completed_message">Вы уже вошли в приложение.\nНажмите кнопку, чтобы продолжить.</string>
-    <string name="sign_in_status_uncompleted_message">Вы еще не вошли в приложение.\nНажмите кнопку, чтобы войти.</string>
-
-    <!--    ArticlesFragment-->
+    <!--    BreakingNewsFragment-->
     <string name="article_was_saved_successfully_message">Статья была успешно сохранена.</string>
     <string name="article_was_deleted_successfully_message">Статья была успешно удалена.</string>
-    <string name="article_was_restored_successfully_message">Статья была успешно восстановлена.</string>
-
     <string name="article_saving_failed_message">При сохранении статьи произошла ошибка.</string>
     <string name="article_deletion_failed_message">При удалении статьи произошла ошибка</string>
-    <string name="article_restoration_failed_message">При восстановлении статьи произошла ошибка</string>
 </resources>

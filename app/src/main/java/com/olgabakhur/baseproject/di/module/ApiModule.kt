@@ -1,5 +1,6 @@
 package com.olgabakhur.baseproject.di.module
 
+import com.olgabakhur.data.source.remote.NewsApi
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -10,6 +11,6 @@ object ApiModule {
 
     @Singleton
     @Provides
-    fun provideNewsApi(retrofit: Retrofit): com.olgabakhur.data.source.remote.NewsApi =
-        retrofit.create(com.olgabakhur.data.source.remote.NewsApi::class.java)
+    fun provideNewsApi(retrofit: Retrofit): NewsApi =
+        retrofit.create(NewsApi::class.java)
 }

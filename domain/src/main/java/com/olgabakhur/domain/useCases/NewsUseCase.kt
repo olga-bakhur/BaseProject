@@ -1,7 +1,6 @@
 package com.olgabakhur.domain.useCases
 
-import com.olgabakhur.data.model.news.pojo.Article
-import com.olgabakhur.data.model.news.pojo.NewsItem
+import com.olgabakhur.data.model.dto.Article
 import com.olgabakhur.data.repository.NewsRepository
 import com.olgabakhur.data.util.result.Result
 import kotlinx.coroutines.flow.Flow
@@ -10,8 +9,9 @@ import javax.inject.Inject
 class NewsUseCase @Inject constructor(
     private val newsRepository: NewsRepository
 ) {
+
     // News Api
-    suspend fun getBreakingNews(countryCode: String, pageNumber: Int): Result<NewsItem> =
+    suspend fun getBreakingNews(countryCode: String, pageNumber: Int): Result<List<Article>> =
         newsRepository.getBreakingNews(countryCode, pageNumber)
 
     // News database

@@ -10,9 +10,9 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/topAppBar"
+        android:theme="@style/ToolbarIconsTint_Style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/Theme.BaseProject.AppBarOverlay"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,8 +22,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/Theme.BaseProject.PopupOverlay"
+            tools:title="@string/app_name"
             app:menu="@menu/menu_toolbar"/>
     </com.google.android.material.appbar.AppBarLayout>
 

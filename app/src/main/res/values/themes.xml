@@ -29,14 +29,8 @@
         <!--    Customize the App theme-->
         <item name="materialAlertDialogTheme">@style/DialogStyle_RoundedCorners</item>
         <item name="circularProgressIndicatorStyle">@style/CircularProgressIndicator_Style</item>
+        <item name="materialCardViewStyle">@style/CardView_Style</item>
+        <item name="toolbarStyle">@style/Toolbar_Style</item>
+        <item name="android:itemTextAppearance">@style/PopupMenuTextAppearance</item>
     </style>
-
-    <style name="Theme.BaseProject.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-
-    <style name="Theme.BaseProject.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="Theme.BaseProject.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

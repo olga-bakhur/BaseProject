@@ -1,7 +1,6 @@
 package com.olgabakhur.domain.interactors
 
-import com.olgabakhur.data.model.news.pojo.Article
-import com.olgabakhur.data.model.news.pojo.NewsItem
+import com.olgabakhur.data.model.dto.Article
 import com.olgabakhur.data.util.result.Result
 import com.olgabakhur.domain.useCases.NewsUseCase
 import kotlinx.coroutines.flow.Flow
@@ -12,7 +11,7 @@ class NewsInteractor @Inject constructor(
 ) {
 
     // News Api
-    suspend fun getBreakingNews(countryCode: String, pageNumber: Int): Result<NewsItem> =
+    suspend fun getBreakingNews(countryCode: String, pageNumber: Int): Result<List<Article>> =
         newsUseCase.getBreakingNews(countryCode, pageNumber)
 
     // News database

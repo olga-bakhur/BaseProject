@@ -2,7 +2,7 @@ package com.olgabakhur.baseproject.presentation.ui.signIn
 
 import androidx.lifecycle.viewModelScope
 import com.olgabakhur.baseproject.presentation.base.BaseViewModel
-import com.olgabakhur.data.model.news.auth.AuthResponse
+import com.olgabakhur.data.model.dto.UserCredentials
 import com.olgabakhur.data.util.result.Result
 import com.olgabakhur.domain.interactors.AuthInteractor
 import kotlinx.coroutines.Dispatchers
@@ -17,8 +17,8 @@ class SignInViewModel @Inject constructor(
     private val authInteractor: AuthInteractor
 ) : BaseViewModel() {
 
-    private val _signInFlow: MutableSharedFlow<Result<AuthResponse>> = MutableSharedFlow(1)
-    val signInFlow: SharedFlow<Result<AuthResponse>> = _signInFlow.asSharedFlow()
+    private val _signInFlow: MutableSharedFlow<Result<UserCredentials>> = MutableSharedFlow(1)
+    val signInFlow: SharedFlow<Result<UserCredentials>> = _signInFlow.asSharedFlow()
 
     fun isUserLoggedIn() = authInteractor.getIsUserLoggedIn()
 

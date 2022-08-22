@@ -4,7 +4,7 @@ import android.content.Context
 import com.olgabakhur.baseproject.R
 import com.olgabakhur.data.util.error.ApplicationError
 
-fun ApplicationError.message(context: Context): String = // TODO: UiText
+fun ApplicationError.message(context: Context): String =
     if (this is ApplicationError.Generic) {
 
         if (this.throwableMessage != null) {

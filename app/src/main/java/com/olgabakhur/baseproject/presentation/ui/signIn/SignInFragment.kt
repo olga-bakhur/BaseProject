@@ -61,13 +61,24 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
     }
 
     private fun updateUiOnLoginStatus(isLoggedIn: Boolean) {
-        binding.tvSitgnInStatus.text = getString(
-            if (isLoggedIn) {
-                R.string.sign_in_status_completed_message
-            } else {
-                R.string.sign_in_status_uncompleted_message
-            }
-        )
+        binding.tvSignInStatus.apply {
+            text = getString(
+                if (isLoggedIn) {
+                    R.string.sign_in_status_completed_message
+                } else {
+                    R.string.sign_in_status_uncompleted_message
+                }
+            )
+            setTextColor(
+                resources.getColor(
+                    if (isLoggedIn) {
+                        R.color.bodyText
+                    } else {
+                        R.color.colorError
+                    }, null
+                )
+            )
+        }
 
         binding.btnSignIn.text = getString(
             if (isLoggedIn) {

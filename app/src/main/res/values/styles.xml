@@ -1,6 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources
-    xmlns:ns2="http://schemas.android.com/tools">
+<resources xmlns:ns2="http://schemas.android.com/tools">
+
+    <!--    Toolbar-->
+    <style name="Theme.BaseProject.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Toolbar_Style" parent="Widget.MaterialComponents.Toolbar.Primary">
+        <item name="titleTextColor">?attr/colorOnPrimary</item>
+    </style>
+
+    <style name="ToolbarIconsTint_Style" parent="@style/ThemeOverlay.MaterialComponents.Toolbar.Primary">
+        <item name="colorControlNormal">?attr/colorOnPrimary</item>
+        <item name="actionMenuTextColor">?attr/colorOnPrimary</item>
+    </style>
+
+    <!--    PopUp-->
+    <style name="PopupMenuTextAppearance" parent="TextAppearance.AppCompat.Menu">
+        <item name="android:textColor">?attr/colorOnBackground</item>
+    </style>
+
+    <!--    Text-->
+    <style name="HeaderText_Style">
+        <item name="android:textSize">@dimen/header_text</item>
+        <item name="android:textColor">@color/headerText</item>
+        <item name="android:fontFamily">@font/roboto_bold</item>
+    </style>
+
+    <style name="BodyText_Style">
+        <item name="android:textSize">@dimen/body_text</item>
+        <item name="android:textColor">@color/bodyText</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+    </style>
+
+    <style name="MetaDataText_Style">
+        <item name="android:textSize">@dimen/meta_data_text</item>
+        <item name="android:textColor">@color/metaDataText</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
 
     <!--    Dialog. Rounded corners-->
     <style name="DialogStyle_RoundedCorners" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
@@ -13,21 +51,32 @@
         <item name="cornerSize">@dimen/dialog_corner_radius</item>
     </style>
 
+    <!--    CardView-->
+    <style name="CardView_Style" parent="Widget.MaterialComponents.CardView">
+        <item name="shapeAppearance">@style/ShapeAppearance.App.MediumComponent</item>
+    </style>
+
+    <style name="ShapeAppearance.App.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/card_corner_radius</item>
+        <item name="cardElevation">@dimen/card_elevation</item>
+    </style>
+
     <!--    Progress bar-->
     <style name="CircularProgressIndicator_Style" parent="Widget.MaterialComponents.CircularProgressIndicator">
         <item name="materialThemeOverlay">@style/ThemeOverlay.App.CircularProgressIndicator</item>
     </style>
 
     <style name="ThemeOverlay.App.CircularProgressIndicator" parent="">
-        <item name="colorPrimary">@color/colorSecondary</item>
+        <item name="colorPrimary">?attr/colorSecondary</item>
     </style>
 
-<!--    TODO: check colors-->
+    <!--    TODO: check colors-->
     <!--    BottomSheet. System bars color-->
     <style name="BottomSheet_SystemBarsStyle" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
         <item name="android:windowIsFloating">false</item>
-        <item name="android:statusBarColor">@color/colorPrimaryVariant</item>
-        <item name="android:navigationBarColor">@color/colorSurface</item>
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:navigationBarColor">?attr/colorSurface</item>
         <item name="android:windowLightNavigationBar" ns2:targetApi="o_mr1">true</item>
         <item name="android:layout_height">match_parent</item>
     </style>

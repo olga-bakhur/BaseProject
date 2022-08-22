@@ -1,6 +1,6 @@
 package com.olgabakhur.domain.interactors
 
-import com.olgabakhur.data.model.news.auth.AuthResponse
+import com.olgabakhur.data.model.dto.UserCredentials
 import com.olgabakhur.data.util.result.Result
 import com.olgabakhur.domain.useCases.AuthUseCase
 import kotlinx.coroutines.flow.Flow
@@ -14,6 +14,6 @@ class AuthInteractor @Inject constructor(
 
     suspend fun setIsUserLoggedIn(isLoggedIn: Boolean) = authUseCase.setIsUserLoggedIn(isLoggedIn)
 
-    suspend fun signIn(email: String, password: String): Result<AuthResponse> =
+    suspend fun signIn(email: String, password: String): Result<UserCredentials> =
         authUseCase.signIn(email, password)
 }
