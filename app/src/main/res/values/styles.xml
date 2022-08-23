@@ -71,7 +71,6 @@
         <item name="colorPrimary">?attr/colorSecondary</item>
     </style>
 
-    <!--    TODO: check colors-->
     <!--    BottomSheet. System bars color-->
     <style name="BottomSheet_SystemBarsStyle" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
         <item name="android:windowIsFloating">false</item>

@@ -1,9 +1,9 @@
 package com.olgabakhur.data.source.remote
 
 import com.olgabakhur.data.BuildConfig
+import com.olgabakhur.data.model.pojo.NewsItemResponse
 import com.olgabakhur.data.model.pojo.SignInRequest
 import com.olgabakhur.data.model.pojo.SignInResponse
-import com.olgabakhur.data.model.pojo.NewsItemResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST

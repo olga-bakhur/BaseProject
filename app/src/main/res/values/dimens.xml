@@ -11,11 +11,14 @@
     <dimen name="header_text">21dp</dimen>
     <dimen name="body_text">17dp</dimen>
     <dimen name="meta_data_text">15dp</dimen>
+
     <!--    Dialog-->
     <dimen name="dialog_corner_radius">10dp</dimen>
+
     <!--    CardView-->
     <dimen name="card_elevation">4dp</dimen>
     <dimen name="card_corner_radius">10dp</dimen>
+
     <!--    Clickable icon-->
     <dimen name="clickable_icon_diameter_small">40dp</dimen>
     <dimen name="clickable_icon_content_size_small">24dp</dimen>

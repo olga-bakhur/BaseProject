@@ -18,12 +18,6 @@
     <fragment
         android:id="@+id/breakingNewsFragment"
         android:name="com.olgabakhur.baseproject.presentation.ui.breakingNews.BreakingNewsFragment"
-        android:label="@string/toolbar_title_breaking_news"
+        android:label="@string/breaking_news_label"
         tools:layout="@layout/fragment_breaking_news" />
-
-    <fragment
-        android:id="@+id/savedNewsFragment"
-        android:name="com.olgabakhur.baseproject.presentation.ui.savedNews.SavedNewsFragment"
-        android:label="@string/toolbar_title_saved_news"
-        tools:layout="@layout/fragment_saved_news" />
 </navigation>

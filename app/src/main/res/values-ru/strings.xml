@@ -25,10 +25,11 @@
     <string name="general_error">Ошибка</string>
     <string name="general_continue">Продолжить</string>
     <string name="general_no_info">Нет информации</string>
+    <string name="general_filter">Отфильтровать</string>
 
     <!--    Toolbar title-->
-    <string name="toolbar_title_breaking_news">Последние новости</string>
-    <string name="toolbar_title_saved_news">Сохрананные новости</string>
+    <string name="breaking_news_label">Последние новости</string>
+    <string name="saved_news_label">Сохрананные новости</string>
 
     <!--    SignInFragment-->
     <string name="sign_in_status_completed_message">Вы уже вошли в приложение.</string>

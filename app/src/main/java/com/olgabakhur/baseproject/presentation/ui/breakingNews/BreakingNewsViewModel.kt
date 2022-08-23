@@ -5,6 +5,7 @@ import com.olgabakhur.baseproject.presentation.base.BaseViewModel
 import com.olgabakhur.data.model.dto.Article
 import com.olgabakhur.data.util.error.ApplicationError
 import com.olgabakhur.data.util.result.Result
+import com.olgabakhur.data.util.result.onSuccess
 import com.olgabakhur.domain.interactors.NewsInteractor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
@@ -27,8 +28,13 @@ class BreakingNewsViewModel @Inject constructor(
     val saveArticleFlow = _saveArticleFlow.asSharedFlow()
 
     // 3. Delete an article
-    private val _deleteArticleFlow = MutableSharedFlow<Result<Int>>(replay = 0)
+    private val _deleteArticleFlow = MutableSharedFlow<Result<Int>>()
     val deleteArticleFlow = _deleteArticleFlow.asSharedFlow()
+
+    var currentNewsCategory: NewsCategory = NewsCategory.BREAKING_NEWS
+        private set
+    var cachedSavedNewsList: List<Article> = ArrayList()
+    var cachedBreakingNewsList: List<Article> = ArrayList()
 
     // 1. Get all articles
     fun getBreakingNewsWithIsSavedInfo(
@@ -39,39 +45,55 @@ class BreakingNewsViewModel @Inject constructor(
         getBreakingNews(countryCode, pageNumber)
         getSavedNews()
 
-        return _breakingNewsFlow.combine(_savedNewsFlow) { resultListBreaking, resultFlowListSaved ->
-            return@combine when (resultListBreaking) {
-                is Result.Success -> {
-                    when (resultFlowListSaved) {
-                        is Result.Success -> {
-                            val savedFlow = resultFlowListSaved.value
-                            var listSavedArticles: List<Article>
+        val combinedNewsFlow =
+            _breakingNewsFlow.combine(_savedNewsFlow) { resultListBreaking, resultFlowListSaved ->
+                return@combine when (resultListBreaking) {
+                    is Result.Success -> {
+                        when (resultFlowListSaved) {
+                            is Result.Success -> {
+                                val savedFlow = resultFlowListSaved.value
+                                var listSavedArticles: List<Article>
 
-                            runBlocking(Dispatchers.Default) {
-                                listSavedArticles = savedFlow.first()
-                            }
-
-                            val newListBreaking = resultListBreaking.value.map { articleBreaking ->
-                                val isSaved = listSavedArticles.any { articleSaved ->
-                                    articleBreaking.url.contentEquals(articleSaved.url, true)
+                                runBlocking(Dispatchers.Default) {
+                                    listSavedArticles = savedFlow.first()
                                 }
-                                articleBreaking.isSaved = isSaved
-                                return@map articleBreaking
+
+                                val newListBreaking =
+                                    resultListBreaking.value.map { articleBreaking ->
+                                        val isSaved = listSavedArticles.any { articleSaved ->
+                                            articleBreaking.url.contentEquals(
+                                                articleSaved.url,
+                                                true
+                                            )
+                                        }
+                                        articleBreaking.isSaved = isSaved
+                                        return@map articleBreaking
+                                    }
+
+                                Result.Success(newListBreaking)
                             }
 
-                            Result.Success(newListBreaking)
-                        }
-
-                        is Result.Error -> {
-                            _errorFlow.emit(resultFlowListSaved.error)
-                            Result.Success(resultListBreaking.value)
+                            is Result.Error -> {
+                                _errorFlow.emit(resultFlowListSaved.error)
+                                Result.Success(resultListBreaking.value)
+                            }
                         }
                     }
-                }
 
-                is Result.Error -> {
-                    resultListBreaking
+                    is Result.Error -> {
+                        resultListBreaking
+                    }
                 }
+            }
+
+        cacheBreakingNewsList(combinedNewsFlow)
+        return combinedNewsFlow
+    }
+
+    private fun cacheBreakingNewsList(flow: Flow<Result<List<Article>>>) {
+        runBlocking {
+            flow.first().onSuccess {
+                cachedBreakingNewsList = it
             }
         }
     }
@@ -89,7 +111,20 @@ class BreakingNewsViewModel @Inject constructor(
         viewModelScope.launchWithLoading {
             val result = newsInteractor.getSavedArticles()
             _savedNewsFlow.emit(result)
+
+            cacheSavedNewsList(result)
         }
+
+    private fun cacheSavedNewsList(result: Result<Flow<List<Article>>>) {
+        result.onSuccess { flow ->
+            runBlocking {
+                cachedSavedNewsList = flow.first().map { article ->
+                    article.isSaved = true
+                    article
+                }
+            }
+        }
+    }
 
     // 2. Save an article
     fun saveArticle(article: Article) {
@@ -104,6 +139,16 @@ class BreakingNewsViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             val result = newsInteractor.deleteArticle(article)
             _deleteArticleFlow.emit(result)
+        }
+    }
+
+    fun getNewsByCategory(category: NewsCategory): List<Article> {
+        currentNewsCategory = category
+
+        return if (currentNewsCategory == NewsCategory.BREAKING_NEWS) {
+            cachedBreakingNewsList
+        } else {
+            cachedSavedNewsList
         }
     }
 }

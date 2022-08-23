@@ -32,8 +32,8 @@ class UserPreferencesRepositoryImpl @Inject constructor(
                 if (throwable is IOException) {
                     emit(emptyPreferences())
                 } else {
-                    Log.e(TAG, "Error occurred during reading DataStore: ${throwable.message}")
-                    throw throwable // TODO: handle
+                    Log.e(TAG, "Error occurred during working with the DataStore: ${throwable.message}")
+                    throw throwable // TODO: handle exception
                 }
             }
             .map { preferences ->

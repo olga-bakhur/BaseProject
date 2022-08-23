@@ -3,4 +3,7 @@
     <!--    Animation -->
     <integer name="animation_duration">400</integer>
     <integer name="ellipsize_marquee_repeat_limit">0</integer>
+
+    <!--    Transitions -->
+    <integer name="transition_duration_view_fade">150</integer>
 </resources>

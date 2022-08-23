@@ -24,10 +24,11 @@
     <string name="general_error">Error</string>
     <string name="general_continue">Continue</string>
     <string name="general_no_info">No information</string>
+    <string name="general_filter">Filter</string>
 
     <!--    Toolbar title-->
-    <string name="toolbar_title_breaking_news">Breaking news</string>
-    <string name="toolbar_title_saved_news">Saved news</string>
+    <string name="breaking_news_label">Breaking news</string>
+    <string name="saved_news_label">Saved news</string>
 
     <!--    SignInFragment-->
     <string name="general_sign_in">Sign in</string>

@@ -117,6 +117,7 @@
             android:focusable="true"
             android:checkable="true"
             android:scaleType="centerInside"
+            android:duplicateParentState="false"
             android:layout_marginEnd="@dimen/dimen_16"
             android:layout_marginVertical="@dimen/dimen_8"
             app:layout_constraintStart_toEndOf="@id/tvPublishedAt"

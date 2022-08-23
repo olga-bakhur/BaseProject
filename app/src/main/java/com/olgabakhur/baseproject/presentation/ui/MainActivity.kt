@@ -5,6 +5,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.activity.addCallback
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuProvider
 import androidx.navigation.NavController
@@ -55,10 +56,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                         true
                     }
 
-                    R.id.savedNewsFragment -> {
-                        navController.navigate(R.id.savedNewsFragment)
-                        true
-                    }
                     else -> false
                 }
 
@@ -108,5 +105,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                 else -> navController.navigateUp()
             }
         }
+    }
+
+    fun setToolbarTitle(@StringRes title: Int) {
+        binding.toolbar.title = getString(title)
     }
 }

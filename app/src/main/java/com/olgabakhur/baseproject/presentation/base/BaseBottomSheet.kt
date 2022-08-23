@@ -3,11 +3,15 @@
 import android.app.Dialog
 import android.content.res.Configuration.ORIENTATION_LANDSCAPE
 import android.os.Bundle
-import android.view.*
-import androidx.annotation.*
-import androidx.core.view.isVisible
-
-import com.google.android.material.bottomsheet.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.view.WindowManager
+import androidx.annotation.LayoutRes
+import androidx.annotation.StyleRes
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.olgabakhur.baseproject.R
 
 abstract class BaseBottomSheet(

@@ -9,13 +9,11 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.olgabakhur.baseproject.R
 import com.olgabakhur.baseproject.databinding.ViewHolderArticleBinding
-import com.olgabakhur.baseproject.presentation.extensions.setTextOrNoInfoLabel
+import com.olgabakhur.baseproject.presentation.extensions.setTextOrNoInfoMessage
 import com.olgabakhur.baseproject.presentation.util.onClickListener.setOnCLick
-import com.olgabakhur.baseproject.presentation.util.view.gone
-import com.olgabakhur.baseproject.presentation.util.view.visible
+import com.olgabakhur.baseproject.presentation.util.transitions.createFadeTransition
 import com.olgabakhur.data.model.dto.Article
 
 class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
@@ -68,14 +66,14 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
 
         private fun setupTitle(article: Article) {
             binding.tvTitle.apply {
-                text = context.setTextOrNoInfoLabel(article.title)
+                text = context.setTextOrNoInfoMessage(article.title)
                 isSelected = true
             }
         }
 
         private fun setupSource(article: Article) {
             binding.tvSource.apply {
-                text = context.setTextOrNoInfoLabel(article.sourceName)
+                text = context.setTextOrNoInfoMessage(article.sourceName)
                 isSelected = true
             }
         }
@@ -83,25 +81,20 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
         private fun setupArticleImage(article: Article, context: Context) {
             Glide.with(context)
                 .load(article.urlToImage)
-                .centerCrop() // TODO: ??
-                .apply(
-                    RequestOptions()
-                        .placeholder(R.drawable.ic_news_image_preloader)
-                        .error(R.drawable.ic_news_image_error)
-                        .fitCenter()
-                )
+                .placeholder(R.drawable.ic_news_image_preloader)
+                .error(R.drawable.ic_news_image_error)
                 .into(binding.ivArticleImage)
         }
 
         private fun setupDescription(article: Article) {
             binding.tvDescription.apply {
-                text = context.setTextOrNoInfoLabel(article.description)
+                text = context.setTextOrNoInfoMessage(article.description)
             }
         }
 
-        private fun setupContent(article: Article) { // TODO: transition
+        private fun setupContent(article: Article) {
             binding.tvContent.apply {
-                text = context.setTextOrNoInfoLabel(article.content)
+                text = context.setTextOrNoInfoMessage(article.content)
             }
         }
 
@@ -113,7 +106,6 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
         }
 
         private fun setupButtonSave(article: Article, context: Context) {
-            // TODO: add selector??
             if (article.isSaved) {
                 binding.ivSave.setColorFilter(
                     context.resources.getColor(
@@ -129,8 +121,6 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
                 saveOrDeleteArticle?.let {
                     it(article)
                 }
-
-                updateItem()
             }
         }
 
@@ -140,17 +130,9 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
             }
         }
 
-        private fun updateItem() { // TODO: update doesn't work
-            bindingAdapter?.notifyItemChanged(bindingAdapterPosition)
-        }
-
-        private fun setupTransition() { // TODO: create transition
-            val isContentVisible = binding.tvContent.isVisible
-            if (isContentVisible) {
-                binding.tvContent.gone()
-            } else {
-                binding.tvContent.visible()
-            }
+        private fun setupTransition() {
+            val shouldHide = binding.tvContent.isVisible
+            createFadeTransition(binding.root, binding.tvContent, shouldHide)
         }
     }
 }
