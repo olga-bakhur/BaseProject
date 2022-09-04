@@ -13,6 +13,9 @@ buildscript {
         classpath globalDependencies.kotlinGradlePlugin
         classpath globalDependencies.navigationSafeArgsPlugin
         classpath globalDependencies.kotlinSerializationPlugin
+
+//        classpath globalDependencies.googleServices
+//        classpath globalDependencies.crashlyticsPlagin
     }
 }
 

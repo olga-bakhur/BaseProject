@@ -19,8 +19,8 @@ fun ArticleResponse.toArticle() = Article(
     author = author ?: Constants.EMPTY,
     content = content ?: Constants.EMPTY,
     description = description ?: Constants.EMPTY,
-    publishedAt = publishedAt ?: Constants.EMPTY,
-    sourceName = sourceResponse?.name ?: Constants.EMPTY,
+    publishDate = publishDate ?: Constants.EMPTY,
+    sourceName = sourceResponse?.sourceName ?: Constants.EMPTY,
     title = title ?: Constants.EMPTY,
     urlToImage = urlToImage ?: Constants.EMPTY
 )
@@ -30,7 +30,7 @@ fun Article.toArticleEntity() = ArticleEntity(
     author = author,
     content = content,
     description = description,
-    publishedAt = publishedAt,
+    publishDate = publishDate,
     sourceName = sourceName,
     title = title,
     urlToImage = urlToImage
@@ -41,13 +41,13 @@ fun ArticleEntity.toArticle() = Article(
     author = author,
     content = content,
     description = description,
-    publishedAt = publishedAt,
+    publishDate = publishDate,
     sourceName = sourceName,
     title = title,
     urlToImage = urlToImage
 )
 
 fun NewsItemResponse.toArticlesList() =
-    articleResponses.map { articleResponse: ArticleResponse ->
+    articlesList.map { articleResponse: ArticleResponse ->
         articleResponse.toArticle()
     }

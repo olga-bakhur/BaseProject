@@ -9,7 +9,7 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvSignInStatus"
-        style="@style/BodyText_Style"
+        style="@style/BodyMedium_Style"
         android:layout_width="@dimen/dimen_0"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dimen_16"

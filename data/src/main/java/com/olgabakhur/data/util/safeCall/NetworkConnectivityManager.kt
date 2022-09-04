@@ -1,4 +1,4 @@
-package com.olgabakhur.data.repositoryimpl
+package com.olgabakhur.data.util.safeCall
 
 import android.content.Context
 import android.net.ConnectivityManager

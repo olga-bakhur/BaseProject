@@ -8,7 +8,9 @@
     </style>
 
     <style name="Toolbar_Style" parent="Widget.MaterialComponents.Toolbar.Primary">
-        <item name="titleTextColor">?attr/colorOnPrimary</item>
+        <item name="android:background">@color/colorBackground</item>
+        <item name="titleTextColor">?attr/colorOnBackground</item>
+        <item name="titleCentered">true</item>
     </style>
 
     <style name="ToolbarIconsTint_Style" parent="@style/ThemeOverlay.MaterialComponents.Toolbar.Primary">
@@ -21,23 +23,104 @@
         <item name="android:textColor">?attr/colorOnBackground</item>
     </style>
 
-    <!--    Text-->
-    <style name="HeaderText_Style">
-        <item name="android:textSize">@dimen/header_text</item>
+    <!--    Text. Header-->
+    <style name="HeaderSmall_Style">
+        <item name="android:textSize">@dimen/header_small_text</item>
+        <item name="android:textColor">@color/headerText</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+    </style>
+
+    <style name="HeaderMedium_Style">
+        <item name="android:textSize">@dimen/header_medium_text</item>
         <item name="android:textColor">@color/headerText</item>
         <item name="android:fontFamily">@font/roboto_bold</item>
     </style>
 
-    <style name="BodyText_Style">
-        <item name="android:textSize">@dimen/body_text</item>
+    <style name="HeaderLarge_Style">
+        <item name="android:textSize">@dimen/header_large_text</item>
+        <item name="android:textColor">@color/headerText</item>
+        <item name="android:fontFamily">@font/roboto_bold</item>
+    </style>
+
+    <!--    Text. Body-->
+    <style name="BodySmall_Style">
+        <item name="android:textSize">@dimen/body_small_text</item>
+        <item name="android:textColor">@color/bodyText</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
+
+    <style name="BodyMedium_Style">
+        <item name="android:textSize">@dimen/body_medium_text</item>
         <item name="android:textColor">@color/bodyText</item>
         <item name="android:fontFamily">@font/roboto_medium</item>
     </style>
 
-    <style name="MetaDataText_Style">
-        <item name="android:textSize">@dimen/meta_data_text</item>
-        <item name="android:textColor">@color/metaDataText</item>
+    <style name="BodyLarge_Style">
+        <item name="android:textSize">@dimen/body_large_text</item>
+        <item name="android:textColor">@color/bodyText</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+    </style>
+
+    <!--    Text. Subtitle-->
+    <style name="SubtitleSmall_Style">
+        <item name="android:textSize">@dimen/subtitle_small</item>
+        <item name="android:textColor">@color/subtitleText</item>
         <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
+
+    <style name="SubtitleMedium_Style">
+        <item name="android:textSize">@dimen/subtitle_medium</item>
+        <item name="android:textColor">@color/subtitleText</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
+
+    <style name="SubtitleLarge_Style">
+        <item name="android:textSize">@dimen/subtitle_large</item>
+        <item name="android:textColor">@color/subtitleText</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
+
+    <!--    Text. Clickable link-->
+    <style name="ClickableLink_Style">
+        <item name="android:textSize">@dimen/subtitle_medium</item>
+        <item name="android:textColor">@color/primary_color_selector</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+    <!--    Clickable ImageButton-->
+    <style name="ClickableImageButton_Style">
+        <item name="android:foreground">@drawable/ripple_mask_oval_primary</item>
+        <item name="shapeAppearance">@style/CircleImageViewStyle</item>
+        <item name="android:tint">@color/on_background_color_selector</item>
+        <item name="android:scaleType">centerInside</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+    <!--    InputLayout-->
+    <style name="InputLayout_Style" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/colorPrimaryAlpha50</item>
+        <item name="hintTextColor">@color/colorPrimary</item>
+        <item name="errorEnabled">true</item>
+        <item name="endIconMode">clear_text</item>
+        <item name="startIconTint">@color/primary_color_selector_is_enabled</item>
+        <item name="prefixTextColor">@color/primary_color_selector_is_enabled</item>
+        <item name="suffixTextColor">@color/primary_color_selector_is_enabled</item>
+    </style>
+
+    <!--    Button. Primary-->
+    <style name="ButtonPrimary_Style" parent="@style/Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textSize">@dimen/button_primary_text</item>
+        <item name="android:textColor">@color/on_primary_color_selector</item>
+        <item name="backgroundTint">@color/primary_color_selector</item>
+        <item name="rippleColor">@color/colorRipplePrimary</item>
+        <item name="cornerRadius">6dp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:insetLeft">@dimen/dimen_0</item>
+        <item name="android:insetTop">@dimen/dimen_0</item>
+        <item name="android:insetRight">@dimen/dimen_0</item>
+        <item name="android:insetBottom">@dimen/dimen_0</item>
     </style>
 
     <!--    Dialog. Rounded corners-->
@@ -53,13 +136,11 @@
 
     <!--    CardView-->
     <style name="CardView_Style" parent="Widget.MaterialComponents.CardView">
-        <item name="shapeAppearance">@style/ShapeAppearance.App.MediumComponent</item>
-    </style>
-
-    <style name="ShapeAppearance.App.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">@dimen/card_corner_radius</item>
+        <item name="cardBackgroundColor">@color/surface_color_selector_is_enabled</item>
+        <item name="cardCornerRadius">@dimen/card_corner_radius</item>
         <item name="cardElevation">@dimen/card_elevation</item>
+        <item name="strokeColor">@color/secondaryNeutral</item>
+        <item name="strokeWidth">@dimen/dimen_1</item>
     </style>
 
     <!--    Progress bar-->

@@ -32,5 +32,9 @@
         <item name="materialCardViewStyle">@style/CardView_Style</item>
         <item name="toolbarStyle">@style/Toolbar_Style</item>
         <item name="android:itemTextAppearance">@style/PopupMenuTextAppearance</item>
+        <item name="android:statusBarColor">@color/colorBackground</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="textInputStyle">@style/InputLayout_Style</item>
+        <item name="materialButtonStyle">@style/ButtonPrimary_Style</item>
     </style>
 </resources>

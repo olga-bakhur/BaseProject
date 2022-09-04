@@ -6,17 +6,17 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
-import com.olgabakhur.data.repository.UserPreferencesRepository
-import com.olgabakhur.data.repositoryimpl.UserPreferencesRepositoryImpl.PreferencesKeys.IS_USER_LOGGED_IN
+import com.olgabakhur.data.repository.PreferencesRepository
+import com.olgabakhur.data.repositoryimpl.PreferencesRepositoryImpl.PreferencesKeys.IS_USER_LOGGED_IN
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import java.io.IOException
 import javax.inject.Inject
 
-class UserPreferencesRepositoryImpl @Inject constructor(
+class PreferencesRepositoryImpl @Inject constructor(
     private val dataStore: DataStore<Preferences>
-) : UserPreferencesRepository {
+) : PreferencesRepository {
 
     companion object {
         private const val TAG = "DataStore"
@@ -32,7 +32,10 @@ class UserPreferencesRepositoryImpl @Inject constructor(
                 if (throwable is IOException) {
                     emit(emptyPreferences())
                 } else {
-                    Log.e(TAG, "Error occurred during working with the DataStore: ${throwable.message}")
+                    Log.e(
+                        TAG,
+                        "Error occurred during working with the DataStore: ${throwable.message}"
+                    )
                     throw throwable // TODO: handle exception
                 }
             }

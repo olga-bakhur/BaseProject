@@ -5,29 +5,32 @@ ext {
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
     globalConfig = [
-            compileSdkVersion : 32,
-            minSdkVersion     : 28,
-            targetSdkVersion  : 32,
-            buildToolsVersion : "30.0.3"
+            compileSdkVersion: 32,
+            minSdkVersion    : 28,
+            targetSdkVersion : 32,
+            buildToolsVersion: "30.0.3"
     ]
 
     appConfig = [
-            applicationId: "com.olgabakhur.baseproject",
+            applicationId            : "com.olgabakhur.baseproject",
 
-            versionCode  : 1,
-            versionName  : "1.0",
+            versionCode              : 1,
+            versionName              : "1.0",
 
-            testInstrumentationRunner  : "androidx.test.runner.AndroidJUnitRunner",
+            testInstrumentationRunner: "androidx.test.runner.AndroidJUnitRunner",
 
-            keyAlias     : keystoreProperties["keyAlias"],
-            keyPassword  : keystoreProperties["keyPassword"],
-            storeFile    : file(keystoreProperties["storeFile"]),
-            storePassword: keystoreProperties["storePassword"]
+            keyAlias                 : keystoreProperties["keyAlias"],
+            keyPassword              : keystoreProperties["keyPassword"],
+            storeFile                : file(keystoreProperties["storeFile"]),
+            storePassword            : keystoreProperties["storePassword"]
     ]
 
     dataConfig = [
-            devUrl         : "https://newsapi.org",
-            prodUrl        : "https://newsapi.org"
+            devUrl          : "https://newsapi.org",
+            prodUrl         : "https://newsapi.org",
+
+            devUrlWebSocket : "", // "ws://${hostName}:${port}",
+            prodUrlWebSocket: "" // "ws://${hostName}:${port}"
     ]
 
     domainConfig = [

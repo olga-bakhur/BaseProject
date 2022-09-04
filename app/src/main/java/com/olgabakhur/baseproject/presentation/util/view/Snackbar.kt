@@ -6,8 +6,7 @@ import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
 import com.google.android.material.snackbar.Snackbar
 
-
-// Simple Snackbar
+/* Simple Snackbar */
 fun showSnackbar(
     context: Context,
     view: View,
@@ -37,7 +36,7 @@ fun showSnackbar(
 }
 
 
-// Snackbar with action
+/* Snackbar with action */
 fun showSnackbarWithAction(
     context: Context,
     view: View,
@@ -78,7 +77,7 @@ fun showSnackbarWithAction(
     }
 }
 
-// Snackbar with a custom background
+/* Snackbar with a custom background */
 fun showSnackbarWithCustomBackground(
     context: Context,
     view: View,

@@ -25,9 +25,8 @@ sealed class ApplicationError() {
     object DatabaseOperation : ApplicationError()
 
     // Login errors
-    object InvalidEmail : ApplicationError()
-    object InvalidPassword : ApplicationError()
     object UserIsNotRegistered : ApplicationError()
+    object UserIsAlreadyRegistered : ApplicationError()
 
     fun isGenericError(): Boolean =
         when (this) {

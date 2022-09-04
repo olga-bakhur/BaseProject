@@ -1,13 +1,15 @@
 package com.olgabakhur.domain.usecases
 
 import com.olgabakhur.data.model.dto.Article
+import com.olgabakhur.data.repository.DatabaseRepository
 import com.olgabakhur.data.repository.NewsRepository
 import com.olgabakhur.data.util.result.Result
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class NewsUseCase @Inject constructor(
-    private val newsRepository: NewsRepository
+    private val newsRepository: NewsRepository,
+    private val database: DatabaseRepository
 ) {
 
     // News Api
@@ -16,11 +18,11 @@ class NewsUseCase @Inject constructor(
 
     // News database
     suspend fun insertArticle(article: Article): Result<Long> =
-        newsRepository.insertArticle(article)
+        database.insertArticle(article)
 
     suspend fun getSavedArticles(): Result<Flow<List<Article>>> =
-        newsRepository.getSavedArticles()
+        database.getSavedArticles()
 
     suspend fun deleteArticle(article: Article): Result<Int> =
-        newsRepository.deleteArticle(article)
+        database.deleteArticle(article)
 }

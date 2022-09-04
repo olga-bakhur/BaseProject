@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-// Collect when CREATED
+/* Collect when CREATED */
 fun <T> LifecycleOwner.collectWhenCreated(flow: Flow<T>, collector: suspend (T) -> Unit) {
     lifecycleScope.launch {
         repeatOnLifecycle(Lifecycle.State.CREATED) {
@@ -25,7 +25,7 @@ fun <T> LifecycleOwner.collectLatestWhenCreated(flow: Flow<T>, collector: suspen
     }
 }
 
-// Collect when STARTED
+/* Collect when STARTED  */
 fun <T> LifecycleOwner.collectWhenStarted(flow: Flow<T>, collector: suspend (T) -> Unit) {
     lifecycleScope.launch {
         repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -42,7 +42,7 @@ fun <T> LifecycleOwner.collectLatestWhenStarted(flow: Flow<T>, collector: suspen
     }
 }
 
-// Collect when RESUMED
+/* Collect when RESUMED */
 fun <T> LifecycleOwner.collectWhenResumed(flow: Flow<T>, collector: suspend (T) -> Unit) {
     lifecycleScope.launch {
         repeatOnLifecycle(Lifecycle.State.RESUMED) {

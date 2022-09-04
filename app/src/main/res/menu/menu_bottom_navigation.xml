@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.katalog.mittermeier.presentation.ui.MainActivity">
+
+    <item
+        android:id="@+id/tabFirst"
+        android:enabled="true"
+        android:icon="@drawable/ic_launcher_foreground"
+        android:title="First"/>
+    <item
+        android:id="@+id/tabSecond"
+        android:enabled="true"
+        android:icon="@drawable/ic_launcher_foreground"
+        android:title="Second"/>
+
+    <item
+        android:id="@+id/tabThird"
+        android:enabled="true"
+        android:icon="@drawable/ic_launcher_foreground"
+        android:title="Third"/>
+
+    <item
+        android:id="@+id/tabFourth"
+        android:enabled="true"
+        android:icon="@drawable/ic_launcher_foreground"
+        android:title="Fourth"/>
+</menu>

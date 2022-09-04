@@ -33,9 +33,8 @@ fun ApplicationError.message(context: Context): String =
                 is ApplicationError.DatabaseOperation -> R.string.error_database_operation
 
                 // Login errors
-                is ApplicationError.InvalidEmail -> R.string.error_invalid_email
-                is ApplicationError.InvalidPassword -> R.string.error_invalid_password
                 is ApplicationError.UserIsNotRegistered -> R.string.error_user_is_not_registered
+                is ApplicationError.UserIsAlreadyRegistered -> R.string.error_user_is_already_registered
                 else -> R.string.error_generic
             }
         )

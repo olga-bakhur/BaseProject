@@ -1,6 +1,6 @@
 package com.olgabakhur.domain.usecases
 
-import com.olgabakhur.data.repositoryimpl.NetworkConnectivityManager
+import com.olgabakhur.data.util.safeCall.NetworkConnectivityManager
 import com.olgabakhur.data.util.error.ApplicationError
 import com.olgabakhur.data.util.safeCall.SafeApiCall
 import kotlinx.coroutines.flow.Flow

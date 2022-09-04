@@ -8,7 +8,7 @@ import com.olgabakhur.baseproject.R
 
 object Dialog {
 
-    // "Ok" dialog with title
+    /* "Ok" dialog with title */
     fun showOkDialogWithTitle(
         context: Context,
         @StringRes title: Int,
@@ -77,7 +77,7 @@ object Dialog {
             .show()
     }
 
-    // "Ok" dialog without title
+    /* "Ok" dialog without title */
     fun showOkDialogNoTitle(
         context: Context,
         @StringRes message: Int,
@@ -108,7 +108,7 @@ object Dialog {
             .show()
     }
 
-    // "Ok / Cancel" dialog with title
+    /* "Ok / Cancel" dialog with title */
     fun showOkCancelDialogWithTitle(
         context: Context,
         @StringRes title: Int,

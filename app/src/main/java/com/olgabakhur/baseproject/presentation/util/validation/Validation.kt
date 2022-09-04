@@ -1,4 +1,4 @@
-package com.olgabakhur.domain.util.validation
+package com.olgabakhur.baseproject.presentation.util.validation
 
 /* Email */
 fun isEmailValid(email: String): Boolean {

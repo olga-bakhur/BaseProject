@@ -7,10 +7,21 @@
     <dimen name="dimen_12">12dp</dimen>
     <dimen name="dimen_16">16dp</dimen>
 
-    <!--    Test-->
-    <dimen name="header_text">21dp</dimen>
-    <dimen name="body_text">17dp</dimen>
-    <dimen name="meta_data_text">15dp</dimen>
+    <!--    Text-->
+    <dimen name="header_small_text">17sp</dimen>
+    <dimen name="header_medium_text">36sp</dimen>
+    <dimen name="header_large_text">50sp</dimen>
+
+    <dimen name="body_small_text">15sp</dimen>
+    <dimen name="body_medium_text">17sp</dimen>
+    <dimen name="body_large_text">21sp</dimen>
+
+    <dimen name="subtitle_small">13sp</dimen>
+    <dimen name="subtitle_medium">15sp</dimen>
+    <dimen name="subtitle_large">17sp</dimen>
+
+    <!--    Button. Primary-->
+    <dimen name="button_primary_text">17sp</dimen>
 
     <!--    Dialog-->
     <dimen name="dialog_corner_radius">10dp</dimen>
@@ -22,4 +33,11 @@
     <!--    Clickable icon-->
     <dimen name="clickable_icon_diameter_small">40dp</dimen>
     <dimen name="clickable_icon_content_size_small">24dp</dimen>
+
+    <!--    Full screen elements width-->
+    <dimen name="max_width_full_screen">650dp</dimen>
+    <dimen name="max_width_half_screen">321dp</dimen>
+
+    <dimen name="margin_outer">16dp</dimen>
+    <dimen name="margin_inner">8dp</dimen>
 </resources>

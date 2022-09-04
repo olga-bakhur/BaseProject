@@ -1,4 +1,4 @@
-package com.olgabakhur.domain.util.validation
+package com.olgabakhur.baseproject.presentation.util.validation
 
 const val EMAIL =
     "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +

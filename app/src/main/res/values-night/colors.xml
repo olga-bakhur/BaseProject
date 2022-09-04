@@ -1,29 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#356859</color>
-    <color name="colorSecondary">#FD5523</color>
+    <!--    Theme colors-->
+    <color name="colorPrimary">#3188DB</color>
+    <color name="colorSecondary">#0097A7</color>
 
-    <color name="colorPrimaryVariant">#214037</color>
-    <color name="colorSecondaryVariant">#BD3D17</color>
+    <color name="colorPrimaryVariant">#2A73B8</color>
+    <color name="colorSecondaryVariant">#00838F</color>
 
-    <color name="colorSurface">#EFEBE9</color>
-    <color name="colorBackground">#FFFBE6</color>
+    <color name="colorBackground">#121212</color>
+    <color name="colorSurface">#262629</color>
+    <color name="colorSurfaceDisabled">#19191B</color>
 
-    <color name="colorError">#7E0303</color>
+    <color name="colorError">#CF6679</color>
 
-    <color name="colorOnPrimary">#EFEBE9</color>
-    <color name="colorOnSecondary">#EFEBE9</color>
-    <color name="colorOnSurface">#356859</color>
-    <color name="colorOnBackground">#356859</color>
-    <color name="colorOnError">#FFFFFF</color>
+    <color name="colorOnPrimary">#000000</color>
+    <color name="colorOnSecondary">#000000</color>
+    <color name="colorOnBackground">#FFFFFF</color>
+    <color name="colorOnSurface">#FFFFFF</color>
+    <color name="colorOnError">#000000</color>
 
-    <color name="colorRipple">#66FFFFFF</color>
+    <!--    Alpha-->
+    <color name="colorPrimaryAlpha50">#803188DB</color>
 
-    <!--    News viewHolder-->
+    <!--    Button. Primary-->
+    <color name="colorRipplePrimary">#66FFFFFF</color>
+    <color name="colorRippleSecondary">#66000000</color>
+
+    <!--    Vector images-->
     <color name="primaryNeutral">#FFFFFF</color>
-    <color name="subsidiaryNeutral">#A3A3A3</color>
+    <color name="secondaryNeutral">#33FFFFFF</color>
 
-    <color name="headerText">#214037</color>
-    <color name="bodyText">#B3214037</color>
-    <color name="metaDataText">#80214037</color>
+    <color name="headerText">#FFFFFF</color>
+    <color name="bodyText">#B3FFFFFF</color>
+    <color name="subtitleText">#80FFFFFF</color>
 </resources>

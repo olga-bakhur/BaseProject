@@ -1,5 +1,7 @@
 package com.olgabakhur.baseproject.presentation.ui
 
+import android.annotation.SuppressLint
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -13,6 +15,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.olgabakhur.baseproject.App
 import com.olgabakhur.baseproject.R
@@ -20,9 +23,12 @@ import com.olgabakhur.baseproject.databinding.ActivityMainBinding
 import com.olgabakhur.baseproject.presentation.extensions.collectWhenCreated
 import com.olgabakhur.baseproject.presentation.extensions.getCurrentDestinationId
 import com.olgabakhur.baseproject.presentation.extensions.message
+import com.olgabakhur.baseproject.presentation.util.device.DeviceManager
+import com.olgabakhur.baseproject.presentation.util.device.DeviceType
 import com.olgabakhur.baseproject.presentation.util.view.Dialog.showOkDialogWithTitle
+import com.olgabakhur.baseproject.presentation.util.view.gone
+import com.olgabakhur.baseproject.presentation.util.view.visible
 import com.olgabakhur.baseproject.presentation.util.viewmodel.viewModel
-import com.olgabakhur.data.repositoryimpl.NetworkConnectivityManager
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
@@ -31,38 +37,27 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var destinationChangeListener: NavController.OnDestinationChangedListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        NetworkConnectivityManager.initConnectivityListener(this)
-
         observeViewModel()
+        setupOrientationChange()
         initNavController()
         setupToolbarNavigation()
+        setupAppBarsVisibility()
         setupToolbarMenu()
         setupSystemBackButton()
     }
 
-    private fun setupToolbarMenu() {
-        addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                /* Menu items which are visible around the whole App. */
-                menuInflater.inflate(R.menu.menu_toolbar, menu)
-            }
+    override fun onStart() {
+        super.onStart()
+        navController.addOnDestinationChangedListener(destinationChangeListener)
+    }
 
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean =
-                when (menuItem.itemId) {
-                    R.id.actionSignOut -> {
-                        viewModel.signOutFake {
-                            navController.popBackStack(R.id.signInFragment, false)
-                        }
-                        true
-                    }
-
-                    else -> false
-                }
-
-        }, this)
+    override fun onStop() {
+        super.onStop()
+        navController.removeOnDestinationChangedListener(destinationChangeListener)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -78,6 +73,15 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                 R.string.general_error,
                 error.message(this)
             )
+        }
+    }
+
+    @SuppressLint("SourceLockedOrientationActivity")
+    private fun setupOrientationChange() {
+        when (DeviceManager.getDeviceType()) {
+            DeviceType.Phone -> requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+            DeviceType.TV -> requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+            else -> ActivityInfo.SCREEN_ORIENTATION_USER /* allow screen rotation for Tablets */
         }
     }
 
@@ -98,6 +102,59 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             fallbackOnNavigateUpListener = ::onSupportNavigateUp
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
+        binding.bottomNavigationView.setupWithNavController(navController)
+    }
+
+    private fun setupAppBarsVisibility() {
+        destinationChangeListener =
+            NavController.OnDestinationChangedListener { _, destination, _ ->
+                setupToolbarVisibility(destination.id)
+                setupBottomNavigationVisibility(destination.id)
+            }
+    }
+
+    private fun setupToolbarVisibility(destinationId: Int) {
+        when (destinationId) {
+            R.id.signInFragment -> supportActionBar?.hide()
+            else -> supportActionBar?.show()
+        }
+    }
+
+    private fun setupBottomNavigationVisibility(destinationId: Int) {
+        when (destinationId) {
+            R.id.signInFragment -> binding.bottomNavigationView.gone()
+            else -> binding.bottomNavigationView.visible()
+        }
+    }
+
+    private fun setupToolbarMenu() {
+        addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                /* Menu items which are visible around the whole App. */
+                menuInflater.inflate(R.menu.menu_toolbar, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                val destination = navController.findDestination(menuItem.itemId)
+
+                return if (destination != null) {
+                    navController.navigate(destination.id)
+                    true
+                } else {
+                    /* Other actions */
+                    when (menuItem.itemId) {
+                        R.id.actionSignOut -> {
+                            viewModel.signOutFake {
+                                navController.popBackStack(R.id.signInFragment, false)
+                            }
+                            true
+                        }
+
+                        else -> false
+                    }
+                }
+            }
+        }, this)
     }
 
     private fun setupSystemBackButton() {

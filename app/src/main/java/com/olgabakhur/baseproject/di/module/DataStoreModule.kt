@@ -15,7 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import javax.inject.Singleton
 
-private const val USER_PREFERENCES = "user_preferences"
+private const val APP_PREFERENCES = "app_preferences"
 
 @Module
 object DataStoreModule {
@@ -28,9 +28,9 @@ object DataStoreModule {
                 produceNewData = { emptyPreferences() }
             ),
             /* Add "migrations" parameter in case if migration from SharedPreferences is required */
-            migrations = listOf(SharedPreferencesMigration(app, USER_PREFERENCES)),
+            migrations = listOf(SharedPreferencesMigration(app, APP_PREFERENCES)),
             scope = CoroutineScope(Dispatchers.IO + SupervisorJob()),
-            produceFile = { app.preferencesDataStoreFile(USER_PREFERENCES) }
+            produceFile = { app.preferencesDataStoreFile(APP_PREFERENCES) }
         )
     }
 }

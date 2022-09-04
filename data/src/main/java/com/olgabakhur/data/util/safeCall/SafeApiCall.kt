@@ -1,6 +1,5 @@
 package com.olgabakhur.data.util.safeCall
 
-import com.olgabakhur.data.repositoryimpl.NetworkConnectivityManager
 import com.olgabakhur.data.util.error.ApplicationError
 import com.olgabakhur.data.util.result.Result
 import kotlinx.coroutines.flow.MutableSharedFlow

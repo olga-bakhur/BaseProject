@@ -52,7 +52,7 @@ abstract class BaseBottomSheet(
         return dialog
     }
 
-    fun setupSize(bottomSheet: View) {
+    private fun setupSize(bottomSheet: View) {
         val layoutParams = bottomSheet.layoutParams
         layoutParams.height = WindowManager.LayoutParams.MATCH_PARENT
         if (resources.configuration.orientation == ORIENTATION_LANDSCAPE) {

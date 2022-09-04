@@ -1,46 +1,32 @@
 package com.olgabakhur.domain.usecases
 
 import com.olgabakhur.data.model.dto.UserCredentials
+import com.olgabakhur.data.repository.ConnectivityRepository
 import com.olgabakhur.data.repository.NewsRepository
-import com.olgabakhur.data.repository.UserPreferencesRepository
+import com.olgabakhur.data.repository.PreferencesRepository
 import com.olgabakhur.data.util.error.ApplicationError
 import com.olgabakhur.data.util.result.Result
 import com.olgabakhur.data.util.result.onError
 import com.olgabakhur.data.util.result.onSuccess
-import com.olgabakhur.domain.util.validation.isEmailValid
-import com.olgabakhur.domain.util.validation.isPasswordValid
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class AuthUseCase @Inject constructor(
     private val newsRepository: NewsRepository,
-    private val userPreferencesRepository: UserPreferencesRepository
+    private val connectivity: ConnectivityRepository,
+    private val preferences: PreferencesRepository
 ) {
 
-    fun getIsUserLoggedIn(): Flow<Boolean> = userPreferencesRepository.getIsUserLoggedIn()
-
-    suspend fun setIsUserLoggedIn(isLoggedIn: Boolean) =
-        userPreferencesRepository.setIsUserLoggedIn(isLoggedIn)
-
-    /* Assume fields are not empty*/
     suspend fun signIn(email: String, password: String): Result<UserCredentials> {
-        if (!isEmailValid(email)) {
-            return Result.Error(ApplicationError.InvalidEmail)
-        }
-
-        if (!isPasswordValid(password)) {
-            return Result.Error(ApplicationError.InvalidPassword)
-        }
-
         val result = newsRepository.signIn(email, password)
 
         return result
             .onSuccess {
-                setIsUserLoggedIn(true)
+                doOnLogIn()
                 return result
             }
             .onError { appError ->
-                setIsUserLoggedIn(false)
+                doOnLogOut()
 
                 val loginError = when (appError) {
                     is ApplicationError.Unauthorized -> ApplicationError.UserIsNotRegistered
@@ -50,5 +36,22 @@ class AuthUseCase @Inject constructor(
 
                 return Result.Error(loginError)
             }
+    }
+
+    fun getIsUserLoggedIn(): Flow<Boolean> = preferences.getIsUserLoggedIn()
+
+    suspend fun setIsUserLoggedIn(isLoggedIn: Boolean) =
+        preferences.setIsUserLoggedIn(isLoggedIn)
+
+    private suspend fun doOnLogIn() {
+        preferences.setIsUserLoggedIn(true)
+        // save user credentials
+        // connectivity.initWebSocketConnection()
+    }
+
+    private suspend fun doOnLogOut() {
+        preferences.setIsUserLoggedIn(false)
+        // delete user credentials
+        // connectivity.closeWebSocketConnection()
     }
 }

@@ -22,6 +22,7 @@ android {
             minifyEnabled false
 
             buildConfigField("String", "BASE_URL", '"' + dataConfig.devUrl + '"')
+            buildConfigField("String", "BASE_URL_WEB_SOCKET", '"' + dataConfig.devUrlWebSocket + '"')
         }
 
         release {
@@ -29,6 +30,7 @@ android {
             minifyEnabled true
 
             buildConfigField("String", "BASE_URL", '"' + dataConfig.devUrl + '"')
+            buildConfigField("String", "BASE_URL_WEB_SOCKET", '"' + dataConfig.prodUrlWebSocket + '"')
         }
     }
 

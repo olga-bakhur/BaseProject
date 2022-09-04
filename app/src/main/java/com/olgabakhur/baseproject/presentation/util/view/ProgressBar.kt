@@ -8,6 +8,7 @@ import androidx.constraintlayout.widget.ConstraintSet
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.olgabakhur.baseproject.R
 
+/* Only for ConstraintLayout */
 fun createProgressBar(context: Context, rootView: View): CircularProgressIndicator {
     val progressBar = CircularProgressIndicator(context).apply {
         isIndeterminate = true

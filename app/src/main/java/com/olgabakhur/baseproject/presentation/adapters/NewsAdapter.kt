@@ -100,7 +100,7 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
 
         private fun setupPublishedAt(article: Article) {
             binding.tvPublishedAt.apply {
-                text = article.publishedAt
+                text = article.publishDate
                 isSelected = true
             }
         }
