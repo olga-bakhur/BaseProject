@@ -1,5 +1,6 @@
 package com.olgabakhur.data.util.safeCall
 
+import com.olgabakhur.data.repositoryimpl.NetworkConnectivityManager
 import com.olgabakhur.data.util.error.ApplicationError
 import com.olgabakhur.data.util.result.Result
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -16,6 +17,13 @@ object SafeApiCall {
     val networkErrorsFlow = _networkErrorsFlow.asSharedFlow()
 
     suspend fun <T> doSafeApiCall(apiCall: suspend () -> T): Result<T> {
+
+        val isConnected = NetworkConnectivityManager.connectivityFlow.value
+
+        if (!isConnected) {
+            return Result.Error(ApplicationError.NoInternetConnection)
+        }
+
         return try {
             Result.Success(apiCall.invoke())
         } catch (throwable: Throwable) {

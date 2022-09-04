@@ -22,6 +22,7 @@ import com.olgabakhur.baseproject.presentation.extensions.getCurrentDestinationI
 import com.olgabakhur.baseproject.presentation.extensions.message
 import com.olgabakhur.baseproject.presentation.util.view.Dialog.showOkDialogWithTitle
 import com.olgabakhur.baseproject.presentation.util.viewmodel.viewModel
+import com.olgabakhur.data.repositoryimpl.NetworkConnectivityManager
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
@@ -33,6 +34,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        NetworkConnectivityManager.initConnectivityListener(this)
+
         observeViewModel()
         initNavController()
         setupToolbarNavigation()

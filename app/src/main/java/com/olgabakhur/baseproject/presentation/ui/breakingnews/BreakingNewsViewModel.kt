@@ -51,12 +51,7 @@ class BreakingNewsViewModel @Inject constructor(
                     is Result.Success -> {
                         when (resultFlowListSaved) {
                             is Result.Success -> {
-                                val savedFlow = resultFlowListSaved.value
-                                var listSavedArticles: List<Article>
-
-                                runBlocking(Dispatchers.Default) {
-                                    listSavedArticles = savedFlow.first()
-                                }
+                                val listSavedArticles = resultFlowListSaved.value.first()
 
                                 val newListBreaking =
                                     resultListBreaking.value.map { articleBreaking ->

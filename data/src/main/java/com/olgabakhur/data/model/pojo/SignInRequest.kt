@@ -1,8 +1,6 @@
 package com.olgabakhur.data.model.pojo
 
-import com.google.gson.annotations.SerializedName
-
 data class SignInRequest(
-    @SerializedName("email") val email: String,
-    @SerializedName("password") val password: String
+    val email: String,
+    val password: String
 )

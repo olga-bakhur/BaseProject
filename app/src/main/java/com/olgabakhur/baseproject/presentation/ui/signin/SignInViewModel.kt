@@ -24,10 +24,8 @@ class SignInViewModel @Inject constructor(
 
     /* Fake implementation */
     fun signInFake(navigateNext: () -> Unit) {
-        viewModelScope.launch {
-            launch(Dispatchers.IO) {
-                authInteractor.setIsUserLoggedIn(true)
-            }.join()
+        viewModelScope.launch(Dispatchers.IO) {
+            authInteractor.setIsUserLoggedIn(true)
 
             withContext(Dispatchers.Main) {
                 navigateNext()
