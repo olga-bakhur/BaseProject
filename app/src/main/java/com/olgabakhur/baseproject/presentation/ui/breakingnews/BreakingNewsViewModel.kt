@@ -1,4 +1,4 @@
-package com.olgabakhur.baseproject.presentation.ui.breakingNews
+package com.olgabakhur.baseproject.presentation.ui.breakingnews
 
 import androidx.lifecycle.viewModelScope
 import com.olgabakhur.baseproject.presentation.base.BaseViewModel

@@ -3,7 +3,7 @@ package com.olgabakhur.baseproject.presentation.base
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.olgabakhur.baseproject.presentation.util.liveData.Event
+import com.olgabakhur.baseproject.presentation.util.livedata.Event
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.Job

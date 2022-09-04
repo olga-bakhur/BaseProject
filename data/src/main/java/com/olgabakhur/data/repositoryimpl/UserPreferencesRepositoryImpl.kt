@@ -1,4 +1,4 @@
-package com.olgabakhur.data.repositoryImpl
+package com.olgabakhur.data.repositoryimpl
 
 import android.util.Log
 import androidx.datastore.core.DataStore
@@ -7,7 +7,7 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
 import com.olgabakhur.data.repository.UserPreferencesRepository
-import com.olgabakhur.data.repositoryImpl.UserPreferencesRepositoryImpl.PreferencesKeys.IS_USER_LOGGED_IN
+import com.olgabakhur.data.repositoryimpl.UserPreferencesRepositoryImpl.PreferencesKeys.IS_USER_LOGGED_IN
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map

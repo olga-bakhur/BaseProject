@@ -4,9 +4,9 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import com.olgabakhur.data.repository.NewsRepository
 import com.olgabakhur.data.repository.UserPreferencesRepository
-import com.olgabakhur.data.repositoryImpl.NewsRepositoryImpl
-import com.olgabakhur.data.repositoryImpl.UserPreferencesRepositoryImpl
-import com.olgabakhur.data.source.local.newsDatabase.ArticleDao
+import com.olgabakhur.data.repositoryimpl.NewsRepositoryImpl
+import com.olgabakhur.data.repositoryimpl.UserPreferencesRepositoryImpl
+import com.olgabakhur.data.source.local.newsdatabase.ArticleDao
 import com.olgabakhur.data.source.remote.NewsApi
 import dagger.Module
 import dagger.Provides

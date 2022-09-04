@@ -2,7 +2,7 @@ package com.olgabakhur.domain.interactors
 
 import com.olgabakhur.data.model.dto.UserCredentials
 import com.olgabakhur.data.util.result.Result
-import com.olgabakhur.domain.useCases.AuthUseCase
+import com.olgabakhur.domain.usecases.AuthUseCase
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

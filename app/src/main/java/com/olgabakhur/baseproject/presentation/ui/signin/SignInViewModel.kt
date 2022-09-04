@@ -1,4 +1,4 @@
-package com.olgabakhur.baseproject.presentation.ui.signIn
+package com.olgabakhur.baseproject.presentation.ui.signin
 
 import androidx.lifecycle.viewModelScope
 import com.olgabakhur.baseproject.presentation.base.BaseViewModel

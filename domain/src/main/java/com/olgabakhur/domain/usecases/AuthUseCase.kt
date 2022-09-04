@@ -1,4 +1,4 @@
-package com.olgabakhur.domain.useCases
+package com.olgabakhur.domain.usecases
 
 import com.olgabakhur.data.model.dto.UserCredentials
 import com.olgabakhur.data.repository.NewsRepository

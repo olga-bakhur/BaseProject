@@ -1,4 +1,4 @@
-package com.olgabakhur.data.source.local.newsDatabase
+package com.olgabakhur.data.source.local.newsdatabase
 
 import android.content.Context
 import androidx.room.Database

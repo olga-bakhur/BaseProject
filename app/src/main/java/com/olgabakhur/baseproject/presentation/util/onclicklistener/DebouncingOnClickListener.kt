@@ -1,4 +1,4 @@
-package com.olgabakhur.baseproject.presentation.util.onClickListener
+package com.olgabakhur.baseproject.presentation.util.onclicklistener
 
 import android.view.View
 

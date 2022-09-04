@@ -21,7 +21,7 @@ import com.olgabakhur.baseproject.presentation.extensions.collectWhenCreated
 import com.olgabakhur.baseproject.presentation.extensions.getCurrentDestinationId
 import com.olgabakhur.baseproject.presentation.extensions.message
 import com.olgabakhur.baseproject.presentation.util.view.Dialog.showOkDialogWithTitle
-import com.olgabakhur.baseproject.presentation.util.viewModel.viewModel
+import com.olgabakhur.baseproject.presentation.util.viewmodel.viewModel
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 

@@ -1,4 +1,4 @@
-package com.olgabakhur.baseproject.presentation.ui.breakingNews
+package com.olgabakhur.baseproject.presentation.ui.breakingnews
 
 import android.content.Context
 import android.os.Bundle
@@ -23,7 +23,7 @@ import com.olgabakhur.baseproject.presentation.extensions.message
 import com.olgabakhur.baseproject.presentation.ui.MainActivity
 import com.olgabakhur.baseproject.presentation.util.view.Dialog
 import com.olgabakhur.baseproject.presentation.util.view.showSnackbar
-import com.olgabakhur.baseproject.presentation.util.viewModel.viewModel
+import com.olgabakhur.baseproject.presentation.util.viewmodel.viewModel
 import com.olgabakhur.data.util.result.Result
 
 class BreakingNewsFragment : BaseFragment(R.layout.fragment_breaking_news) {

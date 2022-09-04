@@ -1,6 +1,6 @@
 @file:Suppress("UNCHECKED_CAST")
 
-package com.olgabakhur.baseproject.presentation.util.viewModel
+package com.olgabakhur.baseproject.presentation.util.viewmodel
 
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment

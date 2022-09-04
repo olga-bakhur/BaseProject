@@ -1,10 +1,10 @@
-package com.olgabakhur.data.repositoryImpl
+package com.olgabakhur.data.repositoryimpl
 
 import com.olgabakhur.data.model.dto.Article
 import com.olgabakhur.data.model.dto.UserCredentials
 import com.olgabakhur.data.model.pojo.SignInRequest
 import com.olgabakhur.data.repository.NewsRepository
-import com.olgabakhur.data.source.local.newsDatabase.ArticleDao
+import com.olgabakhur.data.source.local.newsdatabase.ArticleDao
 import com.olgabakhur.data.source.remote.NewsApi
 import com.olgabakhur.data.util.mappers.news.toArticle
 import com.olgabakhur.data.util.mappers.news.toArticleEntity

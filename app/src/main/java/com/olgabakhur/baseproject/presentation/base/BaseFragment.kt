@@ -17,7 +17,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.progressindicator.CircularProgressIndicator
-import com.olgabakhur.baseproject.presentation.util.liveData.EventObserver
+import com.olgabakhur.baseproject.presentation.util.livedata.EventObserver
 import com.olgabakhur.baseproject.presentation.util.view.createProgressBar
 import com.olgabakhur.baseproject.presentation.util.view.hideKeyboard
 

@@ -1,4 +1,4 @@
-package com.olgabakhur.baseproject.presentation.util.recyclerView
+package com.olgabakhur.baseproject.presentation.util.recyclerview
 
 import android.graphics.Rect
 import android.view.View

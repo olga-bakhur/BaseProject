@@ -2,8 +2,8 @@ package com.olgabakhur.baseproject.di.module
 
 import android.app.Application
 import androidx.room.Room
-import com.olgabakhur.data.source.local.newsDatabase.ArticleDao
-import com.olgabakhur.data.source.local.newsDatabase.ArticleDatabase
+import com.olgabakhur.data.source.local.newsdatabase.ArticleDao
+import com.olgabakhur.data.source.local.newsdatabase.ArticleDatabase
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

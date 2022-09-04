@@ -12,7 +12,7 @@ import com.bumptech.glide.Glide
 import com.olgabakhur.baseproject.R
 import com.olgabakhur.baseproject.databinding.ViewHolderArticleBinding
 import com.olgabakhur.baseproject.presentation.extensions.setTextOrNoInfoMessage
-import com.olgabakhur.baseproject.presentation.util.onClickListener.setOnCLick
+import com.olgabakhur.baseproject.presentation.util.onclicklistener.setOnCLick
 import com.olgabakhur.baseproject.presentation.util.transitions.createFadeTransition
 import com.olgabakhur.data.model.dto.Article
 

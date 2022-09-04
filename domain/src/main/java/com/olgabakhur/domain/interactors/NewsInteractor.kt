@@ -2,7 +2,7 @@ package com.olgabakhur.domain.interactors
 
 import com.olgabakhur.data.model.dto.Article
 import com.olgabakhur.data.util.result.Result
-import com.olgabakhur.domain.useCases.NewsUseCase
+import com.olgabakhur.domain.usecases.NewsUseCase
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
