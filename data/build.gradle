@@ -21,16 +21,14 @@ android {
             debuggable true
             minifyEnabled false
 
-            buildConfigField("String", "BASE_URL", '"' + dataConfig.devUrl + '"')
-            buildConfigField("String", "BASE_URL_WEB_SOCKET", '"' + dataConfig.devUrlWebSocket + '"')
+            buildConfigField("String", "BASE_URL", '"' + dataConfig.baseUrl + '"')
         }
 
         release {
             debuggable false
             minifyEnabled true
 
-            buildConfigField("String", "BASE_URL", '"' + dataConfig.devUrl + '"')
-            buildConfigField("String", "BASE_URL_WEB_SOCKET", '"' + dataConfig.prodUrlWebSocket + '"')
+            buildConfigField("String", "BASE_URL", '"' + dataConfig.baseUrl + '"')
         }
     }
 
@@ -45,6 +43,7 @@ android {
 
 dependencies {
     // Kotlin
+    implementation globalDependencies.androidXCoreKtx
     implementation globalDependencies.kotlinStdLib
     implementation globalDependencies.kotlinSerialization
     implementation globalDependencies.lifecycleLiveDataKtx
@@ -54,8 +53,8 @@ dependencies {
     implementation globalDependencies.coroutinesAndroid
 
     // Lifecycle Coroutines
-    implementation appDependencies.llifecycleCoroutinesKtxViewModel
-    implementation appDependencies.llifecycleCoroutinesKtxRuntime
+    implementation appDependencies.lifecycleCoroutinesKtxViewModel
+    implementation appDependencies.lifecycleCoroutinesKtxRuntime
 
     // Lifecycle LiveData
     implementation globalDependencies.lifecycleLiveDataKtx

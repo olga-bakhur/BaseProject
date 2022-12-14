@@ -1,78 +1,73 @@
 def libraryVersions = [
         // Plugins
-        androidGradlePlugin        : "7.1.0",
-        navigation                 : "2.5.1",
+        androidGradlePlugin        : '7.3.0',
+        navigation                 : '2.5.3',
 
         // Kotlin
-        kotlin                     : "1.6.21",
-        ktxSerialization           : "1.3.3",
+        kotlin                     : '1.7.20',
+        ktxSerialization           : '1.4.1',
+        androidXCoreKtx            : '1.9.0',
 
         // Room
-        room                       : "2.3.0",
+        room                       : '2.4.3',
 
         // Coroutines
-        coroutinesCore             : "1.6.1",
-        coroutinesAndroid          : "1.6.3",
+        coroutinesCore             : '1.6.4',
+        coroutinesAndroid          : '1.6.4',
 
         // Retrofit
-        retrofit                   : "2.9.0",
-        gson                       : "2.9.0",
+        retrofit                   : '2.9.0',
+        gson                       : '2.10',
 
         // OkHttp
-        okHttp                     : "4.9.3",
+        okHttp                     : '5.0.0-alpha.10',
 
         // Dagger
-        dagger                     : "2.42",
+        dagger                     : '2.44.2',
 
         // AppCompat
-        appCompat                  : "1.4.2",
+        appCompat                  : '1.5.1',
 
         // Material design
-        materialDesign             : "1.6.1",
+        materialDesign             : '1.7.0',
 
         // ConstraintLayout
-        constraintLayout           : "2.1.4",
-
-        // SwipeRefresh layout
-        swipeRefreshLayout         : "1.1.0",
+        constraintLayout           : '2.1.4',
 
         // Glide
-        glide                      : "4.13.2",
-        glideCompiler              : "4.11.0",
+        glide                      : '4.14.2',
+        glideCompiler              : '4.14.2',
 
         // Lifecycle Coroutines
-        lifecycleCoroutinesKtx     : "2.5.1",
+        lifecycleCoroutinesKtx     : '2.5.1',
 
         // Lifecycle LiveData
-        lifecycleLiveDataKtx       : "2.5.0",
+        lifecycleLiveDataKtx       : '2.5.1',
 
         // Activity
-        ktxActivity                : "1.5.0",
+        ktxActivity                : '1.6.1',
 
         // Fragment
-        ktxFragment                : "1.5.0",
+        ktxFragment                : '1.5.5',
 
         // ViewBinding delegate
-        viewBindingPropertyDelegate: "1.5.6",
+        viewBindingPropertyDelegate: '1.5.6',
 
         // Preferences DataStore
-        preferencesDataStore       : "1.0.0",
-
-        // Firebase
-        firebaseBom                : "30.3.2",
+        preferencesDataStore       : '1.0.0',
 
         // Tests
-        junit                      : "4.13.2",
-        androidxTestJunit          : "1.1.3",
-        espresso                   : "3.4.0"
+        junit                      : '4.13.2',
+        androidxTestJunit          : '1.1.3',
+        espresso                   : '3.5.0'
 ]
 
 ext {
     globalDependencies = [
             // Modules
-            layerApp                 : project(":app"),
-            layerData                : project(":data"),
-            layerDomain              : project(":domain"),
+            moduleApp                : project(":app"),
+            moduleData               : project(":data"),
+            moduleDomain             : project(":domain"),
 
             // Plugins
             androidGradlePlugin      : "com.android.tools.build:gradle:${libraryVersions.androidGradlePlugin}",
@@ -81,7 +76,7 @@ ext {
             kotlinSerializationPlugin: "org.jetbrains.kotlin:kotlin-serialization:${libraryVersions.kotlin}",
 
             // Kotlin
-            coreKtx                  : "androidx.core:core-ktx:${libraryVersions.kotlin}",
+            androidXCoreKtx          : "androidx.core:core-ktx:${libraryVersions.androidXCoreKtx}",
             kotlinStdLib             : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${libraryVersions.kotlin}",
             kotlinSerialization      : "org.jetbrains.kotlinx:kotlinx-serialization-json:${libraryVersions.ktxSerialization}",
 
@@ -107,42 +102,34 @@ ext {
 
     appDependencies = [
             // AppCompat
-            appCompat                       : "androidx.appcompat:appcompat:${libraryVersions.appCompat}",
+            appCompat                      : "androidx.appcompat:appcompat:${libraryVersions.appCompat}",
 
             // Material design
-            materialDesign                  : "com.google.android.material:material:${libraryVersions.materialDesign}",
+            materialDesign                 : "com.google.android.material:material:${libraryVersions.materialDesign}",
 
             // ConstraintLayout
-            constraintLayout                : "androidx.constraintlayout:constraintlayout:${libraryVersions.constraintLayout}",
-
-            // SwipeRefresh layout
-            swipeRefreshLayout              : "androidx.swiperefreshlayout:swiperefreshlayout:${libraryVersions.swipeRefreshLayout}",
+            constraintLayout               : "androidx.constraintlayout:constraintlayout:${libraryVersions.constraintLayout}",
 
             // Glide
-            glide                           : "com.github.bumptech.glide:glide:${libraryVersions.glide}",
-            glideCompiler                   : "com.github.bumptech.glide:compiler:${libraryVersions.glideCompiler}",
+            glide                          : "com.github.bumptech.glide:glide:${libraryVersions.glide}",
+            glideCompiler                  : "com.github.bumptech.glide:compiler:${libraryVersions.glideCompiler}",
 
             // Navigation
-            navigationFragmentKtx           : "androidx.navigation:navigation-fragment-ktx:${libraryVersions.navigation}",
-            navigationUiKtx                 : "androidx.navigation:navigation-ui-ktx:${libraryVersions.navigation}",
+            navigationFragmentKtx          : "androidx.navigation:navigation-fragment-ktx:${libraryVersions.navigation}",
+            navigationUiKtx                : "androidx.navigation:navigation-ui-ktx:${libraryVersions.navigation}",
 
             // Lifecycle Coroutines
-            llifecycleCoroutinesKtxViewModel: "androidx.lifecycle:lifecycle-viewmodel-ktx:${libraryVersions.lifecycleCoroutinesKtx}",
-            llifecycleCoroutinesKtxRuntime  : "androidx.lifecycle:lifecycle-runtime-ktx:${libraryVersions.lifecycleCoroutinesKtx}",
+            lifecycleCoroutinesKtxViewModel: "androidx.lifecycle:lifecycle-viewmodel-ktx:${libraryVersions.lifecycleCoroutinesKtx}",
+            lifecycleCoroutinesKtxRuntime  : "androidx.lifecycle:lifecycle-runtime-ktx:${libraryVersions.lifecycleCoroutinesKtx}",
 
             // Activity
-            activityKtx                     : "androidx.activity:activity-ktx:${libraryVersions.ktxActivity}",
+            activityKtx                    : "androidx.activity:activity-ktx:${libraryVersions.ktxActivity}",
 
             // Fragment
-            fragmentKtx                     : "androidx.fragment:fragment-ktx:${libraryVersions.ktxFragment}",
+            fragmentKtx                    : "androidx.fragment:fragment-ktx:${libraryVersions.ktxFragment}",
 
             // ViewBinding delegate
-            viewBindingPropertyDelegate     : "com.github.kirich1409:viewbindingpropertydelegate-noreflection:${libraryVersions.viewBindingPropertyDelegate}",
-
-            // Firebase
-//            firebaseBom                     : "com.google.firebase:firebase-bom:${libraryVersions.firebaseBom}",
-//            crashlytics                     : "com.google.firebase:firebase-crashlytics-ktx",
-//            analytics                       : "com.google.firebase:firebase-analytics-ktx"
+            viewBindingPropertyDelegate    : "com.github.kirich1409:viewbindingpropertydelegate-noreflection:${libraryVersions.viewBindingPropertyDelegate}"
     ]
 
     dataDependencies = [

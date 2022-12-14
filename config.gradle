@@ -5,9 +5,9 @@ ext {
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
     globalConfig = [
-            compileSdkVersion: 32,
+            compileSdkVersion: 33,
             minSdkVersion    : 28,
-            targetSdkVersion : 32,
+            targetSdkVersion : 33,
             buildToolsVersion: "30.0.3"
     ]
 
@@ -26,11 +26,7 @@ ext {
     ]
 
     dataConfig = [
-            devUrl          : "https://newsapi.org",
-            prodUrl         : "https://newsapi.org",
-
-            devUrlWebSocket : "", // "ws://${hostName}:${port}",
-            prodUrlWebSocket: "" // "ws://${hostName}:${port}"
+            baseUrl: "https://newsapi.org"
     ]
 
     domainConfig = [

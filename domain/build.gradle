@@ -35,9 +35,10 @@ android {
 
 dependencies {
     // Domain layer
-    implementation globalDependencies.layerData
+    implementation globalDependencies.moduleData
 
     // Kotlin
+    implementation globalDependencies.androidXCoreKtx
     implementation globalDependencies.kotlinStdLib
     implementation globalDependencies.kotlinSerialization
     implementation globalDependencies.lifecycleLiveDataKtx

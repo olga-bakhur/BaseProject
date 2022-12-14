@@ -23,3 +23,11 @@
 -keepclassmembers class * extends androidx.datastore.preferences.protobuf.GeneratedMessageLite {
     <fields>;
 }
+
+-keep class androidx.navigation.fragment.NavHostFragment
+
+-keepclassmembers,allowobfuscation class * {
+  @com.google.gson.annotations.SerializedName <fields>;
+}
+
+-keep class com.katalog.data.model.** { *; }

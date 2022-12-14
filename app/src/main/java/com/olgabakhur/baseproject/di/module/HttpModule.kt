@@ -18,7 +18,7 @@ object HttpModule {
     @Provides
     @Named("ClientForRetrofit")
     fun provideOkHttpClient(): OkHttpClient {
-        val interceptor = HttpLoggingInterceptor()
+        val interceptor = HttpLoggingInterceptor() // TODO: add interceptor to handle timeout
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
 
         return OkHttpClient.Builder()

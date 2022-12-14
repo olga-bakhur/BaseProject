@@ -2,9 +2,7 @@ apply plugin: "com.android.application"
 apply plugin: "kotlin-android"
 apply plugin: "kotlin-kapt"
 apply plugin: "kotlinx-serialization"
-apply plugin: "androidx.navigation.safeargs"
-//apply plugin: "com.google.gms.google-services"
-//apply plugin: 'com.google.firebase.crashlytics'
+apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
     compileSdkVersion globalConfig.compileSdkVersion
@@ -36,8 +34,6 @@ android {
             debuggable true
             minifyEnabled false
             shrinkResources false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-
         }
 
         release {
@@ -65,14 +61,14 @@ android {
 
 dependencies {
     // Domain and Data modules
-    implementation globalDependencies.layerDomain
-    implementation globalDependencies.layerData
+    implementation globalDependencies.moduleDomain
+    implementation globalDependencies.moduleData
 
     // General
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     // Kotlin
-    implementation globalDependencies.coreKtx
+    implementation globalDependencies.androidXCoreKtx
     implementation globalDependencies.kotlinStdLib
     implementation globalDependencies.kotlinSerialization
     implementation globalDependencies.lifecycleLiveDataKtx
@@ -82,8 +78,8 @@ dependencies {
     implementation globalDependencies.coroutinesAndroid
 
     // Lifecycle Coroutines
-    implementation appDependencies.llifecycleCoroutinesKtxViewModel
-    implementation appDependencies.llifecycleCoroutinesKtxRuntime
+    implementation appDependencies.lifecycleCoroutinesKtxViewModel
+    implementation appDependencies.lifecycleCoroutinesKtxRuntime
 
     // Dagger
     api globalDependencies.dagger
@@ -103,8 +99,6 @@ dependencies {
     // ConstraintLayout
     implementation appDependencies.constraintLayout
 
-    implementation appDependencies.swipeRefreshLayout
-
     // Glide
     implementation appDependencies.glide
     kapt appDependencies.glideCompiler
@@ -114,8 +108,8 @@ dependencies {
     implementation appDependencies.navigationUiKtx
 
     // Lifecycle Coroutines
-    implementation appDependencies.llifecycleCoroutinesKtxViewModel
-    implementation appDependencies.llifecycleCoroutinesKtxRuntime
+    implementation appDependencies.lifecycleCoroutinesKtxViewModel
+    implementation appDependencies.lifecycleCoroutinesKtxRuntime
 
     // Lifecycle LiveData
     implementation globalDependencies.lifecycleLiveDataKtx
@@ -131,11 +125,6 @@ dependencies {
 
     // Preferences DataStore
     implementation globalDependencies.preferencesDataStore
-
-    // Firebase
-//    implementation platform(appDependencies.firebaseBom)
-//    implementation appDependencies.crashlytics
-//    implementation appDependencies.analytics
 
     // Tests
     testImplementation testDependencies.junit

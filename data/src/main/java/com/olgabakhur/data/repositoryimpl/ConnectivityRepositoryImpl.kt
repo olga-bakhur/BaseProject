@@ -12,11 +12,11 @@ class ConnectivityRepositoryImpl @Inject constructor(
 ) : ConnectivityRepository {
 
     override fun initWebSocketConnection() {
-        val request = Request.Builder()
-            .url(BuildConfig.BASE_URL_WEB_SOCKET)
-            .build()
-
-        okHttpClient.newWebSocket(request, ServerWebSocketListener())
+//        val request = Request.Builder()
+//            .url(BuildConfig.BASE_URL_WEB_SOCKET)
+//            .build()
+//
+//        okHttpClient.newWebSocket(request, ServerWebSocketListener())
     }
 
     override fun closeWebSocketConnection() {
