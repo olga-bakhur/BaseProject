@@ -4,6 +4,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface PreferencesRepository {
 
-    fun getIsUserLoggedIn(): Flow<Boolean>
-    suspend fun setIsUserLoggedIn(isLoggedIn: Boolean)
+    fun getIntSample(): Flow<Int>
+    suspend fun setIntSample(value: Int)
+    suspend fun clearDataStore()
 }

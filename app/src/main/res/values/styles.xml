@@ -23,59 +23,21 @@
         <item name="android:textColor">?attr/colorOnBackground</item>
     </style>
 
-    <!--    Text. Header-->
-    <style name="HeaderSmall_Style">
-        <item name="android:textSize">@dimen/header_small_text</item>
+    <!--    Text-->
+    <style name="TitleTextStyle">
+        <item name="android:textSize">@dimen/title_text_size</item>
         <item name="android:textColor">@color/headerText</item>
         <item name="android:fontFamily">@font/roboto_medium</item>
     </style>
 
-    <style name="HeaderMedium_Style">
-        <item name="android:textSize">@dimen/header_medium_text</item>
-        <item name="android:textColor">@color/headerText</item>
-        <item name="android:fontFamily">@font/roboto_bold</item>
-    </style>
-
-    <style name="HeaderLarge_Style">
-        <item name="android:textSize">@dimen/header_large_text</item>
-        <item name="android:textColor">@color/headerText</item>
-        <item name="android:fontFamily">@font/roboto_bold</item>
-    </style>
-
-    <!--    Text. Body-->
-    <style name="BodySmall_Style">
-        <item name="android:textSize">@dimen/body_small_text</item>
+    <style name="SubtitleTextStyle">
+        <item name="android:textSize">@dimen/subtitle_text_size</item>
         <item name="android:textColor">@color/bodyText</item>
         <item name="android:fontFamily">@font/roboto_regular</item>
     </style>
 
-    <style name="BodyMedium_Style">
-        <item name="android:textSize">@dimen/body_medium_text</item>
-        <item name="android:textColor">@color/bodyText</item>
-        <item name="android:fontFamily">@font/roboto_medium</item>
-    </style>
-
-    <style name="BodyLarge_Style">
-        <item name="android:textSize">@dimen/body_large_text</item>
-        <item name="android:textColor">@color/bodyText</item>
-        <item name="android:fontFamily">@font/roboto_medium</item>
-    </style>
-
-    <!--    Text. Subtitle-->
-    <style name="SubtitleSmall_Style">
-        <item name="android:textSize">@dimen/subtitle_small</item>
-        <item name="android:textColor">@color/subtitleText</item>
-        <item name="android:fontFamily">@font/roboto_regular</item>
-    </style>
-
-    <style name="SubtitleMedium_Style">
-        <item name="android:textSize">@dimen/subtitle_medium</item>
-        <item name="android:textColor">@color/subtitleText</item>
-        <item name="android:fontFamily">@font/roboto_regular</item>
-    </style>
-
-    <style name="SubtitleLarge_Style">
-        <item name="android:textSize">@dimen/subtitle_large</item>
+    <style name="BodyTextStyle">
+        <item name="android:textSize">@dimen/body_text_size</item>
         <item name="android:textColor">@color/subtitleText</item>
         <item name="android:fontFamily">@font/roboto_regular</item>
     </style>

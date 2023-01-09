@@ -4,8 +4,7 @@ import android.app.Application
 import com.olgabakhur.baseproject.di.module.ApiModule
 import com.olgabakhur.baseproject.di.module.RepositoriesModule
 import com.olgabakhur.baseproject.presentation.ui.MainViewModel
-import com.olgabakhur.baseproject.presentation.ui.breakingnews.BreakingNewsViewModel
-import com.olgabakhur.baseproject.presentation.ui.signin.SignInViewModel
+import com.olgabakhur.baseproject.presentation.ui.articles.ArticleViewModel
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -20,6 +19,5 @@ interface AppComponent {
     }
 
     val mainViewModel: MainViewModel
-    val signInViewModel: SignInViewModel
-    val breakingNewsViewModel: BreakingNewsViewModel
+    val articleViewModel: ArticleViewModel
 }

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -14,115 +13,79 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvTitle"
+            style="@style/TitleTextStyle"
             android:layout_width="@dimen/dimen_0"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_outer"
+            android:layout_marginTop="@dimen/margin_outer"
             android:ellipsize="marquee"
-            android:singleLine="true"
             android:marqueeRepeatLimit="@integer/ellipsize_marquee_repeat_limit"
-            tools:text="Title"
-            style="@style/HeaderSmall_Style"
-            android:layout_marginHorizontal="@dimen/dimen_16"
-            android:layout_marginTop="@dimen/dimen_16"
+            android:singleLine="true"
+            app:layout_constraintBottom_toTopOf="@id/tvSource"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/tvSource"/>
+            tools:text="Title" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvSource"
+            style="@style/SubtitleTextStyle"
             android:layout_width="@dimen/dimen_0"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_outer"
             android:ellipsize="marquee"
             android:marqueeRepeatLimit="@integer/ellipsize_marquee_repeat_limit"
             android:singleLine="true"
-            tools:text="Source"
-            style="@style/BodySmall_Style"
-            android:layout_marginHorizontal="@dimen/dimen_16"
+            app:layout_constraintBottom_toTopOf="@id/ivArticleImage"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvTitle"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/ivArticleImage"/>
+            tools:text="Source" />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/ivArticleImage"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_0"
-            app:layout_constraintDimensionRatio="1.6"
+            android:layout_marginTop="@dimen/margin_inner"
             android:background="@color/secondaryNeutral"
-            android:src="@drawable/ic_news_image_preloader"
-            tools:src="@drawable/ic_news_image_error"
             android:scaleType="centerCrop"
-            tools:scaleType="fitCenter"
-            android:layout_marginTop="@dimen/dimen_16"
+            android:src="@drawable/ic_article_image_placeholder"
+            app:layout_constraintBottom_toTopOf="@id/tvContent"
+            app:layout_constraintDimensionRatio="1.6"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvSource"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/tvDescription"/>
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvDescription"
-            android:layout_width="@dimen/dimen_0"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="3"
-            tools:text="Description"
-            style="@style/BodySmall_Style"
-            android:layout_marginHorizontal="@dimen/dimen_16"
-            android:layout_marginTop="@dimen/dimen_16"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ivArticleImage"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/tvContent"/>
+            tools:scaleType="fitCenter"
+            tools:src="@drawable/ic_article_image_error" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvContent"
+            style="@style/BodyTextStyle"
             android:layout_width="@dimen/dimen_0"
             android:layout_height="wrap_content"
-            tools:text="Content"
-            style="@style/BodySmall_Style"
-            android:layout_marginHorizontal="@dimen/dimen_16"
-            android:layout_marginTop="@dimen/dimen_16"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvDescription"
+            android:layout_marginHorizontal="@dimen/margin_outer"
+            android:layout_marginTop="@dimen/margin_inner"
+            app:layout_constraintBottom_toTopOf="@id/tvPublicationDate"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/ivSave"
-            android:visibility="gone"
-            tools:visibility="visible"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivArticleImage"
+            tools:text="Content" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvPublishedAt"
+            android:id="@+id/tvPublicationDate"
+            style="@style/BodyTextStyle"
             android:layout_width="@dimen/dimen_0"
             android:layout_height="wrap_content"
-            tools:text="Published at"
-            style="@style/BodySmall_Style"
+            android:layout_marginHorizontal="@dimen/margin_outer"
+            android:layout_marginTop="@dimen/margin_inner"
+            android:layout_marginBottom="@dimen/margin_outer"
             android:ellipsize="marquee"
-            android:singleLine="true"
             android:marqueeRepeatLimit="@integer/ellipsize_marquee_repeat_limit"
-            android:layout_marginStart="@dimen/dimen_16"
-            android:layout_marginEnd="@dimen/dimen_8"
+            android:singleLine="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvContent"
-            app:layout_constraintEnd_toStartOf="@id/ivSave"
-            app:layout_constraintBottom_toBottomOf="parent" />
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/ivSave"
-            android:layout_width="@dimen/clickable_icon_diameter_small"
-            android:layout_height="@dimen/clickable_icon_diameter_small"
-            android:src="@drawable/ic_saved"
-            android:tint="@color/secondaryNeutral"
-            tools:tint="@color/colorSecondary"
-            android:foreground="@drawable/ripple_mask_oval_primary"
-            android:clickable="true"
-            android:focusable="true"
-            android:checkable="true"
-            android:scaleType="centerInside"
-            android:duplicateParentState="false"
-            android:layout_marginEnd="@dimen/dimen_16"
-            android:layout_marginVertical="@dimen/dimen_8"
-            app:layout_constraintStart_toEndOf="@id/tvPublishedAt"
-            app:layout_constraintTop_toBottomOf="@id/tvContent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            tools:text="Published at" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

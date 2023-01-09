@@ -2,16 +2,10 @@ package com.olgabakhur.baseproject.presentation.base
 
 import android.content.Context
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
-import androidx.core.view.MenuHost
-import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavDirections
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
@@ -32,25 +26,12 @@ abstract class BaseFragment(@LayoutRes layoutId: Int) : Fragment(layoutId) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mContext = requireContext()
-        setupToolbarMenu()
         observeViewModel()
     }
 
     override fun onPause() {
         super.onPause()
         view?.let { mContext.hideKeyboard(it) }
-    }
-
-    /*
-    Override this function in a particular subFragment to add more MenuItems or clear items
-    which are common for the whole App.
-    */
-    open fun setupToolbarMenu() {
-        val menuHost: MenuHost = requireActivity()
-        menuHost.addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {}
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean = false
-        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
     open fun observeViewModel() {
@@ -65,10 +46,14 @@ abstract class BaseFragment(@LayoutRes layoutId: Int) : Fragment(layoutId) {
 
     /* Loading */
     fun showLoading(isLoading: Boolean) {
-        progressBar = if (isLoading) {
-            createProgressBar(mContext, binding.root).apply { show() }
+        if (progressBar == null) {
+            progressBar = createProgressBar(mContext, binding.root)
+        }
+
+        if (isLoading) {
+            progressBar?.show()
         } else {
-            progressBar?.hide().let { null }
+            progressBar?.hide()
         }
     }
 
@@ -76,7 +61,6 @@ abstract class BaseFragment(@LayoutRes layoutId: Int) : Fragment(layoutId) {
         if (isLoading) disableUi() else enableUi()
     }
 
-    /* Override those functions in a particular subFragment to enable / disable all the clickable views. */
     open fun disableUi() {}
     open fun enableUi() {}
 
@@ -88,7 +72,13 @@ abstract class BaseFragment(@LayoutRes layoutId: Int) : Fragment(layoutId) {
     fun navigate(direction: NavDirections, navOptions: NavOptions) =
         findNavController().navigate(direction, navOptions)
 
-    fun navigateBack() = findNavController().popBackStack()
+    fun navigateBack(@IdRes destinationId: Int? = null, inclusive: Boolean? = null) {
+        if (destinationId != null && inclusive != null) {
+            findNavController().popBackStack(destinationId, inclusive)
+        } else {
+            findNavController().popBackStack()
+        }
+    }
 
     fun navigateUp() = findNavController().navigateUp()
 }

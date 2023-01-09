@@ -1,4 +1,4 @@
-package com.olgabakhur.data.source.local.newsdatabase
+package com.olgabakhur.data.source.local
 
 import android.content.Context
 import androidx.room.Database
@@ -10,13 +10,13 @@ import com.olgabakhur.data.model.entity.ArticleEntity
     entities = [ArticleEntity::class],
     version = 1
 )
-/* @TypeConverters(Converters::class) */
+
 abstract class ArticleDatabase : RoomDatabase() {
 
     abstract fun getArticleDao(): ArticleDao
 
     companion object {
-        const val DATABASE_NAME = "article_db.db"
+        const val DATABASE_NAME = "database_article.db"
 
         @Volatile
         private var instance: ArticleDatabase? = null

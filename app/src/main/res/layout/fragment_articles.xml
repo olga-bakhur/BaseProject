@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="?attr/actionBarSize"
-    tools:context="com.olgabakhur.baseproject.presentation.ui.breakingnews.BreakingNewsFragment">
+    tools:context="com.olgabakhur.baseproject.presentation.ui.articles.ArticlesFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvBreakingNews"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:itemCount="5"
+        tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/view_holder_article" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,7 +3,6 @@ package com.olgabakhur.baseproject.di.module
 import android.app.Application
 import androidx.datastore.core.DataStore
 import androidx.datastore.core.handlers.ReplaceFileCorruptionHandler
-import androidx.datastore.preferences.SharedPreferencesMigration
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.emptyPreferences
@@ -15,22 +14,19 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import javax.inject.Singleton
 
-private const val APP_PREFERENCES = "app_preferences"
-
 @Module
 object DataStoreModule {
 
+    private const val APP_PREFERENCES = "app_preferences"
+
     @Singleton
     @Provides
-    fun providePreferencesDataStore(app: Application): DataStore<Preferences> {
-        return PreferenceDataStoreFactory.create(
+    fun providePreferencesDataStore(app: Application): DataStore<Preferences> =
+        PreferenceDataStoreFactory.create(
             corruptionHandler = ReplaceFileCorruptionHandler(
                 produceNewData = { emptyPreferences() }
             ),
-            /* Add "migrations" parameter in case if migration from SharedPreferences is required */
-            migrations = listOf(SharedPreferencesMigration(app, APP_PREFERENCES)),
             scope = CoroutineScope(Dispatchers.IO + SupervisorJob()),
             produceFile = { app.preferencesDataStoreFile(APP_PREFERENCES) }
         )
-    }
 }

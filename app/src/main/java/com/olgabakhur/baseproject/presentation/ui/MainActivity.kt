@@ -3,13 +3,8 @@ package com.olgabakhur.baseproject.presentation.ui
 import android.annotation.SuppressLint
 import android.content.pm.ActivityInfo
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import androidx.activity.addCallback
-import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.MenuProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -46,7 +41,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         initNavController()
         setupToolbarNavigation()
         setupAppBarsVisibility()
-        setupToolbarMenu()
         setupSystemBackButton()
     }
 
@@ -96,7 +90,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.signInFragment,
                 R.id.breakingNewsFragment
             ),
             fallbackOnNavigateUpListener = ::onSupportNavigateUp
@@ -109,65 +102,22 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         destinationChangeListener =
             NavController.OnDestinationChangedListener { _, destination, _ ->
                 setupToolbarVisibility(destination.id)
-                setupBottomNavigationVisibility(destination.id)
             }
     }
 
     private fun setupToolbarVisibility(destinationId: Int) {
         when (destinationId) {
-            R.id.signInFragment -> supportActionBar?.hide()
+//            R.id.signInFragment -> supportActionBar?.hide()
             else -> supportActionBar?.show()
         }
-    }
-
-    private fun setupBottomNavigationVisibility(destinationId: Int) {
-        when (destinationId) {
-            R.id.signInFragment -> binding.bottomNavigationView.gone()
-            else -> binding.bottomNavigationView.visible()
-        }
-    }
-
-    private fun setupToolbarMenu() {
-        addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                /* Menu items which are visible around the whole App. */
-                menuInflater.inflate(R.menu.menu_toolbar, menu)
-            }
-
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                val destination = navController.findDestination(menuItem.itemId)
-
-                return if (destination != null) {
-                    navController.navigate(destination.id)
-                    true
-                } else {
-                    /* Other actions */
-                    when (menuItem.itemId) {
-                        R.id.actionSignOut -> {
-                            viewModel.signOutFake {
-                                navController.popBackStack(R.id.signInFragment, false)
-                            }
-                            true
-                        }
-
-                        else -> false
-                    }
-                }
-            }
-        }, this)
     }
 
     private fun setupSystemBackButton() {
         onBackPressedDispatcher.addCallback(this) {
             when (navController.getCurrentDestinationId()) {
-                R.id.signInFragment,
                 R.id.breakingNewsFragment -> finish()
                 else -> navController.navigateUp()
             }
         }
-    }
-
-    fun setToolbarTitle(@StringRes title: Int) {
-        binding.toolbar.title = getString(title)
     }
 }

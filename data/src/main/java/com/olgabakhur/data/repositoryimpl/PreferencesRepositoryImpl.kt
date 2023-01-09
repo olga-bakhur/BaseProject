@@ -3,13 +3,14 @@ package com.olgabakhur.data.repositoryimpl
 import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
+import androidx.datastore.preferences.core.intPreferencesKey
 import com.olgabakhur.data.repository.PreferencesRepository
-import com.olgabakhur.data.repositoryimpl.PreferencesRepositoryImpl.PreferencesKeys.IS_USER_LOGGED_IN
+import com.olgabakhur.data.repositoryimpl.PreferencesRepositoryImpl.PreferencesKeys.SAMPLE_INT_VALUE
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import java.io.IOException
 import javax.inject.Inject
@@ -20,13 +21,24 @@ class PreferencesRepositoryImpl @Inject constructor(
 
     companion object {
         private const val TAG = "DataStore"
+        const val DEFAULT_INT_VALUE: Int = 1
     }
 
     private object PreferencesKeys {
-        val IS_USER_LOGGED_IN = booleanPreferencesKey("IS_USER_LOGGED_IN")
+        val SAMPLE_INT_VALUE = intPreferencesKey("SAMPLE_INT_VALUE")
     }
 
-    override fun getIsUserLoggedIn(): Flow<Boolean> =
+    override fun getIntSample(): Flow<Int> = getValue(SAMPLE_INT_VALUE, DEFAULT_INT_VALUE)
+
+    override suspend fun setIntSample(value: Int) = setValue(SAMPLE_INT_VALUE, value)
+
+    override suspend fun clearDataStore() {
+        dataStore.edit { preferences ->
+            preferences.clear()
+        }
+    }
+
+    private fun <T> getValue(key: Preferences.Key<T>, defaultValue: T): Flow<T> =
         dataStore.data
             .catch { throwable ->
                 if (throwable is IOException) {
@@ -36,17 +48,15 @@ class PreferencesRepositoryImpl @Inject constructor(
                         TAG,
                         "Error occurred during working with the DataStore: ${throwable.message}"
                     )
-                    throw throwable // TODO: handle exception
                 }
             }
             .map { preferences ->
-                preferences[IS_USER_LOGGED_IN] ?: false
-            }
+                preferences[key] ?: defaultValue
+            }.distinctUntilChanged()
 
-
-    override suspend fun setIsUserLoggedIn(isLoggedIn: Boolean) {
+    private suspend fun <T> setValue(key: Preferences.Key<T>, value: T) {
         dataStore.edit { preferences ->
-            preferences[IS_USER_LOGGED_IN] = isLoggedIn
+            preferences[key] = value
         }
     }
 }

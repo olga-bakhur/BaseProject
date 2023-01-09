@@ -1,53 +1,47 @@
 package com.olgabakhur.data.util.mappers.news
 
 import com.olgabakhur.data.model.dto.Article
-import com.olgabakhur.data.model.dto.UserCredentials
 import com.olgabakhur.data.model.entity.ArticleEntity
 import com.olgabakhur.data.model.pojo.ArticleResponse
-import com.olgabakhur.data.model.pojo.NewsItemResponse
-import com.olgabakhur.data.model.pojo.SignInResponse
-import com.olgabakhur.data.util.Constants
+import com.olgabakhur.data.model.pojo.NewsResponse
+import java.util.*
 
-fun SignInResponse.toUserCredentials() = UserCredentials(
-    email = email,
-    accountType = accountType,
-    sessionId = sessionId
-)
+/* API */
+fun NewsResponse.toListArticles(): List<Article> =
+    listArticlesResponse.map { articleResponse ->
+        articleResponse.toArticle()
+    }
 
 fun ArticleResponse.toArticle() = Article(
-    url = url ?: Constants.EMPTY,
-    author = author ?: Constants.EMPTY,
-    content = content ?: Constants.EMPTY,
-    description = description ?: Constants.EMPTY,
-    publishDate = publishDate ?: Constants.EMPTY,
-    sourceName = sourceResponse?.sourceName ?: Constants.EMPTY,
-    title = title ?: Constants.EMPTY,
-    urlToImage = urlToImage ?: Constants.EMPTY
-)
-
-fun Article.toArticleEntity() = ArticleEntity(
-    url = url,
+    urlToArticle = urlToArticle ?: UUID.randomUUID().toString().substring(0, 15),
     author = author,
     content = content,
     description = description,
-    publishDate = publishDate,
+    publicationDate = publicationDate,
+    sourceName = sourceResponse?.sourceName,
+    title = title,
+    urlToImage = urlToImage
+)
+
+/* Database */
+fun Article.toArticleEntity() = ArticleEntity(
+    urlToArticle = urlToArticle,
+    author = author,
+    content = content,
+    description = description,
+    publicationDate = publicationDate,
     sourceName = sourceName,
     title = title,
     urlToImage = urlToImage
 )
 
 fun ArticleEntity.toArticle() = Article(
-    url = url,
+    urlToArticle = urlToArticle,
     author = author,
     content = content,
     description = description,
-    publishDate = publishDate,
+    publicationDate = publicationDate,
     sourceName = sourceName,
     title = title,
     urlToImage = urlToImage
 )
-
-fun NewsItemResponse.toArticlesList() =
-    articlesList.map { articleResponse: ArticleResponse ->
-        articleResponse.toArticle()
-    }

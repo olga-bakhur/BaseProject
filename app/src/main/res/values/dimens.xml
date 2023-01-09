@@ -8,15 +8,15 @@
     <dimen name="dimen_16">16dp</dimen>
 
     <!--    Text-->
-    <dimen name="header_small_text">17sp</dimen>
+    <dimen name="title_text_size">17sp</dimen>
     <dimen name="header_medium_text">36sp</dimen>
     <dimen name="header_large_text">50sp</dimen>
 
-    <dimen name="body_small_text">15sp</dimen>
+    <dimen name="subtitle_text_size">15sp</dimen>
     <dimen name="body_medium_text">17sp</dimen>
     <dimen name="body_large_text">21sp</dimen>
 
-    <dimen name="subtitle_small">13sp</dimen>
+    <dimen name="body_text_size">13sp</dimen>
     <dimen name="subtitle_medium">15sp</dimen>
     <dimen name="subtitle_large">17sp</dimen>
 
