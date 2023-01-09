@@ -30,23 +30,7 @@
     <string name="general_success">Success!</string>
     <string name="general_continue">Continue</string>
     <string name="general_no_info">No info</string>
-    <string name="general_invalid">Invalid</string>
-    <string name="general_required_field">\*Required field</string>
-    <string name="general_optional_field">\*Optional field</string>
-    <string name="general_filter">Filter</string>
 
     <!--    Toolbar title-->
     <string name="articles_label">Articles</string>
-
-    <!--    SignInFragment-->
-    <string name="general_sign_in">Sign in</string>
-    <string name="general_sign_out">Sign out</string>
-    <string name="sign_in_status_completed_message">You are already Signed in.</string>
-    <string name="sign_in_status_uncompleted_message">You are not Signed in.</string>
-
-    <!--    BreakingNewsFragment-->
-    <string name="article_was_saved_successfully_message">Article was saved successfully.</string>
-    <string name="article_was_deleted_successfully_message">Article was deleted successfully.</string>
-    <string name="article_saving_failed_message">Article saving failed.</string>
-    <string name="article_deletion_failed_message">Article deletion failed.</string>
 </resources>

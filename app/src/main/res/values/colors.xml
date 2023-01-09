@@ -9,7 +9,6 @@
 
     <color name="colorBackground">#FFFFFF</color>
     <color name="colorSurface">#FFFFFF</color>
-    <color name="colorSurfaceDisabled">#EEEEEE</color>
 
     <color name="colorError">#B00020</color>
 
@@ -19,19 +18,11 @@
     <color name="colorOnSurface">#000000</color>
     <color name="colorOnError">#FFFFFF</color>
 
-    <!--    Alpha-->
-    <color name="colorPrimaryAlpha50">#803188DB</color>
+    <!--    Text-->
+    <color name="colorTitleText">#000000</color>
+    <color name="colorSubtitleText">#B3000000</color>
+    <color name="colorBodyText">#80000000</color>
 
-    <!--    Button. Primary-->
-    <color name="colorRipplePrimary">#66000000</color>
-    <color name="colorRippleSecondary">#66FFFFFF</color>
-
-    <!--    Vector images-->
     <color name="primaryNeutral">#FFFFFF</color>
     <color name="secondaryNeutral">#33000000</color>
-
-    <!--    Text-->
-    <color name="headerText">#000000</color>
-    <color name="bodyText">#B3000000</color>
-    <color name="subtitleText">#80000000</color>
 </resources>

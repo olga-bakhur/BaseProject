@@ -12,7 +12,7 @@ import com.olgabakhur.baseproject.R
 fun createProgressBar(context: Context, rootView: View): CircularProgressIndicator {
     val progressBar = CircularProgressIndicator(context).apply {
         isIndeterminate = true
-        elevation = resources.getDimension(R.dimen.dimen_5)
+        elevation = resources.getDimension(R.dimen.progress_bar_radius)
     }
 
     val lp = ConstraintLayout.LayoutParams(
