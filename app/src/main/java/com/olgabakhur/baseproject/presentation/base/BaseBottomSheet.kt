@@ -17,8 +17,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.olgabakhur.baseproject.presentation.util.livedata.EventObserver
-import com.olgabakhur.baseproject.presentation.util.view.createProgressBar
-import com.olgabakhur.baseproject.presentation.util.view.hideKeyboard
+import com.olgabakhur.baseproject.presentation.util.view.Keyboard
+import com.olgabakhur.baseproject.presentation.util.view.ProgressBar
 
 abstract class BaseBottomSheet(@LayoutRes val layoutId: Int) : BottomSheetDialogFragment() {
 
@@ -42,7 +42,7 @@ abstract class BaseBottomSheet(@LayoutRes val layoutId: Int) : BottomSheetDialog
 
     override fun onPause() {
         super.onPause()
-        view?.let { mContext.hideKeyboard(it) }
+        view?.let { Keyboard.hideKeyboard(it, mContext) }
     }
 
     open fun observeViewModel() {
@@ -58,7 +58,7 @@ abstract class BaseBottomSheet(@LayoutRes val layoutId: Int) : BottomSheetDialog
     /* Loading */
     fun showLoading(isLoading: Boolean) {
         if (progressBar == null) {
-            progressBar = createProgressBar(mContext, binding.root)
+            progressBar = ProgressBar.createProgressBar(mContext, binding.root)
         }
 
         if (isLoading) {

@@ -15,13 +15,12 @@ import com.olgabakhur.baseproject.App
 import com.olgabakhur.baseproject.R
 import com.olgabakhur.baseproject.databinding.ActivityMainBinding
 import com.olgabakhur.baseproject.presentation.extensions.collectLatestWhenCreated
-import com.olgabakhur.baseproject.presentation.extensions.getCurrentDestinationId
-import com.olgabakhur.baseproject.presentation.extensions.message
-import com.olgabakhur.baseproject.presentation.util.NetworkConnectivityHelper
 import com.olgabakhur.baseproject.presentation.util.device.DeviceManager
 import com.olgabakhur.baseproject.presentation.util.device.DeviceType
+import com.olgabakhur.baseproject.presentation.util.stringresourcehelper.NetworkConnectivityHelper
+import com.olgabakhur.baseproject.presentation.util.stringresourcehelper.message
 import com.olgabakhur.baseproject.presentation.util.view.Dialog
-import com.olgabakhur.baseproject.presentation.util.view.showSnackbar
+import com.olgabakhur.baseproject.presentation.util.view.Snackbar
 import com.olgabakhur.baseproject.presentation.util.viewmodel.viewModel
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
@@ -48,7 +47,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private fun observeViewModel() {
         collectLatestWhenCreated(viewModel.getFlowApplicationErrors()) { appError ->
-            Dialog.showOkDialogWithTitle(
+            Dialog.showOkDialog(
                 this,
                 R.string.general_error_label,
                 appError.message(this)
@@ -56,7 +55,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         }
 
         collectLatestWhenCreated(viewModel.flowNetworkConnectivityStatus) { connectivity ->
-            showSnackbar(
+            Snackbar.showSnackbar(
                 this,
                 binding.root,
                 NetworkConnectivityHelper.getLocalizedName(connectivity, this)
@@ -66,7 +65,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     @SuppressLint("SourceLockedOrientationActivity")
     private fun setupOrientationChange() {
-        when (DeviceManager.getDeviceType()) {
+        when (DeviceManager.getDeviceType(this)) {
             DeviceType.Phone -> requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
             DeviceType.TV -> requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
             else -> ActivityInfo.SCREEN_ORIENTATION_USER /* allow screen rotation for Tablets */
@@ -93,7 +92,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private fun setupSystemBackButton() {
         onBackPressedDispatcher.addCallback(this) {
-            when (navController.getCurrentDestinationId()) {
+            when (navController.currentDestination?.id) {
                 R.id.articlesFragment -> finish()
                 else -> navController.navigateUp()
             }

@@ -5,17 +5,14 @@ import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 
-fun Context.showKeyboard(view: View) {
-    if (view.requestFocus()) getInputMethodManager().showSoftInput(
-        view,
-        InputMethodManager.SHOW_FORCED
-    )
+object Keyboard {
+
+    fun hideKeyboard(view: View, context: Context) {
+        getInputMethodManager(context).hideSoftInputFromWindow(view.windowToken, 0)
+    }
+
+    private fun getInputMethodManager(context: Context): InputMethodManager {
+        return context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+    }
 }
 
-fun Context.hideKeyboard(view: View) {
-    getInputMethodManager().hideSoftInputFromWindow(view.windowToken, 0)
-}
-
-private fun Context.getInputMethodManager(): InputMethodManager {
-    return getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-}

@@ -12,8 +12,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.olgabakhur.baseproject.presentation.util.livedata.EventObserver
-import com.olgabakhur.baseproject.presentation.util.view.createProgressBar
-import com.olgabakhur.baseproject.presentation.util.view.hideKeyboard
+import com.olgabakhur.baseproject.presentation.util.view.Keyboard
+import com.olgabakhur.baseproject.presentation.util.view.ProgressBar
 
 abstract class BaseFragment(@LayoutRes layoutId: Int) : Fragment(layoutId) {
 
@@ -31,7 +31,7 @@ abstract class BaseFragment(@LayoutRes layoutId: Int) : Fragment(layoutId) {
 
     override fun onPause() {
         super.onPause()
-        view?.let { mContext.hideKeyboard(it) }
+        view?.let { Keyboard.hideKeyboard(it, mContext) }
     }
 
     open fun observeViewModel() {
@@ -47,7 +47,7 @@ abstract class BaseFragment(@LayoutRes layoutId: Int) : Fragment(layoutId) {
     /* Loading */
     fun showLoading(isLoading: Boolean) {
         if (progressBar == null) {
-            progressBar = createProgressBar(mContext, binding.root)
+            progressBar = ProgressBar.createProgressBar(mContext, binding.root)
         }
 
         if (isLoading) {

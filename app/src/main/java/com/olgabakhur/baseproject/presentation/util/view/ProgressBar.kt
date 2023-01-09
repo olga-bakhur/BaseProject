@@ -8,23 +8,25 @@ import androidx.constraintlayout.widget.ConstraintSet
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.olgabakhur.baseproject.R
 
-/* Only for ConstraintLayout */
-fun createProgressBar(context: Context, rootView: View): CircularProgressIndicator {
-    val progressBar = CircularProgressIndicator(context).apply {
-        isIndeterminate = true
-        elevation = resources.getDimension(R.dimen.progress_bar_radius)
-    }
+object ProgressBar {
 
-    val lp = ConstraintLayout.LayoutParams(
-        ViewGroup.LayoutParams.WRAP_CONTENT,
-        ViewGroup.LayoutParams.WRAP_CONTENT
-    ).apply {
-        startToStart = ConstraintSet.PARENT_ID
-        topToTop = ConstraintSet.PARENT_ID
-        endToEnd = ConstraintSet.PARENT_ID
-        bottomToBottom = ConstraintSet.PARENT_ID
-    }
+    fun createProgressBar(context: Context, rootView: View): CircularProgressIndicator {
+        val progressBar = CircularProgressIndicator(context).apply {
+            isIndeterminate = true
+            elevation = resources.getDimension(R.dimen.progress_bar_radius)
+        }
 
-    (rootView as ViewGroup).addView(progressBar, lp)
-    return progressBar
+        val lp = ConstraintLayout.LayoutParams(
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        ).apply {
+            startToStart = ConstraintSet.PARENT_ID
+            topToTop = ConstraintSet.PARENT_ID
+            endToEnd = ConstraintSet.PARENT_ID
+            bottomToBottom = ConstraintSet.PARENT_ID
+        }
+
+        (rootView as ViewGroup).addView(progressBar, lp)
+        return progressBar
+    }
 }

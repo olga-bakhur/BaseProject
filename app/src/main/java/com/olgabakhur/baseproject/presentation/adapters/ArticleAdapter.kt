@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.olgabakhur.baseproject.R
 import com.olgabakhur.baseproject.databinding.ViewHolderArticleBinding
-import com.olgabakhur.baseproject.presentation.extensions.getTextOrNoInfoMessage
+import com.olgabakhur.baseproject.presentation.extensions.setTextOrDefaultMessage
 import com.olgabakhur.data.model.dto.Article
 
 class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() {
@@ -50,27 +50,25 @@ class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() 
 
         private fun setupTitle(article: Article) {
             binding.tvTitle.apply {
-                text = context.getTextOrNoInfoMessage(article.title)
+                setTextOrDefaultMessage(article.title)
                 isSelected = true
             }
         }
 
         private fun setupSource(article: Article) {
             binding.tvSource.apply {
-                text = context.getTextOrNoInfoMessage(article.sourceName)
+                setTextOrDefaultMessage(article.sourceName)
                 isSelected = true
             }
         }
 
         private fun setupContent(article: Article) {
-            binding.tvContent.apply {
-                text = context.getTextOrNoInfoMessage(article.content)
-            }
+            binding.tvContent.setTextOrDefaultMessage(article.content)
         }
 
         private fun setupPublicationDate(article: Article) {
             binding.tvPublicationDate.apply {
-                text = context.getTextOrNoInfoMessage(article.publicationDate)
+                setTextOrDefaultMessage(article.publicationDate)
                 isSelected = true
             }
         }

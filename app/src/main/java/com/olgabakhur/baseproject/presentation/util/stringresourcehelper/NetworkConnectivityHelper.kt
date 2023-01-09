@@ -1,4 +1,4 @@
-package com.olgabakhur.baseproject.presentation.util
+package com.olgabakhur.baseproject.presentation.util.stringresourcehelper
 
 import android.content.Context
 import com.olgabakhur.baseproject.R
