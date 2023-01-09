@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">Base Project</string>
 
+    <!--    NetworkConnectivity-->
+    <string name="network_connectivity_status_available">Internet is available</string>
+    <string name="network_connectivity_status_unavailable">Internet is unavailable</string>
+    <string name="network_connectivity_status_losing">Losing the Internet connection…</string>
+    <string name="network_connectivity_status_lost">Internet connection is lost</string>
+
     <!-- Error handling -->
     <string name="error_generic">Something went wrong. Please try again later.</string>
     <string name="error_no_internet_connection">No Internet connection. Please check the Internet.</string>
@@ -20,7 +26,7 @@
     <!--    General-->
     <string name="general_ok">Ok</string>
     <string name="general_cancel">Cancel</string>
-    <string name="general_error">Error</string>
+    <string name="general_error_label">Error</string>
     <string name="general_success">Success!</string>
     <string name="general_continue">Continue</string>
     <string name="general_no_info">No info</string>
@@ -30,8 +36,7 @@
     <string name="general_filter">Filter</string>
 
     <!--    Toolbar title-->
-    <string name="breaking_news_label">Breaking news</string>
-    <string name="saved_news_label">Saved news</string>
+    <string name="articles_label">Articles</string>
 
     <!--    SignInFragment-->
     <string name="general_sign_in">Sign in</string>

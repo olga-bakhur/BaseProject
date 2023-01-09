@@ -1,29 +1,15 @@
 package com.olgabakhur.baseproject.presentation.ui
 
-import androidx.lifecycle.viewModelScope
 import com.olgabakhur.baseproject.presentation.base.BaseViewModel
+import com.olgabakhur.data.repository.NetworkConnectivityObserver
 import com.olgabakhur.domain.interactors.MainInteractor
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(
-    private val mainInteractor: MainInteractor
+    private val mainInteractor: MainInteractor,
+    networkConnectivityObserver: NetworkConnectivityObserver
 ) : BaseViewModel() {
 
-    fun getApplicationErrors() = mainInteractor.getApplicationErrors()
-
-    /* Fake Sign out implementation. Replace with the real one. */
-    fun signOutFake(navigateToStartDestination: () -> Unit) {
-        viewModelScope.launch {
-            launch(Dispatchers.IO) {
-//                authInteractor.setIsUserLoggedIn(false)
-            }.join()
-
-            withContext(Dispatchers.Main) {
-                navigateToStartDestination()
-            }
-        }
-    }
+    val flowNetworkConnectivityStatus = networkConnectivityObserver.observe()
+    fun getFlowApplicationErrors() = mainInteractor.getApplicationErrors()
 }

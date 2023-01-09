@@ -10,19 +10,18 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.olgabakhur.baseproject.App
 import com.olgabakhur.baseproject.R
 import com.olgabakhur.baseproject.databinding.ActivityMainBinding
-import com.olgabakhur.baseproject.presentation.extensions.collectWhenCreated
+import com.olgabakhur.baseproject.presentation.extensions.collectLatestWhenCreated
 import com.olgabakhur.baseproject.presentation.extensions.getCurrentDestinationId
 import com.olgabakhur.baseproject.presentation.extensions.message
+import com.olgabakhur.baseproject.presentation.util.NetworkConnectivityHelper
 import com.olgabakhur.baseproject.presentation.util.device.DeviceManager
 import com.olgabakhur.baseproject.presentation.util.device.DeviceType
-import com.olgabakhur.baseproject.presentation.util.view.Dialog.showOkDialogWithTitle
-import com.olgabakhur.baseproject.presentation.util.view.gone
-import com.olgabakhur.baseproject.presentation.util.view.visible
+import com.olgabakhur.baseproject.presentation.util.view.Dialog
+import com.olgabakhur.baseproject.presentation.util.view.showSnackbar
 import com.olgabakhur.baseproject.presentation.util.viewmodel.viewModel
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
@@ -32,7 +31,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var destinationChangeListener: NavController.OnDestinationChangedListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,18 +38,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         setupOrientationChange()
         initNavController()
         setupToolbarNavigation()
-        setupAppBarsVisibility()
         setupSystemBackButton()
-    }
-
-    override fun onStart() {
-        super.onStart()
-        navController.addOnDestinationChangedListener(destinationChangeListener)
-    }
-
-    override fun onStop() {
-        super.onStop()
-        navController.removeOnDestinationChangedListener(destinationChangeListener)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -60,12 +47,19 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     }
 
     private fun observeViewModel() {
-        /* Only for generic errors */
-        collectWhenCreated(viewModel.getApplicationErrors()) { error ->
-            showOkDialogWithTitle(
+        collectLatestWhenCreated(viewModel.getFlowApplicationErrors()) { appError ->
+            Dialog.showOkDialogWithTitle(
                 this,
-                R.string.general_error,
-                error.message(this)
+                R.string.general_error_label,
+                appError.message(this)
+            )
+        }
+
+        collectLatestWhenCreated(viewModel.flowNetworkConnectivityStatus) { connectivity ->
+            showSnackbar(
+                this,
+                binding.root,
+                NetworkConnectivityHelper.getLocalizedName(connectivity, this)
             )
         }
     }
@@ -90,32 +84,17 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.breakingNewsFragment
+                R.id.articlesFragment
             ),
             fallbackOnNavigateUpListener = ::onSupportNavigateUp
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
-        binding.bottomNavigationView.setupWithNavController(navController)
-    }
-
-    private fun setupAppBarsVisibility() {
-        destinationChangeListener =
-            NavController.OnDestinationChangedListener { _, destination, _ ->
-                setupToolbarVisibility(destination.id)
-            }
-    }
-
-    private fun setupToolbarVisibility(destinationId: Int) {
-        when (destinationId) {
-//            R.id.signInFragment -> supportActionBar?.hide()
-            else -> supportActionBar?.show()
-        }
     }
 
     private fun setupSystemBackButton() {
         onBackPressedDispatcher.addCallback(this) {
             when (navController.getCurrentDestinationId()) {
-                R.id.breakingNewsFragment -> finish()
+                R.id.articlesFragment -> finish()
                 else -> navController.navigateUp()
             }
         }
