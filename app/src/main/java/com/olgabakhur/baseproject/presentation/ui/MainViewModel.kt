@@ -11,5 +11,6 @@ class MainViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     val flowNetworkConnectivityStatus = networkConnectivityObserver.observe()
+
     fun getFlowApplicationErrors() = mainInteractor.getApplicationErrors()
 }

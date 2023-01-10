@@ -12,6 +12,8 @@
 
         <item name="colorPrimaryDark">@color/colorPrimaryVariant</item>
 
+        <item name="backgroundColor">@color/colorBackground</item>
+
         <!--    Used for “sheets” of material (like cards and bottom sheets)-->
         <item name="colorSurface">@color/colorSurface</item>
 
@@ -21,9 +23,8 @@
         <!--    “On” colors are used to tint foreground content (such as text and icons)-->
         <item name="colorOnPrimary">@color/colorOnPrimary</item>
         <item name="colorOnSecondary">@color/colorOnSecondary</item>
-        <item name="colorOnSurface">@color/colorOnSurface</item>
-        <item name="android:colorBackground">@color/colorBackground</item>
         <item name="colorOnBackground">@color/colorOnBackground</item>
+        <item name="colorOnSurface">@color/colorOnSurface</item>
         <item name="colorOnError">@color/colorOnError</item>
 
         <!--    Customize the App theme-->

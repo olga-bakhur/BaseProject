@@ -22,7 +22,4 @@
     <color name="colorTitleText">#000000</color>
     <color name="colorSubtitleText">#B3000000</color>
     <color name="colorBodyText">#80000000</color>
-
-    <color name="primaryNeutral">#FFFFFF</color>
-    <color name="secondaryNeutral">#33000000</color>
 </resources>

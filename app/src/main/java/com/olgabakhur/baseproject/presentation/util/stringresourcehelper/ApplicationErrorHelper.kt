@@ -27,7 +27,7 @@ fun ApplicationError.message(context: Context): String =
             is ApplicationError.UnknownSession -> R.string.error_unknown_session
             is ApplicationError.ServerError -> R.string.error_server
 
-            // Database operation error
+            // Database errors
             is ApplicationError.DatabaseOperationException -> R.string.error_database_operation
         }
     )

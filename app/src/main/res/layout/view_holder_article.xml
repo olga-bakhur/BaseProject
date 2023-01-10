@@ -47,7 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/zero"
             android:layout_marginTop="@dimen/space_inner"
-            android:background="@color/secondaryNeutral"
+            android:background="@color/colorPrimary"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_article_image_placeholder"
             app:layout_constraintBottom_toTopOf="@id/tvContent"
