@@ -3,7 +3,7 @@ package com.olgabakhur.data.repositoryimpl
 import com.olgabakhur.data.model.dto.Article
 import com.olgabakhur.data.repository.ArticleRepository
 import com.olgabakhur.data.source.remote.NewsApi
-import com.olgabakhur.data.util.mappers.news.toListArticles
+import com.olgabakhur.data.util.mappers.toListArticles
 import com.olgabakhur.data.util.result.Result
 import com.olgabakhur.data.util.safecall.SafeIoCall
 import javax.inject.Inject

@@ -3,8 +3,8 @@ package com.olgabakhur.data.repositoryimpl
 import com.olgabakhur.data.model.dto.Article
 import com.olgabakhur.data.repository.DatabaseRepository
 import com.olgabakhur.data.source.local.ArticleDao
-import com.olgabakhur.data.util.mappers.news.toArticle
-import com.olgabakhur.data.util.mappers.news.toArticleEntity
+import com.olgabakhur.data.util.mappers.toArticle
+import com.olgabakhur.data.util.mappers.toArticleEntity
 import com.olgabakhur.data.util.result.Result
 import com.olgabakhur.data.util.safecall.SafeIoCall
 import kotlinx.coroutines.flow.Flow

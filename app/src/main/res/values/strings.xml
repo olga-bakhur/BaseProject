@@ -25,7 +25,7 @@
     <string name="error_database_operation">Database operation failed.</string>
 
     <!--    General-->
-    <string name="general_ok">Ok</string>
+    <string name="general_ok">OK</string>
     <string name="general_cancel">Cancel</string>
     <string name="general_error_label">Error</string>
     <string name="general_no_info">No info</string>

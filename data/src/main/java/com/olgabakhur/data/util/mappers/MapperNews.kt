@@ -1,4 +1,4 @@
-package com.olgabakhur.data.util.mappers.news
+package com.olgabakhur.data.util.mappers
 
 import com.olgabakhur.data.model.dto.Article
 import com.olgabakhur.data.model.entity.ArticleEntity
