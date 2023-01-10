@@ -7,5 +7,5 @@ class MainInteractor @Inject constructor(
     private val errorsUseCase: ErrorsUseCase
 ) {
 
-    fun getApplicationErrors() = errorsUseCase.getApplicationErrors()
+    fun getApplicationErrors() = errorsUseCase.getApplicationErrorsFlow()
 }

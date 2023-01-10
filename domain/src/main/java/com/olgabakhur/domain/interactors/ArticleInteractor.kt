@@ -15,10 +15,10 @@ class ArticleInteractor @Inject constructor(
         articleUseCase.getArticlesList(countryCode, pageNumber)
 
     // Database
-    suspend fun getSavedArticles(): Flow<List<Article>> = articleUseCase.getSavedArticles()
+    suspend fun getSavedArticlesList(): Flow<List<Article>> = articleUseCase.getSavedArticlesList()
 
-    suspend fun insertArticle(article: Article): Result<Unit> =
-        articleUseCase.insertArticle(article)
+    suspend fun saveArticle(article: Article): Result<Unit> =
+        articleUseCase.saveArticle(article)
 
     suspend fun deleteArticle(article: Article): Result<Unit> =
         articleUseCase.deleteArticle(article)

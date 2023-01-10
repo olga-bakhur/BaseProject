@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface DatabaseRepository {
 
-    suspend fun getSavedArticles(): Result<Flow<List<Article>>>
-    suspend fun insertArticle(article: Article): Result<Unit>
+    suspend fun getSavedArticlesList(): Result<Flow<List<Article>>>
+    suspend fun saveArticle(article: Article): Result<Unit>
     suspend fun deleteArticle(article: Article): Result<Unit>
 }

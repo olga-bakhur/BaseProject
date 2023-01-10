@@ -1,4 +1,4 @@
-package com.olgabakhur.data.util.safeCall
+package com.olgabakhur.data.util.safecall
 
 import com.olgabakhur.data.util.error.ApplicationError
 import com.olgabakhur.data.util.error.toApplicationError
@@ -8,8 +8,8 @@ import kotlinx.coroutines.flow.asSharedFlow
 
 object SafeIoCall {
 
-    private val _ioErrorFlow = MutableSharedFlow<ApplicationError>(replay = 0)
-    val ioErrorsFlow = _ioErrorFlow.asSharedFlow()
+    private val _ioErrorsFlow = MutableSharedFlow<ApplicationError>(replay = 0)
+    val ioErrorsFlow = _ioErrorsFlow.asSharedFlow()
 
     suspend fun <T> doSafeIoCall(ioCall: suspend () -> T): Result<T> {
         return try {
@@ -18,7 +18,7 @@ object SafeIoCall {
         } catch (throwable: Throwable) {
             val appError = throwable.toApplicationError()
 
-            _ioErrorFlow.emit(appError)
+            _ioErrorsFlow.emit(appError)
             return Result.Error(appError)
         }
     }

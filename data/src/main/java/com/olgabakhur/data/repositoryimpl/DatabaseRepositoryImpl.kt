@@ -6,7 +6,7 @@ import com.olgabakhur.data.source.local.ArticleDao
 import com.olgabakhur.data.util.mappers.news.toArticle
 import com.olgabakhur.data.util.mappers.news.toArticleEntity
 import com.olgabakhur.data.util.result.Result
-import com.olgabakhur.data.util.safeCall.SafeIoCall
+import com.olgabakhur.data.util.safecall.SafeIoCall
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -15,9 +15,9 @@ class DatabaseRepositoryImpl @Inject constructor(
     private val articleDao: ArticleDao
 ) : DatabaseRepository {
 
-    override suspend fun getSavedArticles(): Result<Flow<List<Article>>> =
+    override suspend fun getSavedArticlesList(): Result<Flow<List<Article>>> =
         SafeIoCall.doSafeIoCall {
-            articleDao.getAllArticles()
+            articleDao.getSavedArticlesList()
                 .map { listArticleEntity ->
                     listArticleEntity.map { articleEntity ->
                         articleEntity.toArticle()
@@ -25,7 +25,7 @@ class DatabaseRepositoryImpl @Inject constructor(
                 }
         }
 
-    override suspend fun insertArticle(article: Article): Result<Unit> =
+    override suspend fun saveArticle(article: Article): Result<Unit> =
         SafeIoCall.doSafeIoCall {
             articleDao.saveArticle(article.toArticleEntity())
         }

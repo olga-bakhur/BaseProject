@@ -5,7 +5,7 @@ import com.olgabakhur.data.repository.ArticleRepository
 import com.olgabakhur.data.source.remote.NewsApi
 import com.olgabakhur.data.util.mappers.news.toListArticles
 import com.olgabakhur.data.util.result.Result
-import com.olgabakhur.data.util.safeCall.SafeIoCall
+import com.olgabakhur.data.util.safecall.SafeIoCall
 import javax.inject.Inject
 
 class ArticleRepositoryImpl @Inject constructor(

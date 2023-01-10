@@ -27,6 +27,6 @@ sealed class ApplicationError {
     class UnknownSession(val throwable: Throwable) : ApplicationError()
     class ServerError(val throwable: Throwable) : ApplicationError()
 
-    // Database operation error
+    // Database errors
     class DatabaseOperationException(val throwable: Throwable) : ApplicationError()
 }

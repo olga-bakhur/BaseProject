@@ -18,8 +18,8 @@ class ArticleUseCase @Inject constructor(
         articleRepository.getArticlesList(countryCode, pageNumber)
 
     // Database
-    suspend fun getSavedArticles(): Flow<List<Article>> =
-        when (val result = databaseRepository.getSavedArticles()) {
+    suspend fun getSavedArticlesList(): Flow<List<Article>> =
+        when (val result = databaseRepository.getSavedArticlesList()) {
             is Result.Success -> {
                 result.value
             }
@@ -29,8 +29,8 @@ class ArticleUseCase @Inject constructor(
             }
         }
 
-    suspend fun insertArticle(article: Article): Result<Unit> =
-        databaseRepository.insertArticle(article)
+    suspend fun saveArticle(article: Article): Result<Unit> =
+        databaseRepository.saveArticle(article)
 
     suspend fun deleteArticle(article: Article): Result<Unit> =
         databaseRepository.deleteArticle(article)
