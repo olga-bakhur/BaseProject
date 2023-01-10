@@ -1,7 +1,9 @@
 package com.olgabakhur.data.model.dto
 
-import java.io.Serializable
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Article(
     val urlToArticle: String,
     val author: String?,
@@ -11,4 +13,4 @@ data class Article(
     val sourceName: String?,
     val title: String?,
     val urlToImage: String?
-) : Serializable
+) : Parcelable
