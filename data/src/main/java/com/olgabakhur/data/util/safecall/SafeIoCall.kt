@@ -1,7 +1,6 @@
 package com.olgabakhur.data.util.safecall
 
 import com.olgabakhur.data.util.error.ApplicationError
-import com.olgabakhur.data.util.error.toApplicationError
 import com.olgabakhur.data.util.result.Result
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -16,7 +15,7 @@ object SafeIoCall {
             Result.Success(ioCall.invoke())
 
         } catch (throwable: Throwable) {
-            val appError = throwable.toApplicationError()
+            val appError = ApplicationError.getApplicationError(throwable)
 
             _ioErrorsFlow.emit(appError)
             return Result.Error(appError)

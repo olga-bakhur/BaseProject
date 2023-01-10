@@ -17,8 +17,8 @@ import com.olgabakhur.baseproject.databinding.ActivityMainBinding
 import com.olgabakhur.baseproject.presentation.extensions.collectLatestWhenCreated
 import com.olgabakhur.baseproject.presentation.util.device.DeviceManager
 import com.olgabakhur.baseproject.presentation.util.device.DeviceType
+import com.olgabakhur.baseproject.presentation.util.stringresourcehelper.ApplicationErrorHelper
 import com.olgabakhur.baseproject.presentation.util.stringresourcehelper.NetworkConnectivityHelper
-import com.olgabakhur.baseproject.presentation.util.stringresourcehelper.message
 import com.olgabakhur.baseproject.presentation.util.view.Dialog
 import com.olgabakhur.baseproject.presentation.util.view.Snackbar
 import com.olgabakhur.baseproject.presentation.util.viewmodel.viewModel
@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             Dialog.showOkDialog(
                 this,
                 R.string.general_error_label,
-                appError.message(this)
+                ApplicationErrorHelper.getAppErrorDescription(appError, this)
             )
         }
 
