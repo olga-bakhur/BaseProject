@@ -14,8 +14,8 @@
     </style>
 
     <style name="ToolbarIconsTintStyle" parent="@style/ThemeOverlay.MaterialComponents.Toolbar.Primary">
-        <item name="colorControlNormal">?attr/colorOnPrimary</item>
-        <item name="actionMenuTextColor">?attr/colorOnPrimary</item>
+        <item name="colorControlNormal">?attr/colorOnBackground</item>
+        <item name="actionMenuTextColor">?attr/colorOnBackground</item>
     </style>
 
     <!--    Text-->

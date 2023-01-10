@@ -42,7 +42,7 @@ class ArticlesFragment : BaseFragment(R.layout.fragment_articles) {
     }
 
     private fun setupRecyclerView() {
-        binding.rvBreakingNews.apply {
+        binding.rvArticles.apply {
             adapter = articleAdapter
             layoutManager = LinearLayoutManager(mContext)
         }

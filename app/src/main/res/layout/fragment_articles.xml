@@ -7,7 +7,7 @@
     tools:context="com.olgabakhur.baseproject.presentation.ui.articles.ArticlesFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvBreakingNews"
+        android:id="@+id/rvArticles"
         android:layout_width="@dimen/zero"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
