@@ -129,6 +129,5 @@ dependencies {
 
     // Tests
     testImplementation testDependencies.junit
-    testImplementation testDependencies.androidxTestJunit
-    testImplementation testDependencies.espressoCore
+    androidTestImplementation testDependencies.androidxTestJunit
 }

@@ -83,4 +83,8 @@ dependencies {
 
     // Preferences DataStore
     implementation globalDependencies.preferencesDataStore
+
+    // Tests
+    testImplementation testDependencies.junit
+    androidTestImplementation testDependencies.androidxTestJunit
 }

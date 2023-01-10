@@ -1,3 +1,5 @@
+@file:Suppress("SpellCheckingInspection")
+
 package com.olgabakhur.baseproject
 
 import androidx.test.platform.app.InstrumentationRegistry

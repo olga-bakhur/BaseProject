@@ -1,4 +1,7 @@
-﻿@file:Suppress("EmptyMethod")
+﻿@file:Suppress(
+    "EmptyMethod", "MemberVisibilityCanBePrivate", "MemberVisibilityCanBePrivate",
+    "MemberVisibilityCanBePrivate"
+)
 
 package com.olgabakhur.baseproject.presentation.base
 
