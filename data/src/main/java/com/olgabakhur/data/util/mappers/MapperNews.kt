@@ -8,40 +8,34 @@ import java.util.*
 
 /* API */
 fun NewsResponse.toListArticles(): List<Article> =
-    listArticlesResponse.map { articleResponse ->
+    articleResponseList.map { articleResponse ->
         articleResponse.toArticle()
     }
 
 fun ArticleResponse.toArticle() = Article(
-    urlToArticle = urlToArticle ?: UUID.randomUUID().toString().substring(0, 15),
-    author = author,
-    content = content,
-    description = description,
-    publicationDate = publicationDate,
-    sourceName = sourceResponse?.sourceName,
     title = title,
+    content = content,
+    sourceName = sourceResponse?.sourceName,
+    publicationDate = publicationDate,
+    urlToArticle = urlToArticle ?: UUID.randomUUID().toString().substring(0, 15),
     urlToImage = urlToImage
 )
 
 /* Database */
 fun Article.toArticleEntity() = ArticleEntity(
-    urlToArticle = urlToArticle,
-    author = author,
-    content = content,
-    description = description,
-    publicationDate = publicationDate,
-    sourceName = sourceName,
     title = title,
+    content = content,
+    sourceName = sourceName,
+    publicationDate = publicationDate,
+    urlToArticle = urlToArticle,
     urlToImage = urlToImage
 )
 
 fun ArticleEntity.toArticle() = Article(
-    urlToArticle = urlToArticle,
-    author = author,
-    content = content,
-    description = description,
-    publicationDate = publicationDate,
-    sourceName = sourceName,
     title = title,
+    content = content,
+    sourceName = sourceName,
+    publicationDate = publicationDate,
+    urlToArticle = urlToArticle,
     urlToImage = urlToImage
 )

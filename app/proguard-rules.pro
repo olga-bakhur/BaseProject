@@ -30,4 +30,4 @@
   @com.google.gson.annotations.SerializedName <fields>;
 }
 
--keep class com.katalog.data.model.** { *; }
+-keep class com.olgabakhur.data.model.** { *; }

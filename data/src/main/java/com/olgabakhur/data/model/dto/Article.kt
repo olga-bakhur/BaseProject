@@ -5,12 +5,10 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Article(
-    val urlToArticle: String,
-    val author: String?,
-    val content: String?,
-    val description: String?,
-    val publicationDate: String?,
-    val sourceName: String?,
     val title: String?,
+    val content: String?,
+    val sourceName: String?,
+    val publicationDate: String?,
+    val urlToArticle: String,
     val urlToImage: String?
 ) : Parcelable
