@@ -1,6 +1,5 @@
 package com.olgabakhur.baseproject.presentation.ui.articles
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,11 +19,9 @@ class ArticlesFragment : BaseFragment(R.layout.fragment_articles) {
     override val viewModel: ArticleViewModel by viewModel { App.appComponent.articleViewModel }
 
     private val articleAdapter by lazy { ArticleAdapter() }
-    private lateinit var mContext: Context
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mContext = requireContext()
         setupRecyclerView()
         viewModel.getArticlesList(
             countryCode = "us",
@@ -44,7 +41,7 @@ class ArticlesFragment : BaseFragment(R.layout.fragment_articles) {
     private fun setupRecyclerView() {
         binding.rvArticles.apply {
             adapter = articleAdapter
-            layoutManager = LinearLayoutManager(mContext)
+            layoutManager = LinearLayoutManager(requireContext())
         }
     }
 }

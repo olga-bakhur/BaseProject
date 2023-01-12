@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
 import javax.inject.Inject
 
-class ArticleUseCase @Inject constructor(
+class GetArticleUseCase @Inject constructor(
     private val articleRepository: ArticleRepository,
     private val databaseRepository: DatabaseRepository
 ) {

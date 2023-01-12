@@ -1,6 +1,5 @@
 package com.olgabakhur.baseproject.presentation.base
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.IdRes
@@ -11,7 +10,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.progressindicator.CircularProgressIndicator
-import com.olgabakhur.baseproject.presentation.util.livedata.EventObserver
+import com.olgabakhur.baseproject.presentation.extensions.collectLatestWhenStarted
 import com.olgabakhur.baseproject.presentation.util.view.Keyboard
 import com.olgabakhur.baseproject.presentation.util.view.ProgressBar
 
@@ -20,34 +19,29 @@ abstract class BaseFragment(@LayoutRes layoutId: Int) : Fragment(layoutId) {
     abstract val viewModel: BaseViewModel
     abstract val binding: ViewBinding
 
-    private lateinit var mContext: Context
     private var progressBar: CircularProgressIndicator? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mContext = requireContext()
         observeViewModel()
     }
 
     override fun onPause() {
         super.onPause()
-        view?.let { Keyboard.hideKeyboard(it, mContext) }
+        view?.let { Keyboard.hideKeyboard(it, requireContext()) }
     }
 
     open fun observeViewModel() {
-        viewModel.loading.observe(
-            viewLifecycleOwner,
-            EventObserver { isLoading ->
-                showLoading(isLoading)
-                blockUi(isLoading)
-            }
-        )
+        viewLifecycleOwner.collectLatestWhenStarted(viewModel.loading) { isLoading ->
+            showLoading(isLoading)
+            blockUi(isLoading)
+        }
     }
 
     /* Loading */
     fun showLoading(isLoading: Boolean) {
         if (progressBar == null) {
-            progressBar = ProgressBar.createProgressBar(mContext, binding.root)
+            progressBar = ProgressBar.createProgressBar(requireContext(), binding.root)
         }
 
         if (isLoading) {
