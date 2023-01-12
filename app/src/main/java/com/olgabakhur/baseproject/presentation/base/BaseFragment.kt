@@ -4,19 +4,23 @@ import android.os.Bundle
 import android.view.View
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
+import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.olgabakhur.baseproject.presentation.extensions.collectLatestWhenStarted
-import com.olgabakhur.baseproject.presentation.ui.MainActivity
 import com.olgabakhur.baseproject.presentation.util.view.Keyboard
+import com.olgabakhur.baseproject.presentation.util.view.ProgressBar
 
 abstract class BaseFragment(@LayoutRes layoutId: Int) : Fragment(layoutId) {
 
     abstract val viewModel: BaseViewModel
     abstract val binding: ViewBinding
+
+    private var progressBar: CircularProgressIndicator? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -26,6 +30,7 @@ abstract class BaseFragment(@LayoutRes layoutId: Int) : Fragment(layoutId) {
     override fun onPause() {
         super.onPause()
         view?.let { Keyboard.hideKeyboard(it, requireContext()) }
+        progressBar = null
     }
 
     open fun observeViewModel() {
@@ -37,10 +42,12 @@ abstract class BaseFragment(@LayoutRes layoutId: Int) : Fragment(layoutId) {
 
     /* Loading */
     fun showLoading(isLoading: Boolean) {
-        activity?.let { hostActivity ->
-            if (hostActivity is MainActivity) {
-                hostActivity.showLoading(isLoading)
+        context?.let {
+            if (progressBar == null) {
+                progressBar = ProgressBar.createProgressBar(it, binding.root)
             }
+
+            progressBar?.isVisible = isLoading
         }
     }
 

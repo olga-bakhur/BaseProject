@@ -13,18 +13,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.annotation.LayoutRes
+import androidx.core.view.isVisible
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.olgabakhur.baseproject.presentation.extensions.collectLatestWhenStarted
-import com.olgabakhur.baseproject.presentation.ui.MainActivity
 import com.olgabakhur.baseproject.presentation.util.view.Keyboard
+import com.olgabakhur.baseproject.presentation.util.view.ProgressBar
 
 abstract class BaseBottomSheet(@LayoutRes val layoutId: Int) : BottomSheetDialogFragment() {
 
     abstract val viewModel: BaseViewModel
     abstract val binding: ViewBinding
+
+    private var progressBar: CircularProgressIndicator? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,6 +44,7 @@ abstract class BaseBottomSheet(@LayoutRes val layoutId: Int) : BottomSheetDialog
     override fun onPause() {
         super.onPause()
         view?.let { Keyboard.hideKeyboard(it, requireContext()) }
+        progressBar = null
     }
 
     open fun observeViewModel() {
@@ -51,10 +56,12 @@ abstract class BaseBottomSheet(@LayoutRes val layoutId: Int) : BottomSheetDialog
 
     /* Loading */
     fun showLoading(isLoading: Boolean) {
-        activity?.let { hostActivity ->
-            if (hostActivity is MainActivity) {
-                hostActivity.showLoading(isLoading)
+        context?.let {
+            if (progressBar == null) {
+                progressBar = ProgressBar.createProgressBar(it, binding.root)
             }
+
+            progressBar?.isVisible = isLoading
         }
     }
 
