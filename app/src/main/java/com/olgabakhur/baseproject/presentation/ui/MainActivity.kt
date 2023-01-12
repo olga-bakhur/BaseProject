@@ -5,6 +5,7 @@ import android.content.pm.ActivityInfo
 import android.os.Bundle
 import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -97,5 +98,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                 else -> navController.navigateUp()
             }
         }
+    }
+
+    fun showLoading(isLoading: Boolean) {
+        binding.progressBar.isVisible = isLoading
     }
 }
