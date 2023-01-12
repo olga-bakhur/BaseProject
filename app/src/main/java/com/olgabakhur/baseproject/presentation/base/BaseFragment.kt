@@ -9,17 +9,14 @@ import androidx.navigation.NavDirections
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
-import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.olgabakhur.baseproject.presentation.extensions.collectLatestWhenStarted
+import com.olgabakhur.baseproject.presentation.ui.MainActivity
 import com.olgabakhur.baseproject.presentation.util.view.Keyboard
-import com.olgabakhur.baseproject.presentation.util.view.ProgressBar
 
 abstract class BaseFragment(@LayoutRes layoutId: Int) : Fragment(layoutId) {
 
     abstract val viewModel: BaseViewModel
     abstract val binding: ViewBinding
-
-    private var progressBar: CircularProgressIndicator? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -40,14 +37,10 @@ abstract class BaseFragment(@LayoutRes layoutId: Int) : Fragment(layoutId) {
 
     /* Loading */
     fun showLoading(isLoading: Boolean) {
-        if (progressBar == null) {
-            progressBar = ProgressBar.createProgressBar(requireContext(), binding.root)
-        }
-
-        if (isLoading) {
-            progressBar?.show()
-        } else {
-            progressBar?.hide()
+        activity?.let { hostActivity ->
+            if (hostActivity is MainActivity) {
+                hostActivity.showLoading(isLoading)
+            }
         }
     }
 

@@ -17,17 +17,14 @@ import androidx.viewbinding.ViewBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.olgabakhur.baseproject.presentation.extensions.collectLatestWhenStarted
+import com.olgabakhur.baseproject.presentation.ui.MainActivity
 import com.olgabakhur.baseproject.presentation.util.view.Keyboard
-import com.olgabakhur.baseproject.presentation.util.view.ProgressBar
 
 abstract class BaseBottomSheet(@LayoutRes val layoutId: Int) : BottomSheetDialogFragment() {
 
     abstract val viewModel: BaseViewModel
     abstract val binding: ViewBinding
-
-    private var progressBar: CircularProgressIndicator? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -54,14 +51,10 @@ abstract class BaseBottomSheet(@LayoutRes val layoutId: Int) : BottomSheetDialog
 
     /* Loading */
     fun showLoading(isLoading: Boolean) {
-        if (progressBar == null) {
-            progressBar = ProgressBar.createProgressBar(requireContext(), binding.root)
-        }
-
-        if (isLoading) {
-            progressBar?.show()
-        } else {
-            progressBar?.hide()
+        activity?.let { hostActivity ->
+            if (hostActivity is MainActivity) {
+                hostActivity.showLoading(isLoading)
+            }
         }
     }
 
